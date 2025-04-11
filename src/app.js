@@ -12,7 +12,6 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(express.urlencoded({ extended: true }));
 app.use('/bootstrap', express.static(path.join(__dirname, '../node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, '../Public')));
-app.use(express.static(path.join(__dirname, '../Public/imagem')));
 app.use(fileUpload());
 
 // configurando sessão

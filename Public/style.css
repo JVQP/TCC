@@ -5,23 +5,54 @@
     background-color: #045782 !important; 
 }
 
-#titulo-navbar{
+/*#titulo-navbar{
     color: white !important; 
-    font-size: 30px !important; 
     font-family: 'Times New Roman', Times, serif;    
 }
-
+*/
 #container{
 
-    margin-top: 65px;
+    margin-top: 100px;
 }
 
 #col1{
-    border: solid 1px #dfeaf0cc;
+    border: solid 1px #dfeaf0cc; /*ESTILZANDO AS COLUNAS*/
     width: 225px;
+    height: auto;
+    border-bottom: solid 1px #dfeaf0cc;
+    position: sticky;
 }
 
 #col2{
-    border: solid 1px #dfeaf0cc;
+    border: solid 1px #dfeaf0cc; /*ESTILZANDO AS COLUNAS*/
   
+}
+
+.img-profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;        /*ESTILIZANDO A IMAGEM DE PERFIL DO ALUNO E PROFESSOR*/
+    margin-top: 10px;
+}
+
+.frase{
+border-bottom: solid 1px #dfeaf0cc; /* Acrescentando borda embaixo da frase  */
+}
+
+
+.conteudo{
+    padding: 10px; 
+}
+
+.btn-primary{
+    margin-top: 10px;
+    width: 200px;
+    
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;  /* Botão de sair */
+    border-color: #dc3545;
+    width: 200px;
 }
