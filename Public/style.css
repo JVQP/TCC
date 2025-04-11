@@ -1,0 +1,27 @@
+
+/*Estilizando página dos administradores*/
+
+#navbar{ /* Estilizando a barra de navegação */
+    background-color: #045782 !important; 
+}
+
+#titulo-navbar{
+    color: white !important; 
+    font-size: 30px !important; 
+    font-family: 'Times New Roman', Times, serif;    
+}
+
+#container{
+
+    margin-top: 65px;
+}
+
+#col1{
+    border: solid 1px #dfeaf0cc;
+    width: 225px;
+}
+
+#col2{
+    border: solid 1px #dfeaf0cc;
+  
+}
