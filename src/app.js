@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-const PORT = process.env.PORT || 8080; // Corrigido para PORT (não BASE_URL)
+const PORT = process.env.PORT || 8080; 
+const db = require('./banco.js');
+const fs = require('fs');
 
 // Configurando o servidor
 const app = express();
