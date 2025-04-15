@@ -31,7 +31,7 @@ const homeRouter = require('./routers/home.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
-app.use('/login/:Aluno', loginRouter)
+app.use('/login/:Aluno', loginRouter);
 
 // Rodando servidor 
 app.listen(PORT, () => {
