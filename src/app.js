@@ -25,8 +25,10 @@ app.use(session({
 // Configurando Rotas
 const admRouter = require('./routers/adm.js');
 const loginRouter = require('./routers/login.js');
+const homeRouter = require('./routers/home.js');
 app.use('/adm', admRouter);
-app.use('/', loginRouter)
+app.use('/', loginRouter);
+app.use('/home', homeRouter)
 
 // Rodando servidor 
 app.listen(PORT, () => {

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SenaiEmprega</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>
+
+<body class="bg-light text-center">
+
+  <%- include('partials/navbar') %>
+
+  <main>
+    <div id="carouselExampleIndicators" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/imagem/banner1.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/imagem/banner2.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/imagem/banner3.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="mb-4">Bem-vindo ao SenaiEmprega!</h1>
+      <p class="lead"><strong>SenaiEmprega</strong> é uma plataforma exclusiva que conecta alunos do Senai a
+        oportunidades reais no mercado de trabalho. Através de avaliações dos professores, histórico de desempenho e
+        currículos atualizados, os alunos podem se destacar para vagas de estágio e emprego, enquanto empresas acessam
+        uma base confiável de talentos técnicos qualificados.</p>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+      <a href="#" class="btn btn-primary">Sou Aluno</a>
+      <a href="#" class="btn btn-primary">Sou Educador</a>
+      <a href="#" class="btn btn-primary">Sou Empresa</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </main>
+
+</body>
+<%- include('partials/footer') %>
+</html>
