@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-const PORT = process.env.PORT || 8080; // Corrigido para PORT (não BASE_URL)
+const PORT = process.env.PORT || 8080; 
+const db = require('./banco.js');
+const fs = require('fs');
 
 // Configurando o servidor
 const app = express();
@@ -23,10 +25,11 @@ app.use(session({
 
 
 // Configurando Rotas
-const admRouter = require('./routers/adm.js');
-const loginRouter = require('./routers/login.js');
-app.use('/adm', admRouter);
-app.use('/', loginRouter)
+const admRouter = require('./routers/adm.js'); // Roata para o administrador
+const loginRouter = require('./routers/login.js'); // Rota para o login
+
+app.use('/adm', admRouter); // Roata para o administrador
+app.use('/', loginRouter); // Rota para o login
 
 // Rodando servidor 
 app.listen(PORT, () => {
