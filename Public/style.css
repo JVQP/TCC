@@ -1,29 +1,34 @@
+/* Estilizando página dos administradores */
 
-/*Estilizando página dos administradores*/
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    min-height: calc(100vh - 140px); /* Tamanho da tela - navbar e footer */
+    display: flex;
+    flex-direction: column;
+}
 
 #navbar {
     /* Estilizando a barra de navegação */
     background-color: #045782 !important;
 }
 
-
 #container {
-
+    flex: 1;
+    display: flex;
     margin-top: 100px;
 }
 
 #col1 {
     border: solid 1px #dfeaf0cc;
-    /*ESTILZANDO AS COLUNAS*/
+    min-height: 100%; /* Garante que a coluna estique até o rodapé */
     width: 225px;
-    height: 500px;
-    border-bottom: solid 1px #dfeaf0cc;
     position: sticky;
-}
-
-#col2 {
-    border: solid 1px #dfeaf0cc;
-    /*ESTILZANDO AS COLUNAS*/
+    top: 100px;
+    display: block;
 
 }
 
@@ -31,13 +36,12 @@
     width: 100px;
     height: 100px;
     border-radius: 50px;
-    /*ESTILIZANDO A IMAGEM DE PERFIL DO ALUNO E PROFESSOR*/
     margin-top: 10px;
 }
 
 .frase {
     border-bottom: solid 1px #dfeaf0cc;
-    /* Acrescentando borda embaixo da frase  */
+    /* Acrescentando borda embaixo da frase */
 }
 
 .btn-danger {
@@ -46,24 +50,36 @@
     /* Botão de sair */
     border-color: #dc3545;
     width: 200px;
+    margin-top: 70px;
+    
 }
 
-.class-icons{
+.class-icons {
     text-decoration: none;
     color: black;
 }
 
-#icons{
+#icons {
     font-size: 20px;
     margin-top: 30px;
 }
 
-.logout{
-    border-top: 1px solid #dfeaf0cc;
-}
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-    margin-top: 140px;
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    #col1 {
+        width: 88%; 
+    }
+
+    .text-center {
+        text-align: left;
+        font-size: 9px;
+    }
+
+    .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+        font-size: 30px;
+    }
+
+
 }
