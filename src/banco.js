@@ -53,6 +53,28 @@ function aluno() {
 
 }
 
+function mensagem(){
+
+    let query = `CREATE TABLE mensagens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    mensagem TEXT NOT NULL
+);`
+
+    db.run(query, (err) => {
+        if (err) {
+            console.log('Erro ao criar tabela mensagens: ' + err.message);
+        } else {
+            console.log('Tabela mensagens criada com sucesso!');
+        }
+
+    });
+    
+ 
+}
+
+
 
 
 module.exports = db;

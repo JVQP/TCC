@@ -30,11 +30,13 @@ const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
 const obrigadoRouter = require('./routers/obrigado.js');
 
+
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
 app.use('/login/:Aluno', loginRouter);;
 app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);
+
 
 // Rodando servidor 
 app.listen(PORT, () => {
