@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     // Renderizando a página de contato
-    res.render('contato');
+    res.render('contato', {mensagem: null});
 });
 
 router.post('/mensagem', (req, res) => {
@@ -15,13 +15,11 @@ router.post('/mensagem', (req, res) => {
     db.run(`INSERT INTO mensagens (nome, email, mensagem) VALUES (?, ?, ?)`, [nome, email, mensagem], (err) => {
         if (err) {
             console.error('Erro ao inserir mensagem:', err.message);
-            res.render('contato', {mensagem: 'Erro ao enviar mensagem. Tente novamente!.'});
+           return res.render('contato', {mensagem: 'Erro ao enviar mensagem. Tente novamente mais tarde!.'});
         }
         console.log(`Mensagem de ${nome} enviada com sucesso!`);
         res.redirect('/obrigado');
     });
-
-   
 
 });
 
