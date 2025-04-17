@@ -6,5 +6,7 @@ const router = express.Router();
         res.render('login');
     })
 
+  
+      
 
     module.exports = router;
