@@ -6,6 +6,5 @@ if(window.location.pathname == '/contato'){
         nome.value = nome.value.toUpperCase();
     }
         
-
     }
 

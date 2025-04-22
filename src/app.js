@@ -29,6 +29,7 @@ const loginRouter = require('./routers/login.js');
 const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
 const obrigadoRouter = require('./routers/obrigado.js');
+const usuarioRouter = require('./routers/usuario.js');
 
 
 app.use('/adm', admRouter);
@@ -36,6 +37,7 @@ app.use('/', homeRouter);
 app.use('/login', loginRouter);;
 app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);
+app.use('/usuario', usuarioRouter);
 
 
 // Rodando servidor 
