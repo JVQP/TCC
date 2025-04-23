@@ -22,38 +22,83 @@
 
     <%- include('partials/navbar') %>
 
-<form action="" class="row g-3">
-    <h1>Registrar Usuário</h1>
-    <div class="col-md-6">
-        <label for="inputNome" class="form-label"> Nome: 
-            <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Nome completo.." required>
-        </label>
+    <main>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+         <h1>Registrar Usuário</h1>
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">E-Mail: </label>
+                    <input type="inputEmail" class="form-control" name="inputEmail" id="inputEmail" placeholder="Informe o seu E-mail.." required>
+                </div>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome completo: </label>
+                    <input type="inputNome" class="form-control" name="inputNome" placeholder="Informe o seu nome completo.." required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputSenha" class="form-label">Senha: </label>
+                    <input type="password" class="form-control" name="inputSenha" placeholder="Digite a sua senha.." required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputConfirmar" class="form-label">Confirmar senha: </label>
+                    <input type="password" class="form-control" name="inputConfirmar" placeholder="Digite novamente.." required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputTipoUsuario" class="form-label"> Tipo de Usuário:
+                        <select class="form-select" id="inputTipoUsuario" name="inputTipoUsuario" aria-label="Default select example" required>
+                            <option selected>Selecione o tipo de usuário..</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Aluno">Aluno</option>
+                            <option value="Empresa">Empresa</option> 
+                    </label>
+                </div>
+                 
+                <br>
+                  
+                <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
+    
+            </form>
+        </div>
     </div>
-    <div class="col-md-6">
-        <label for="inputEmail" class="form-label"> Email: 
-            <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="Informe seu E-Mail.." required>
-        </label>
-    </div>
-    <div class="col-md-6">
-        <label for="inputTipoUsuario" class="form-label"> Tipo de Usuário:
-            <select class="form-select" id="inputTipoUsuario" name="inputTipoUsuario" aria-label="Default select example" required>
-                <option selected>Selecione o tipo de usuário..</option>
-                <option value="1">Professor</option>
-                <option value="2">Aluno</option>
-                <option value="3">Empresa</option> 
-        </label>
-    </div>
-    <div class="col-md-6">
-        <label for="inputSenha" class="form-label"> Senha: 
-            <input type="text" class="form-control" id="inputSenha" name="inputSenha" placeholder="Digite sua senha.." required>
-        </label>
+</main>
+
+<footer class="bg-primary text-white text-center text-lg-start mt-5">
+    <div class="container p-4">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-lg-start">
+                <img src="/imagem/Logo.png" alt="Logo SenaiEmprega" height="90" class="mb-2">
+                <p class="text-center text-lg-start">
+                    <strong>Conectando alunos, professores e empresas para oportunidades reais no mercado de
+                        trabalho.</strong>
+                </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links úteis</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="/" class="text-white">Início</a></li>
+                    <li><a href="/contato" class="text-white">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Redes sociais</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="https://www.instagram.com/p/CZ5qbFSNHZq/" class="text-white" target="_blank"
+                            rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="#" class="text-white">LinkedIn</a></li>
+                </ul>
+            </div>
+
+        </div>
     </div>
 
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </div>
-    </form>
-
+    <div class="text-center p-3 bg-dark">
+        © 2025 SenaiEmprega | Desenvolvido por João Vitor - Junior - Patrick &#x1f609;
+    </div>
+</footer>
 </body>
 
 </html>

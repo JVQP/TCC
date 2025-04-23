@@ -92,6 +92,10 @@ main {
     width: 880px;
 }
 
+#registro{
+    margin-top: 20px;
+}
+
 /* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
     #col1 {
