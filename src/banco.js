@@ -17,9 +17,12 @@ function usuario() {
     let query = `CREATE TABLE usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL,
+    data_nascimento DATE NOT NULL,
     senha VARCHAR(255) NOT NULL,
+    confirmar_senha VARCHAR(255) NOT NULL,
     tipo VARCHAR(10) NOT NULL
+
 );`
 
     db.run(query, (err) => {
@@ -31,6 +34,22 @@ function usuario() {
     })
 
 }
+
+
+
+function drop(){
+    let query = `DROP TABLE IF EXISTS usuarios;`
+
+    db.run(query, (err) => {
+        if (err) {
+            console.log('Erro ao deletar tabela usuarios: ' + err.message);
+        } else {
+            console.log('Tabela usuarios deletada com sucesso!');
+        }
+    })
+}
+
+
 
 function aluno() {
 
