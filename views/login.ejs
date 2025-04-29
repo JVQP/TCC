@@ -34,6 +34,12 @@
     
                         <button type="submit" class="btn btn-primary w-100">Entrar</button>
                     </form>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong><%= error %></strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      <% } %>
                 </div>
             </div>
     

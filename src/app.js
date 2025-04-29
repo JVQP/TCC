@@ -23,6 +23,17 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Rota de Logout 
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Erro ao encerrar a sessão.');
+        }
+        res.redirect('/login');
+    });
+});
+
 // Configurando Rotas
 const admRouter = require('./routers/adm.js');
 const loginRouter = require('./routers/login.js');
@@ -38,6 +49,7 @@ app.use('/login', loginRouter);;
 app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);
 app.use('/usuario', usuarioRouter);
+
 
 
 // Rodando servidor 

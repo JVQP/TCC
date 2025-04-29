@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../banco');
+const middleware = require('./middleware.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
