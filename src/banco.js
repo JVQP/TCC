@@ -9,6 +9,16 @@ const db = new sqlite3.Database('Database.sqlite', (err) => {
     }
 });
 
+// SCRIPT PARA CRIAR TABELAS E RELACIONAMENTOS
+// Ativando o suporte a chaves estrangeiras
+
+db.run('PRAGMA foreign_keys = ON;', (err) => {
+    if (err) {
+        console.log('Erro ao ativar chaves estrangeiras: ' + err.message);
+    } else {
+        console.log('Chaves estrangeiras ativadas com sucesso!');
+    }
+});
 
 /*  SCRIPT PARA MANIPULAR COM SQLITE*/
 
@@ -22,7 +32,6 @@ function usuario() {
     senha VARCHAR(255) NOT NULL,
     confirmar_senha VARCHAR(255) NOT NULL,
     tipo VARCHAR(10) NOT NULL
-
 );`
 
     db.run(query, (err) => {
@@ -34,7 +43,6 @@ function usuario() {
     })
 
 }
-
 
 
 function drop(){
@@ -93,7 +101,24 @@ function mensagem(){
  
 }
 
+function imagem_perfil(){
 
+    let query = `CREATE TABLE imagem_perfil (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INT NOT NULL,
+    imagem TEXT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+);`
 
+    db.run(query, (err) => {
+        if (err) {
+            console.log('Erro ao criar tabela imagem_perfil: ' + err.message);
+        } else {
+            console.log('Tabela imagem_perfil criada com sucesso!');
+        }
+
+    });
+    
+}
 
 module.exports = db;

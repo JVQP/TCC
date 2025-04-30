@@ -23,7 +23,7 @@ const router = express.Router();
       
         if(usuario) {
                 req.session.usuario = usuario;
-                return res.render('adm', {usuario: req.session.usuario});
+                return res.redirect('/adm');
             } else {
                 res.render('login', { error: 'E-Mail ou senha inválidos, tente novamente mais tarde!.' });
             }
