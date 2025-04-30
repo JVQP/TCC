@@ -23,6 +23,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+
 // Rota de Logout 
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -34,6 +35,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
+
 // Configurando Rotas
 const admRouter = require('./routers/adm.js');
 const loginRouter = require('./routers/login.js');
@@ -41,8 +43,9 @@ const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
 const obrigadoRouter = require('./routers/obrigado.js');
 const usuarioRouter = require('./routers/usuario.js');
+const turmaRouter = require('./routers/turma.js');
 
-
+app.use('/turmas', turmaRouter);
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
 app.use('/login', loginRouter);;

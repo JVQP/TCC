@@ -24,7 +24,8 @@ if(window.location.pathname == '/usuario'){
     });
 
     }
-if(window.location.pathname == '/usuario/cadastro'){
+
+    if(window.location.pathname == '/usuario/cadastro'){
     function upperCase(){
 
         let nome = document.getElementById('inputNome');
