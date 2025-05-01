@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENAI EMPREGA</title>
     <link rel="stylesheet" href="/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="/index.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="/index.js" defer></script>
 </head>
 
 
@@ -15,40 +17,50 @@
 
     <%- include('partials/navbar') %>
 
-    <main>
+        <main>
 
-        <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
-        style="min-height: 80vh;">
-        <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
-            <h1>Adicionar aluno</h1>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="Aluno" class="form-label">Turma: </label>
-                    <input type="text" class="form-control" oninput="upperCase()" id="inputAluno"
-                        name="inputAluno"  required>
+            <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
+                style="min-height: 80vh;">
+                <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+                    <h1>Adicionar aluno</h1>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <br>
+                        <div class="mb-3">
+                            <label for="inputAluno" class="form-label">Aluno:</label>
+                            <select class="form-select" id="inputAluno" name="inputAluno" required>
+                                <option selected disabled>Selecione o aluno..</option>
+                                <% usuarios.forEach(function(usuarios){ %>
+                                    <option><%= usuarios.nome %></option>
+                                <% }) %>
+                               
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputCurso" class="form-label">Curso:</label>
+                            <select class="form-select" id="inputCurso" name="inputCurso" required>
+                                <option selected disabled>Selecione o curso..</option>
+                                <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+                                <option value="Administração">Administração</option>
+                                <option value="Elétrica">Elétrica</option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
+                        <a href="/adm"><button type="button" class="btn btn-danger">Voltar</button></a>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="inputCurso" class="form-label"> Curso:
-                        <select class="form-select" id="inputCurso" name="inputCurso"
-                            aria-label="Default select example" required>
-                            <option selected>Selecione o curso..</option>
-                            <option>Desenvolvimento de Sistemas</option>
-                            <option>Administração</option>
-                            <option>Elétrica</option>
-                    </label>
-                </div>
-                <br>
-                <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
-                <a href="/adm"><button type="button" class="btn btn-danger">Voltar</button></a>
-            </form>
-        </div>
-       </div>
+            </div>
 
-    </main>
-    
-    <%- include('partials/footer') %>
+        </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <%- include('partials/footer') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
 
 </body>
+
 </html>

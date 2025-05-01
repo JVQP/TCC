@@ -59,14 +59,13 @@ function drop(){
 }
 
 
-
 function aluno() {
 
     let query = `CREATE TABLE alunos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR(100),
+    usuario_id VARCHAR(100),
     curso VARCHAR(100),
-    FOREIGN KEY (nome) REFERENCES usuarios(nome)
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );`
 
     db.run(query, (err) => {
@@ -90,6 +89,11 @@ function turma(){
     );`
 }
 
+function curso(){
+
+    let query = `CREATE TABLE cursos`
+
+}
 
 function mensagem(){
 
