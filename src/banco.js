@@ -1,4 +1,3 @@
-const { Dropdown } = require('bootstrap');
 
 // Importando banco de dados e configurando
 const sqlite3 = require('sqlite3').verbose();
