@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI EMPREGA</title>
+    <link rel="stylesheet" href="/style.css">
+   <!-- CSS -->
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   
+<script src="/index.js" defer></script>
+</head>
+
+
+<body class="bg-light">
+
+    <%- include('partials/navbar') %>
+
+    <main>
+
+        <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
+        style="min-height: 80vh;">
+        <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+            <h1>Adicionar aluno</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="Aluno" class="form-label">Turma: </label>
+                    <input type="text" class="form-control" oninput="upperCase()" id="inputAluno"
+                        name="inputAluno"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputCurso" class="form-label"> Curso:
+                        <select class="form-select" id="inputCurso" name="inputCurso"
+                            aria-label="Default select example" required>
+                            <option selected>Selecione o curso..</option>
+                            <option>Desenvolvimento de Sistemas</option>
+                            <option>Administração</option>
+                            <option>Elétrica</option>
+                    </label>
+                </div>
+                <br>
+                <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
+                <a href="/adm"><button type="button" class="btn btn-danger">Voltar</button></a>
+            </form>
+        </div>
+       </div>
+
+    </main>
+    
+    <%- include('partials/footer') %>
+
+</body>
+<!-- JS -->
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</html>

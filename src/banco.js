@@ -1,3 +1,5 @@
+const { Dropdown } = require('bootstrap');
+
 // Importando banco de dados e configurando
 const sqlite3 = require('sqlite3').verbose();
 
@@ -46,7 +48,7 @@ function usuario() {
 
 
 function drop(){
-    let query = `DROP TABLE IF EXISTS usuarios;`
+    let query = `DROP TABLE IF EXISTS alunos;`
 
     db.run(query, (err) => {
         if (err) {
@@ -63,10 +65,9 @@ function aluno() {
 
     let query = `CREATE TABLE alunos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_usuario INT NOT NULL,
+    nome VARCHAR(100),
     curso VARCHAR(100),
-    turma VARCHAR(50),
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+    FOREIGN KEY (nome) REFERENCES usuarios(nome)
 );`
 
     db.run(query, (err) => {
@@ -79,6 +80,17 @@ function aluno() {
     });
 
 }
+
+function turma(){
+    let query = `CREATE TABLE turmas(
+    
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    aluno_id INTEGER,
+    turma VARCHAR(100),
+    FOREIGN KEY(aluno_id) REFERENCES alunos(id_usuario)    
+    );`
+}
+
 
 function mensagem(){
 
