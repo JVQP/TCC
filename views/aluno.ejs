@@ -23,7 +23,7 @@
                 style="min-height: 80vh;">
                 <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
                     <h1>Adicionar aluno</h1>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="/aluno/registro-aluno" method="POST" enctype="multipart/form-data">
                         <br>
                         <div class="mb-3">
                             <label for="inputAluno" class="form-label">Aluno:</label>
@@ -40,12 +40,46 @@
                             <label for="inputCurso" class="form-label">Curso:</label>
                             <select class="form-select" id="inputCurso" name="inputCurso" required>
                                 <option selected disabled>Selecione o curso..</option>
-                                <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
-                                <option value="Administração">Administração</option>
-                                <option value="Elétrica">Elétrica</option>
+                                <option>Soldador no processo MAG</option>
+                                <option>Mecânico de máquinas industriais</option>
+                                <option>Oxicorte a mão e máquina</option>
+                                <option>Torneiro mecânico</option>
+                                <option>Eletricista instalador predial de baixa tensão</option>
+                                <option>Caldeiro</option>
+                                <option>Operação de empilhadeira</option>
+                                <option>Comandos elétricos industriais</option>
+                                <option>Mecânico de refrigeração e climatização industrial</option>
+                                <option>Soldador em aço carbono no processo TIG</option>
+                                <option>Programação de torno CNC</option>
+                                <option>Controlador lógico programável - CLP</option>
+                                <option>Auto Cad 2D</option>
+                                <option>Projetos de sistemas fotovoltaica de microgeração</option>
+                                <option>Instalação de sistemas para microgeração fotovoltaica conectadas à rede</option>
+                                <option>Instalador de sistemas fotovoltaica</option>
+                                <option>NR10 segurança em instalações e serviços com eletricidade (RECICLAGEM)</option>
+                                <option>Soldador no processo eletrodo revestido aço carbono</option>
+                                <option>PCL - Controlador lógico programável</option>
+                                <option>NR33 SST Realizado em espaço confinado trabalhador e vigia</option>
+                                <option>Programação de torno CNC</option>
+                                <option>NR35 Trabalho em altura</option>
+                                <option>Técnico em Eletromecânica</option>
+                                <option>Técnico em Mecânica</option>
+                                <option>Técnico em Desenvolvimento de sistemas</option>
                             </select>
                         </div>
-
+                        <% if (typeof mensagem_sucesso !== 'undefined' && mensagem_sucesso) { %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong><%= mensagem_sucesso %></strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                          <% } %>
+                        <% if (typeof error !== 'undefined' && error) { %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong><%= error %></strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                          <% } %>
+        
                         <br>
                         <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
                         <a href="/adm"><button type="button" class="btn btn-danger">Voltar</button></a>

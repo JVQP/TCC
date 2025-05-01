@@ -46,8 +46,9 @@ function usuario() {
 }
 
 
+
 function drop(){
-    let query = `DROP TABLE IF EXISTS alunos;`
+    let query = `DROP TABLE IF EXISTS turmas;`
 
     db.run(query, (err) => {
         if (err) {
@@ -63,9 +64,8 @@ function aluno() {
 
     let query = `CREATE TABLE alunos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    usuario_id VARCHAR(100),
-    curso VARCHAR(100),
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+    nome VARCHAR(100),
+    curso VARCHAR(100)
 );`
 
     db.run(query, (err) => {
@@ -83,16 +83,10 @@ function turma(){
     let query = `CREATE TABLE turmas(
     
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    aluno_id INTEGER,
+    aluno VARCHAR(100),
     turma VARCHAR(100),
-    FOREIGN KEY(aluno_id) REFERENCES alunos(id_usuario)    
+    FOREIGN KEY(aluno) REFERENCES alunos(nome)    
     );`
-}
-
-function curso(){
-
-    let query = `CREATE TABLE cursos`
-
 }
 
 function mensagem(){

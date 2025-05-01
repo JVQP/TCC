@@ -12,7 +12,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 app.use(express.urlencoded({ extended: true }));
-app.use('/bootstrap', express.static(path.join(__dirname, '../node_modules/bootstrap/dist')));
+app.use('/bootstrap', express.static(path.join(__dirname,'../node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, '../Public')));
 app.use(fileUpload());
 
@@ -48,6 +48,7 @@ const obrigadoRouter = require('./routers/obrigado.js');
 const usuarioRouter = require('./routers/usuario.js');
 const turmaRouter = require('./routers/turma.js');
 const alunoRouter = require('./routers/aluno.js');
+
 
 app.use('/turmas', turmaRouter);
 app.use('/adm', admRouter);
