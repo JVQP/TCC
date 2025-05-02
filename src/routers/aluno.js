@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
                 if(err){
                     return res.status(500).send('Erro interno no servidor, por favor verificar!');
                 } else {
-                    res.render('aluno', {usuarios: usuarios})
+                    res.render('aluno', {usuarios: usuarios, usuario: req.session.usuario })
                 }
         })
 
@@ -23,7 +23,9 @@ router.post('/registro-aluno', (req, res) => {
 
         db.run(`INSERT INTO alunos (nome, curso) VALUES (?, ?);`, [nome, curso], (err) => {
             if(err){
-                return res.render('aluno', {error: 'Erro interno no servidor, por favor verificar!'}); 
+                return res.render('aluno', {error: 'Erro interno no servidor, por favor verificar!',
+                    usuario: req.session.usuario 
+                }); 
             } else {
 
                 db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
@@ -31,7 +33,8 @@ router.post('/registro-aluno', (req, res) => {
                         return res.status(500).send('Erro interno no servidor, por favor verificar!');
                     } 
                         res.render('aluno', {usuarios: usuarios,
-                            mensagem_sucesso: 'Aluno registrado com sucesso!'
+                            mensagem_sucesso: 'Aluno registrado com sucesso!',
+                            usuario: req.session.usuario 
                         });
                     
             });

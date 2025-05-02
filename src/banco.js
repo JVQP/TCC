@@ -85,6 +85,7 @@ function turma(){
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     aluno VARCHAR(100),
     turma VARCHAR(100),
+    data_inicio DATE NOT NULL,
     FOREIGN KEY(aluno) REFERENCES alunos(nome)    
     );`
 }

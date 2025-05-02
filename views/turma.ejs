@@ -21,22 +21,15 @@
                 style="min-height: 80vh;">
                 <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
                     <h1>Adicionar turmas</h1>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="/turmas/registro_turmas" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Turma: </label>
+                            <label for="turma" class="form-label">Turma: </label>
                             <input type="text" class="form-control" oninput="upperCase()" id="inputTurma"
                                 name="inputTurma" placeholder="Nome da turma.." required>
                         </div>
                         <div class="mb-3">
-                            <label for="inputCurso" class="form-label">Curso:</label>
-                            <select class="form-select" id="inputCurso" name="inputCurso"
-                                aria-label="Default select example" required>
-                                <option selected>Selecione o curso..</option>
-                                <option>Desenvolvimento de Sistemas</option>
-                                <option>Administração</option>
-                                <option>Elétrica</option>
-                            </select>
-
+                            <label for="dataInicio" class="form-label">Data de início: </label>
+                            <input type="date" class="form-control" id="dataInicio" name="dataInicio" required>
                         </div>
                         <br>
                         <input type="submit" id="registro" class="btn btn-primary" value="Registrar">
