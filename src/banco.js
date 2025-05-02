@@ -45,8 +45,7 @@ function usuario() {
 
 }
 
-
-
+// SCRIPT PARA DELETAR TABELAS
 function drop(){
     let query = `DROP TABLE IF EXISTS turmas;`
 
@@ -58,7 +57,6 @@ function drop(){
         }
     })
 }
-
 
 function aluno() {
 
