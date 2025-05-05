@@ -62,8 +62,10 @@ function aluno() {
 
     let query = `CREATE TABLE alunos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    matricula VARCHAR(100) NOT NULL,
     nome VARCHAR(100),
-    curso VARCHAR(100)
+    curso VARCHAR(100),
+    perido VARCHAR(100)
 );`
 
     db.run(query, (err) => {
@@ -75,17 +77,6 @@ function aluno() {
 
     });
 
-}
-
-function turma(){
-    let query = `CREATE TABLE turmas(
-    
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    aluno VARCHAR(100),
-    turma VARCHAR(100),
-    data_inicio DATE NOT NULL,
-    FOREIGN KEY(aluno) REFERENCES alunos(nome)    
-    );`
 }
 
 function mensagem(){

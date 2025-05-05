@@ -46,11 +46,9 @@ const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
 const obrigadoRouter = require('./routers/obrigado.js');
 const usuarioRouter = require('./routers/usuario.js');
-const turmaRouter = require('./routers/turma.js');
 const alunoRouter = require('./routers/aluno.js');
 
 
-app.use('/turmas', turmaRouter);
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
 app.use('/login', loginRouter);;

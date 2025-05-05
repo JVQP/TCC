@@ -24,7 +24,10 @@
                 <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
                     <h1>Adicionar aluno</h1>
                     <form action="/aluno/registro-aluno" method="POST" enctype="multipart/form-data">
-                        <br>
+                        <div class="mb-3">
+                            <label for="inputMatricula" class="form-label">N° de matrícula:</label>
+                            <input type="text" class="form-control" id="inputMatricula" name="inputMatricula" required>
+                        </div>
                         <div class="mb-3">
                             <label for="inputAluno" class="form-label">Aluno:</label>
                             <select class="form-select" id="inputAluno" name="inputAluno" required>
@@ -65,6 +68,16 @@
                                 <option>Técnico em Eletromecânica</option>
                                 <option>Técnico em Mecânica</option>
                                 <option>Técnico em Desenvolvimento de sistemas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPeriodo" class="form-label">Período:</label>
+                            <select class="form-select" id="inputPeriodo" name="inputPeriodo" required>
+                                <option selected disabled>Selecione o perído..</option>
+                                <option>Matutino</option>
+                                <option>Vespertino</option>
+                                <option>Noturno</option>
+                        
                             </select>
                         </div>
                         <% if (typeof mensagem_sucesso !== 'undefined' && mensagem_sucesso) { %>

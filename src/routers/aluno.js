@@ -18,10 +18,12 @@ router.get('/', (req, res) => {
 
 router.post('/registro-aluno', (req, res) => {
 
+        let matricula = req.body.inputMatricula;
         let nome = req.body.inputAluno;
         let curso = req.body.inputCurso;
+        let periodo = req.body.inputPeriodo;
 
-        db.run(`INSERT INTO alunos (nome, curso) VALUES (?, ?);`, [nome, curso], (err) => {
+        db.run(`INSERT INTO alunos (nome, curso) VALUES (?, ?);`, [matricula, nome, curso, periodo], (err) => {
             if(err){
                 return res.render('aluno', {error: 'Erro interno no servidor, por favor verificar!',
                     usuario: req.session.usuario 
