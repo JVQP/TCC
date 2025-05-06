@@ -9,42 +9,52 @@ router.get('/', (req, res) => {
                 if(err){
                     return res.status(500).send('Erro interno no servidor, por favor verificar!');
                 } else {
-                    res.render('aluno', {usuarios: usuarios, usuario: req.session.usuario })
+                    res.render('aluno', {usuarios: usuarios || [], usuario: req.session.usuario })
                 }
         })
 
 
 });
 
-router.post('/registro-aluno', (req, res) => {
+router.post('/registro-aluno', middleware, (req, res) => {
 
         let matricula = req.body.inputMatricula;
         let nome = req.body.inputAluno;
         let curso = req.body.inputCurso;
-        let periodo = req.body.inputPeriodo;
+        let Turno = req.body.inputTurno;
 
-        db.run(`INSERT INTO alunos (nome, curso) VALUES (?, ?);`, [matricula, nome, curso, periodo], (err) => {
-            if(err){
-                return res.render('aluno', {error: 'Erro interno no servidor, por favor verificar!',
-                    usuario: req.session.usuario 
-                }); 
-            } else {
 
-                db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
-                    if(err){
-                        return res.status(500).send('Erro interno no servidor, por favor verificar!');
-                    } 
-                        res.render('aluno', {usuarios: usuarios,
-                            mensagem_sucesso: 'Aluno registrado com sucesso!',
-                            usuario: req.session.usuario 
+        db.run(`INSERT INTO alunos (matricula, nome, curso, turno) VALUES (?, ?, ?, ?)`, [matricula, nome, curso, Turno], function(err) {
+                if(err){
+                    db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
+                        if (err) {
+                            return res.status(500).send('Erro interno no servidor ao buscar usuários.');
+                        }
+                        res.render('aluno', {
+                            usuarios: usuarios || [],
+                            usuario: req.session.usuario,
+                            error: `Erro ao cadastrar aluno, por favor verificar!`
                         });
+                      
+                    });
                     
-            });
-            }
-           
+                } else {
+                      db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
+                        if(err){
+                            return res.status(500).send('Erro interno no servidor, por favor verificar!');
+                        } else {
+                            res.render('aluno', {
+                                usuarios: usuarios || [],
+                                mensagem_sucesso: 'Aluno cadastrado com sucesso!',
+                                usuario: req.session.usuario
+                            });
+                            
+                        }
+                      });
+                }
         });
-       
-        });
+
+});
 
 
 module.exports = router;

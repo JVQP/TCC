@@ -32,10 +32,9 @@
                             <label for="inputAluno" class="form-label">Aluno:</label>
                             <select class="form-select" id="inputAluno" name="inputAluno" required>
                                 <option selected disabled>Selecione o aluno..</option>
-                                <% usuarios.forEach(function(usuarios){ %>
-                                    <option><%= usuarios.nome %></option>
-                                <% }) %>
-                               
+                                <% usuarios.forEach(function(usuario){ %>
+                                    <option><%= usuario.nome %></option>
+                                <% }) %> 
                             </select>
                         </div>
 
@@ -71,8 +70,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="inputPeriodo" class="form-label">Período:</label>
-                            <select class="form-select" id="inputPeriodo" name="inputPeriodo" required>
+                            <label for="inputTurno" class="form-label">Período:</label>
+                            <select class="form-select" id="inputTurno" name="inputTurno" required>
                                 <option selected disabled>Selecione o perído..</option>
                                 <option>Matutino</option>
                                 <option>Vespertino</option>
@@ -87,7 +86,7 @@
                             </div>
                           <% } %>
                         <% if (typeof error !== 'undefined' && error) { %>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                               <strong><%= error %></strong>
                               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
