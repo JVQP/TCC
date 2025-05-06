@@ -47,6 +47,7 @@ const contatoRouter = require('./routers/contato.js');
 const obrigadoRouter = require('./routers/obrigado.js');
 const usuarioRouter = require('./routers/usuario.js');
 const alunoRouter = require('./routers/aluno.js');
+const listaAlunosRouter = require('./routers/lista_alunos.js');
 
 
 app.use('/adm', admRouter);
@@ -56,6 +57,7 @@ app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);
 app.use('/usuario', usuarioRouter);
 app.use('/aluno', alunoRouter);
+app.use('/lista_alunos', listaAlunosRouter);
 
 
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI EMPREGA</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="/index.js" defer></script>
+</head>
+
+
+<body class="bg-light">
+
+    <%- include('partials/navbar') %>
+
+<!-- Filtragem de aluno -->
+
+<form action="" method="post" class="barra-pesquisa">
+
+    <div class="input-group" id="pesquisa-aluno">
+        <input type="text" class="form-control" placeholder="Ex: Matrícula.. Ex: Nome.. Ex: Curso.. Ex: Turno" aria-label="Input group example" aria-describedby="btnGroupAddon">
+        <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-search"></i></div>
+      </div>
+
+
+</form>
+
+  <!-- Tabela responsiva -->
+<main>
+    <div class="table-responsive" id="table">
+        <table class="table table-striped table-hover table-sm" id="tabelaAlunos">
+          <thead class="table-dark">
+            <tr>
+              <th style="text-align: center;">#</th>
+              <th style="text-align: center;">Matrícula</th>
+              <th style="text-align: center;">Aluno</th>
+              <th style="text-align: center;">Curso</th>
+              <th style="text-align: center;">Turno</th>
+              <th style="width: 70px; text-align: center;">Ações</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <% alunos.forEach(aluno => { %>
+              <tr>
+                <td><%= aluno.id %></td>
+                <td><%= aluno.matricula %></td>
+                <td><%= aluno.nome %></td>
+                <td><%= aluno.curso %></td>
+                <td><%= aluno.turno %></td>
+                
+                <td style="width: 70px;">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <button class="btn btn-outline-primary btn-sm px-1 py-0" style="width: 28px; height: 28px;" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-outline-danger btn-sm px-1 py-0" style="width: 28px; height: 28px;" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                  
+                      
+                
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="back-button">
+        <a href="/adm">  <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
+               <i class="bi bi-box-arrow-left"></i>
+           </button> </a> 
+       </div>   
+</main>
+
+   
+        <%- include('partials/footer') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>
