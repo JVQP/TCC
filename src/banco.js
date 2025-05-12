@@ -120,4 +120,31 @@ function imagem_perfil(){
     
 }
 
+function soft_skills(){
+    let query = `CREATE TABLE IF NOT EXISTS avaliacao(
+
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        trabalho_equipe INTEGER,
+        responsabilidade INTEGER,
+        pensamento_critico INTEGER,
+        proatividade INTEGER,
+        lideranca INTEGER,
+        adaptabilidade INTEGER,
+        empatia INTEGER
+    );`
+
+    db.run(query, (err) => {
+        if(err){
+                console.log('Erro ao criar tabela de Soft Skills: ' + err.message);
+        } else {
+            
+                console.log('Tabela Soft Skills criada com sucesso!');
+
+        }
+    });
+
+}
+
+
+
 module.exports = db;
