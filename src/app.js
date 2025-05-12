@@ -22,7 +22,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 4000 * 60 * 60 * 24
     }
 }));
 
@@ -48,7 +48,7 @@ const obrigadoRouter = require('./routers/obrigado.js');
 const usuarioRouter = require('./routers/usuario.js');
 const alunoRouter = require('./routers/aluno.js');
 const listaAlunosRouter = require('./routers/lista_alunos.js');
-
+const excluirAlunoRouter = require('./routers/excluir_aluno.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -58,7 +58,7 @@ app.use('/obrigado', obrigadoRouter);
 app.use('/usuario', usuarioRouter);
 app.use('/aluno', alunoRouter);
 app.use('/lista_alunos', listaAlunosRouter);
-
+app.use('/excluir', excluirAlunoRouter);
 
 
 // Rodando servidor 

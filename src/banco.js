@@ -47,7 +47,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop(){
-    let query = `DROP TABLE IF EXISTS alunos;`
+    let query = `DROP TABLE IF EXISTS avaliacao;`
 
     db.run(query, (err) => {
         if (err) {
@@ -124,13 +124,19 @@ function soft_skills(){
     let query = `CREATE TABLE IF NOT EXISTS avaliacao(
 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        aluno INTEGER,
+        professor VARCHAR(100),
         trabalho_equipe INTEGER,
         responsabilidade INTEGER,
         pensamento_critico INTEGER,
         proatividade INTEGER,
         lideranca INTEGER,
         adaptabilidade INTEGER,
-        empatia INTEGER
+        empatia INTEGER,
+        comentario VARCHAR(100) NOT NULL,
+        media INTEGER,
+        observacao VARCHAR(100),
+        FOREIGN KEY (aluno) REFERENCES alunos(nome)
     );`
 
     db.run(query, (err) => {
