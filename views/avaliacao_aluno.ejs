@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de avaliação</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="/index.js" defer></script>
+</head>
+
+<body class="bg-light">
+
+
+    <%- include('partials/navbar') %>
+
+        <div class="container-fluid p-3 p-md-5">
+            <h2 class="text-center mb-4">Ficha de Avaliação de Soft Skills</h2>
+          <a href="/adm"><button class="btn btn-danger center" title="Voltar"><i class="bi bi-arrow-bar-left"></i></button></a> 
+            <form>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label">Nome do Aluno</label>
+                        <input type="text" class="form-control" value="<%= aluno.nome %>" name="avaNome" placeholder="Digite o nome do aluno">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label class="form-label">Período</label>
+                        <input type="text" class="form-control" name="avaPeriodo" placeholder="Ex: 1° Módulo">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label class="form-label">Professor Avaliador</label>
+                        <input type="text" class="form-control" name="avaProfessor" placeholder="Nome do professor">
+                    </div>
+                </div>
+
+
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered align-middle text-nowrap">
+                        <thead class="table-secondary text-center">
+                            <tr>
+                                <th>Soft Skill</th>
+                                <th>Descrição</th>
+                                <th style="width: 90px;">Nota</th>
+                                <th>Comentário</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Comunicação</td>
+                                <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
+                                <td><input type="number" min="0" max="5" oninput="atualizarNota()" id="avaNota1" name="avaNota1" class="form-control"></td>
+                                <td><input type="text" name="avaComentario" class="form-control" placeholder="Comentário opcional"></td>
+                            </tr>
+                            <tr>
+                                <td>Trabalho em Equipe</td>
+                                <td>Colaboração, respeito e contribuição em grupo.</td>
+                                <td><input type="number" min="0" max="5" oninput="atualizarNota()" id="avaNota2" name="avaNota2" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Responsabilidade</td>
+                                <td>Comprometimento, pontualidade, ética.</td>
+                                <td><input type="number" min="0" max="5" oninput="atualizarNota()" id="avaNota3" name="avaNota3" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Pensamento Crítico</td>
+                                <td>Argumentação, questionamento, resolução de problemas.</td>
+                                <td><input type="number" min="0" max="5" oninput="atualizarNota()" id="avaNota4" name="avaNota4" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Proatividade</td>
+                                <td>Iniciativa e autonomia para resolver tarefas.</td>
+                                <td><input type="number" min="0" max="5"  id="avaNota5" oninput="atualizarNota()" name="avaNota5" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Liderança</td>
+                                <td>Influência positiva, tomada de decisões.</td>
+                                <td><input type="number" min="0" max="5"  id="avaNota6" oninput="atualizarNota()" name="avaNota6" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Adaptabilidade</td>
+                                <td>Flexibilidade e aceitação de mudanças.</td>
+                                <td><input type="number" min="0" max="5"  id="avaNota7" oninput="atualizarNota()" name="avaNota7" class=" form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Empatia</td>
+                                <td>Respeito e compreensão dos sentimentos dos outros.</td>
+                                <td><input type="number" min="0" max="5"  id="avaNota8" oninput="atualizarNota()" name="avaNota8" class="form-control"></td>
+                                <td><input type="text"  name="avaComentario" class="form-control"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="mb-4">
+                    <label class="form-label">Média: </label>
+                    <input type="text" class="form-control" id="media" placeholder="Média" style="width: 200px;" readonly>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Observações Gerais</label>
+                    <textarea class="form-control" rows="4" name="avaObservacao"
+                        placeholder="Comentários adicionais sobre o aluno"></textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary px-4">Salvar Avaliação</button>
+                </div>
+
+            </form>
+        </div>
+
+
+        <%- include('partials/footer') %>
+
+</body>
+
+</html>

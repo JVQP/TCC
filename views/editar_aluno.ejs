@@ -23,20 +23,20 @@
                 style="min-height: 80vh;">
                 <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
                     <h1>Editar</h1>
-                    <form action="/aluno/registro-aluno" method="POST" enctype="multipart/form-data">
+                    <form action="/editar/<%= aluno.id %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="inputMatricula" class="form-label">N° de matrícula:</label>
-                            <input type="text" class="form-control" id="inputMatricula" name="inputMatricula" required>
+                            <label for="editarMatricula" class="form-label">N° de matrícula:</label>
+                            <input type="text" class="form-control" id="editarMatricula" value="<%= aluno.matricula %>" name="editarMatricula" required>
                         </div>
                         <div class="mb-3">
-                            <label for="EditarNome" class="form-label">Aluno:</label>
-                            <input type="text" class="form-control" id="EditarNome" name="EditarNome" required>
+                            <label for="editarNome" class="form-label">Aluno:</label>
+                            <input type="text" class="form-control" id="editarNome" name="editarNome" value="<%= aluno.nome %>" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="inputCurso" class="form-label">Curso:</label>
-                            <select class="form-select" id="inputCurso" name="inputCurso" required>
-                                <option selected disabled>Selecione o curso..</option>
+                            <label for="editarCurso" class="form-label">Curso:</label>
+                            <select class="form-select" id="editarCurso" name="editarCurso" value = '<%= aluno.curso %>' required>
+                                <option selected disabled><%= aluno.curso %> </option>
                                 <option>Soldador no processo MAG</option>
                                 <option>Mecânico de máquinas industriais</option>
                                 <option>Oxicorte a mão e máquina</option>
@@ -65,33 +65,14 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="inputTurno" class="form-label">Período:</label>
-                            <select class="form-select" id="inputTurno" name="inputTurno" required>
-                                <option selected disabled>Selecione o perído..</option>
+                            <label for="editarTurno" class="form-label">Turno:</label>
+                            <select class="form-select" id="editarTurno" name="editarTurno" value = '<%= aluno.turno %>' required>
                                 <option>Matutino</option>
                                 <option>Vespertino</option>
                                 <option>Noturno</option>
-
                             </select>
                         </div>
-                        <% if (typeof mensagem_sucesso !=='undefined' && mensagem_sucesso) { %>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>
-                                    <%= mensagem_sucesso %>
-                                </strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            <% } %>
-                                <% if (typeof error !=='undefined' && error) { %>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <strong>
-                                            <%= error %>
-                                        </strong>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <% } %>
+
 
                                         <br>
                                         <input type="submit" id="registro" class="btn btn-primary" value="Registrar">

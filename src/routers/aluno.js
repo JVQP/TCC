@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-    db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
+    db.all(`SELECT * FROM usuarios WHERE tipo = 'Aluno'`, (err, usuarios) => {
         if (err) {
             return res.status(500).send('Erro interno no servidor, por favor verificar!');
         } else {

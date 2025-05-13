@@ -126,6 +126,7 @@ function soft_skills(){
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         aluno INTEGER,
         professor VARCHAR(100),
+        periodo VARCHAR(100),
         trabalho_equipe INTEGER,
         responsabilidade INTEGER,
         pensamento_critico INTEGER,
@@ -135,8 +136,8 @@ function soft_skills(){
         empatia INTEGER,
         comentario VARCHAR(100) NOT NULL,
         media INTEGER,
-        observacao VARCHAR(100),
-        FOREIGN KEY (aluno) REFERENCES alunos(nome)
+        observacao VARCHAR(100)
+      
     );`
 
     db.run(query, (err) => {
@@ -150,7 +151,5 @@ function soft_skills(){
     });
 
 }
-
-
 
 module.exports = db;
