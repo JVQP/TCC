@@ -128,14 +128,14 @@ function soft_skills(){
         professor VARCHAR(100),
         periodo VARCHAR(100),
         trabalho_equipe INTEGER,
+        comunicacao INTEGER,
         responsabilidade INTEGER,
         pensamento_critico INTEGER,
         proatividade INTEGER,
         lideranca INTEGER,
         adaptabilidade INTEGER,
         empatia INTEGER,
-        comentario VARCHAR(100) NOT NULL,
-        media INTEGER,
+        media REAL,
         observacao VARCHAR(100)
       
     );`

@@ -23,9 +23,9 @@
 
     <!-- Filtragem de aluno -->
 
-    <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
+   <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
       <div class="input-group" id="pesquisa-aluno">
-        <input type="text" class="form-control" placeholder="Informe a matricula do aluno.."
+        <input type="text" class="form-control" placeholder="Ex: Matrícula.. Ex: Nome.. Ex: Curso.. Ex: Turno"
           aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
         <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
       </div>
@@ -85,15 +85,6 @@
           </tbody>
         </table>
       </div>
-
-                      <% if (typeof error !== 'undefined' && error) { %>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <strong><%= error %></strong>
-                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                          <% } %>
-
-        <p><strong>TOTAL:</strong> <%= total %></p>
 
       <div class="back-button">
         <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar

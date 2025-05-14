@@ -30,7 +30,7 @@ router.post('/registro-aluno', middleware, (req, res) => {
 
         if (aluno) {
             // Matrícula já existe
-            db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
+            db.all(`SELECT * FROM usuarios WHERE tipo = 'Aluno'`, (err, usuarios) => {
                 if (err) {
                     return res.status(500).send('Erro interno ao buscar usuários.');
                 }
@@ -50,7 +50,7 @@ router.post('/registro-aluno', middleware, (req, res) => {
                         return res.status(500).send('Erro ao cadastrar aluno.');
                     }
 
-                    db.all(`SELECT * FROM usuarios`, (err, usuarios) => {
+                    db.all(`SELECT * FROM usuarios WHERE tipo = 'Aluno'`, (err, usuarios) => {
                         if (err) {
                             return res.status(500).send('Erro interno no servidor ao buscar usuários.');
                         }

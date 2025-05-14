@@ -12,10 +12,40 @@ db.all('SELECT * FROM alunos', (err, alunos) => {
         console.error(err);
         return res.status(500).send('Erro ao acessar o banco de dados.');
     }
-    res.render('lista_alunos', { alunos: alunos, usuario: req.session.usuario});
+    res.render('lista_alunos', { alunos: alunos, total: alunos.length, usuario: req.session.usuario });
 
 });
 });
 
+
+router.post('/pesquisa', middleware, (req, res) => {
+
+let pesquisa = req.body.pesquisa;
+
+db.all(`
+        SELECT * FROM alunos 
+        WHERE 
+            matricula LIKE ? OR 
+            nome LIKE ? OR 
+            curso LIKE ? OR 
+            turno LIKE ?
+    `, [`%${pesquisa}%`], (err, alunos) => {
+    if (err) {
+        console.error(err);
+        return res.status(500).send('Erro ao acessar o banco de dados.');
+    }
+   
+    if(alunos.length === 0) {
+        res.render('pesquisa_aluno', {error: 'Nenhum aluno encontrado', alunos: []});
+    } else {
+        let total = alunos.length;
+        res.render('pesquisa_aluno', { alunos: alunos, total: total});
+    }
+
+});
+
+
+
+});
 
 module.exports = router

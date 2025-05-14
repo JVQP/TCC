@@ -26,11 +26,11 @@
                     <form action="/editar/<%= aluno.id %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="editarMatricula" class="form-label">N° de matrícula:</label>
-                            <input type="text" class="form-control" id="editarMatricula" value="<%= aluno.matricula %>" name="editarMatricula" required>
+                            <input type="text" class="form-control" id="editarMatricula" value="<%= aluno.matricula %>" readonly name="editarMatricula" required>
                         </div>
                         <div class="mb-3">
                             <label for="editarNome" class="form-label">Aluno:</label>
-                            <input type="text" class="form-control" id="editarNome" name="editarNome" value="<%= aluno.nome %>" required>
+                            <input type="text" class="form-control" id="editarNome" name="editarNome" value="<%= aluno.nome %>" readonly required>
                         </div>
 
                         <div class="mb-3">
