@@ -130,6 +130,19 @@ td{
 }
 
 
+/* ESTILIZANDO PÁGINA DE PORTAL DE VAGAS */
+
+.portal-tittle{
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 20px;
+}
+
+#vagas{
+    margin-top: 30px;
+}
+
+
+
 /* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
     #col1 {
