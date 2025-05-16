@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
     <link rel="stylesheet" href="/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="/index.js" defer></script>
 
@@ -14,56 +15,108 @@
 
 <body>
 
- <%- include('partials/navbar') %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+
+
+            <!-- MENU DE OPÇÕES -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-list"
+                    id="menu"></i></button>
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Painel de controle</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="container-fluid" id="container">
+                        <div class="row">
+                            <div class="col-4" id="col1">
+                                <% if (perfil && perfil.length && perfil[0].imagem) { %>
+                                    <img src="/imagem/<%= perfil[0].imagem %>" alt="Foto de perfil" class="img-profile" loading="lazy">
+                                    <% } else { %>
+                                        <img src="/imagem/user.png" alt="Foto padrão"  class="img-profile" loading="lazy">
+                                        <% } %>
+                            </div>
+
+                            <div class="editar">
+                                <a href="/add-foto/<%= usuario.id %>" style="text-decoration: none;" title="Editar"><i
+                                        class="bi bi-pencil-square"></i></a>
+                            </div>
+
+                            <div class="nomes">
+                                <p class="nome">
+                                    <%= usuario.nome %>
+                                </p>
+                                <p class="frase">"Pelo futuro do trabalho."</p>
+
+                            </div>
+                            <div class="conteudo">
+                                <a href="/usuario"><button type="button" class="btn-interacao"><i class="bi bi-person"
+                                            id="icons"></i> Cadastrar usuário.</button></a>
+                                <br>
+                                <a href="/aluno"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-badge"></i> Registrar Aluno.</button></a>
+                                <br>
+                                <a href="/lista_alunos"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-lines-fill"></i> Listar alunos.</button></a>
+                                <br>
+                                <a href="/loginAva"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-check"></i> Avaliar aluno.</button></a>
+                                <br>
+                                <a href="/portal-vagas"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
+                                <br>
+                                <button type="button" class="btn-interacao"><i class="bi bi-link-45deg"></i>
+                                    Links.</button>
+                                <br>
+
+                                <div class="logout">
+                                    <a href="/logout"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                            Sair
+                                            <i class="bi bi-box-arrow-left"></i>
+                                        </button> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGO -->
+
+            <img src="/imagem/Logo.png" alt="SenaiEmprega" style="height: 100px; align-items: center;">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
 
     <!-- Construindo colunas com interações -->
 
     <main>
-        <div class="container-fluid" id="container">
-            <div class="row">
-                <div class="col-4" id="col1">
-                    <img src="/imagem/user.png" alt="profile" class="img-profile">
-                    <p><%= usuario.nome %></p>
-                    <p class="frase">"Pelo futuro do trabalho."</p>
-            </div>
-          
-            <div class="col-8" id="col2">
-                <div class="card mb-3">
-                    <h1>Parcerias do SENAI</h1>
-                    <img src="/imagem/" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">O Senai é a melhor escolha quando o assunto é qualificação para o trabalho na indústria 4.0. Com cursos alinhados às necessidades do mercado, corpo docente experiente e atualizado, além de estrutura completa para aulas práticas e ambientes de vivência que estimulam a criatividade e o protagonismo dos alunos, não é à toa que 7 em cada 10 ex-estudantes do Senai estão empregados em suas áreas de formação.er card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-            </div>
 
-            <div class="conteudo">
-               <a href="/usuario"><button type="button" class="btn-interacao"><i class="bi bi-person" id="icons"></i> Cadastrar usuário.</button></a>  
-                <br>   
-                <a href="/aluno"><button type="button" class="btn-interacao"><i class="bi bi-person-badge"></i> Registrar Aluno.</button></a> 
-                <br>  
-               <a href="/lista_alunos"><button type="button" class="btn-interacao"><i class="bi bi-person-lines-fill"></i> Listar alunos.</button></a>
-                <br>  
-              <a href="/loginAva"><button type="button" class="btn-interacao"><i class="bi bi-person-check"></i> Avaliar aluno.</button></a> 
-                <br>  
-               <a href="/portal-vagas"><button type="button" class="btn-interacao"><i class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
-                <br>  
-                <button type="button" class="btn-interacao"><i class="bi bi-link-45deg"></i> Links.</button>  
-                <br>  
-                 
-                <div class="logout">
-                     <a href="/logout">  <button type="button" class="btn btn-danger" id="logout-btn"> Sair
-                            <i class="bi bi-box-arrow-left"></i>
-                        </button> </a> 
-                    </div>    
-        </div>
-        </div>
-        </div>
     </main>
 
     <%- include('partials/footer') %>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
 </body>
 

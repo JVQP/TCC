@@ -60,4 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
+
+
+// SCRIPT DA PÁGINA DE ADIÇÃO DE PERFIL
+
+
+if (path.startsWith('/add-foto/')) {
+path.split('/')[2]; 
+
+let btn = document.getElementById('confirmar');
+
+btn.addEventListener('click', function (e) {
+
+btn.innerHTML = "Aguarde...";
+
+
+
+});
+
+}
 });

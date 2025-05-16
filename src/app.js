@@ -52,6 +52,7 @@ const excluirAlunoRouter = require('./routers/excluir_aluno.js');
 const editarAlunoRouter = require('./routers/editar_aluno.js');
 const avaliacaoRouter = require('./routers/avaliacao.js');
 const portalRouter = require('./routers/portal_vagas.js');
+const addFotoRouter = require('./routers/add_foto.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -65,7 +66,9 @@ app.use('/excluir', excluirAlunoRouter);
 app.use('/editar', editarAlunoRouter);
 app.use('/loginAva', avaliacaoRouter);
 app.use('/portal-vagas', portalRouter);
+app.use('/add-foto', addFotoRouter);
 
+module.exports = app;
 
 // Rodando servidor 
 app.listen(PORT, () => {

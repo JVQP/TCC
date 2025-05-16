@@ -36,7 +36,7 @@ db.all(`
     }
    
     if(alunos.length === 0) {
-        res.render('pesquisa_aluno', {error: 'Nenhum aluno encontrado', alunos: []});
+        res.render('pesquisa_aluno', {error: 'Nenhum aluno encontrado', alunos: [], usuario: req.session.usuario});
     } else {
         let total = alunos.length;
         res.render('pesquisa_aluno', { alunos: alunos, total: total});

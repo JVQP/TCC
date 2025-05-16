@@ -47,7 +47,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop(){
-    let query = `DROP TABLE IF EXISTS avaliacao;`
+    let query = `DROP TABLE IF EXISTS imagem_perfil;`
 
     db.run(query, (err) => {
         if (err) {
@@ -57,6 +57,7 @@ function drop(){
         }
     })
 }
+
 
 function aluno() {
 
@@ -106,7 +107,7 @@ function imagem_perfil(){
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     id_usuario INT NOT NULL,
     imagem TEXT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 );`
 
     db.run(query, (err) => {

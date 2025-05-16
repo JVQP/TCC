@@ -1,7 +1,5 @@
 const express = require('express');
 const db = require('../banco.js');
-const { string } = require('i/lib/util.js');
-const e = require('express');
 const router = express.Router();
 
 
@@ -16,7 +14,7 @@ router.get('/:id', (req, res) => {
             res.status(500).send('Erro ao buscar aluno: ' + err.message);
             console.log(err);
         } else {
-            res.render('editar_aluno', { aluno: alunos[0] });
+            res.render('editar_aluno', { aluno: alunos[0]});
         }
 
     });
