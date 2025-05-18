@@ -27,6 +27,7 @@ function usuario() {
 
     let query = `CREATE TABLE usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    imagem VARHCAR(100),
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     data_nascimento DATE NOT NULL,
@@ -47,7 +48,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop(){
-    let query = `DROP TABLE IF EXISTS imagem_perfil;`
+    let query = `DROP TABLE IF EXISTS usuarios;`
 
     db.run(query, (err) => {
         if (err) {
@@ -57,6 +58,7 @@ function drop(){
         }
     })
 }
+
 
 
 function aluno() {

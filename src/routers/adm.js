@@ -4,19 +4,18 @@ const db = require('../banco.js');
 const router = express.Router();
 
 
-router.all('/', middleware, (req, res) => {
+router.get('/', middleware, (req, res) => {
 
-    db.all(`SELECT * FROM imagem_perfil WHERE id_usuario = ?`, [req.session.usuario.id], (err, imagem) => {
+    
+    db.all('SELECT * FROM usuarios WHERE id = ? ', [req.session.usuario.id], (err, usuario) => {
 
-        if (err) {
-            console.log(err);
-            return res.send('Erro ao buscar imagem de perfil');
-        } else {
-            return res.render('adm', { usuario: req.session.usuario, perfil: imagem });
-        }
-
+            if(err){
+                console.log('Mensagem: ' + err.message);
+                return res.status(500).send('Mensagem: ' + err.message);
+            } else{
+                return res.render('adm', {usuarios: usuario, usuario: req.session.usuario});
+            }
     });
-
 });
 
 

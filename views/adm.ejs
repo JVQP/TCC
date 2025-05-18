@@ -33,18 +33,23 @@
                 <div class="offcanvas-body">
                     <div class="container-fluid" id="container">
                         <div class="row">
+
                             <div class="col-4" id="col1">
-                                <% if (perfil && perfil.length && perfil[0].imagem) { %>
-                                    <img src="/imagem/<%= perfil[0].imagem %>" alt="Foto de perfil" class="img-profile" loading="lazy">
+                                <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
+                                    <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil" class="img-profile"
+                                        loading="lazy">
                                     <% } else { %>
-                                        <img src="/imagem/user.png" alt="Foto padrão"  class="img-profile" loading="lazy">
+                                        <img src="/imagem/user.png" alt="Foto padrão" class="img-profile"
+                                            loading="lazy">
                                         <% } %>
                             </div>
 
                             <div class="editar">
-                                <a href="/add-foto/<%= usuario.id %>" class="icon-profile" style="text-decoration: none;" title="Adicionar foto"><i class="bi bi-person-bounding-box"></i></a>
-                                <a href="/editar-foto/<%= usuario.id%>/<%= perfil[0].imagem %>" style="text-decoration: none; margin-right: 20px;"  class="icon-profile" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                                <a href="/editar-foto/<%= usuario.id%>/<%= usuarios[0].imagem %>"
+                                    style="text-decoration: none; margin-right: 20px;" class="icon-profile"
+                                    title="Editar"><i class="bi bi-pencil-square"></i></a>
                             </div>
+
 
                             <div class="nomes">
                                 <p class="nome">

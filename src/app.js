@@ -52,7 +52,6 @@ const excluirAlunoRouter = require('./routers/excluir_aluno.js');
 const editarAlunoRouter = require('./routers/editar_aluno.js');
 const avaliacaoRouter = require('./routers/avaliacao.js');
 const portalRouter = require('./routers/portal_vagas.js');
-const addFotoRouter = require('./routers/add_foto.js');
 const editarFotoRouter = require('./routers/editar_foto.js');
 
 app.use('/adm', admRouter);
@@ -67,7 +66,6 @@ app.use('/excluir', excluirAlunoRouter);
 app.use('/editar', editarAlunoRouter);
 app.use('/loginAva', avaliacaoRouter);
 app.use('/portal-vagas', portalRouter);
-app.use('/add-foto', addFotoRouter);
 app.use('/editar-foto', editarFotoRouter);
 
 module.exports = app;

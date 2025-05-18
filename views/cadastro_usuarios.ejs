@@ -64,6 +64,13 @@
                         <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
                             <h1>Registrar Usuário</h1>
                             <form action="/usuario/cadastro" method="POST" enctype="multipart/form-data">
+                               
+                                 <div class="mb-3" id="add-imagem">
+                                     <img src="/imagem/user.png" class="img-user" alt="perfil">
+                                    <input type="file" class="form-control" name="inputImagem" id="inputImagem">
+                                        
+                                </div>
+                               
                                 <div class="mb-3">
                                <label for="inputEmail" class="form-label">E-Mail: </label>
                                     <input type="email" class="form-control" name="inputEmail" id="inputEmail"
