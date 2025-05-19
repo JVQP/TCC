@@ -20,36 +20,50 @@
 
         <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
             <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
-                <form action='/editar-foto/<%= usuario.id %>/<%= usuarios[0].imagem %>' method="POST" enctype="multipart/form-data">
-                 
-                    <div class="mb-3">
+                <form action='/editar-foto/<%= usuario.id %>/<%= usuarios[0].imagem %>' method="POST"
+                    enctype="multipart/form-data">
 
-                        <input type="hidden" class="form-control" value="<%= usuario.id %>">
 
-                    </div>
-                 
-                    <div class="mb-3" id="add-imagem">
-                        <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
-                            <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil" class="img-profile"
-                                loading="lazy">
-                            <% } else { %>
-                                <img src="/imagem/user.png" alt="Foto padrão" class="img-profile"
-                                    loading="lazy">
-                                <% } %>
 
-                                <input type="file" class="form-control" name = "imagemNova">
+                    <% if (typeof error !=='undefined' && error) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>
+                                <%= error %>
+                            </strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% } %>
 
-                    </div>
-                    <div class="mb-3" id="add-imagem">
 
-                        <p>
-                            <%= usuario.nome %>
-                        </p>
+                            <div class="mb-3">
 
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Confirmar</button>
+                                <input type="hidden" class="form-control" value="<%= usuario.id %>">
+
+                            </div>
+
+                            <div class="mb-3" id="add-imagem">
+                                <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
+                                    <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil"
+                                        class="img-profile" loading="lazy">
+                                    <% } else { %>
+                                        <img src="/imagem/user.png" alt="Foto padrão" class="img-profile"
+                                            loading="lazy">
+                                        <% } %>
+
+                                            <input type="file" class="form-control" id="file" name="imagemNova">
+
+                            </div>
+                            <div class="mb-3" id="add-imagem">
+
+                                <p>
+                                    <%= usuario.nome %>
+                                </p>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Confirmar</button>
                 </form>
-                <a href="/adm"><button type="submit" class="btn btn-danger w-100">Voltar</button></a>
+              <br>
+                <a href="<%= voltar %>" class="btn btn-danger w-100">Voltar</a>
             </div>
         </div>
         <%- include('partials/footer') %>

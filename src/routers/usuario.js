@@ -48,9 +48,12 @@ router.post('/cadastro', middleware, (req, res) => {
             });
         }
 
-        let imagem = null;
+        let imagem = 'user.png';
+        let imagemSalva = false;
+
         if (req.files && req.files.inputImagem) {
             imagem = req.files.inputImagem.name;
+            imagemSalva = true;
         }
 
         db.run('INSERT INTO usuarios (imagem, nome, email, data_nascimento, senha, confirmar_senha, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -65,7 +68,7 @@ router.post('/cadastro', middleware, (req, res) => {
                 }
 
              
-                if (imagem) {
+                if (imagemSalva) {
                     const uploadPath = path.join(__dirname, '..', '..', 'Public', 'imagem', imagem);
                     req.files.inputImagem.mv(uploadPath, (err) => {
                         if (err) {

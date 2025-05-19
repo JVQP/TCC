@@ -22,7 +22,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 // 1 dia
+        maxAge: 1000 * 60 * 60 * 24,
     }
 }));
 
@@ -53,6 +53,9 @@ const editarAlunoRouter = require('./routers/editar_aluno.js');
 const avaliacaoRouter = require('./routers/avaliacao.js');
 const portalRouter = require('./routers/portal_vagas.js');
 const editarFotoRouter = require('./routers/editar_foto.js');
+const painelAlunoRouter = require('./routers/painel_aluno.js');
+const listaUsuarioRouter = require('./routers/lista_usuario.js');
+
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -67,6 +70,11 @@ app.use('/editar', editarAlunoRouter);
 app.use('/loginAva', avaliacaoRouter);
 app.use('/portal-vagas', portalRouter);
 app.use('/editar-foto', editarFotoRouter);
+app.use('/painel-aluno', painelAlunoRouter);
+app.use('/lista-usuario', listaUsuarioRouter);
+
+
+
 
 module.exports = app;
 

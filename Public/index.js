@@ -79,4 +79,26 @@ btn.innerHTML = "Aguarde...";
 });
 
 }
+
+// SCRIPT DA PÁGINA DE CADASTRO DE USUÁRIO
+
+if(path === '/usuario' || path === '/usuario/cadastro'){
+
+let btn = document.getElementById('registro');
+
+btn.addEventListener('click', function (e) {
+btn.innerHTML = "Registrando...";
+
+});
+
+}
+
+if(path.startsWith('/editar-foto/')){
+path.split('/')[2];
+
+
+
+}
+
+
 });

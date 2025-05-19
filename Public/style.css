@@ -57,6 +57,10 @@ main {
     text-align: center;
 }
 
+#file{
+    margin-top: 20px;
+}
+
 #add-imagem {
     flex-direction: column;
     margin-top: 20px;
@@ -129,7 +133,7 @@ main {
 .logout {
     margin-top: 20px;
     border-top: 1px solid gray;
-    width: 200px;
+    width: 352px;
 }
 
 #col2 {

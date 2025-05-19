@@ -21,15 +21,23 @@ const router = express.Router();
             return;
         } 
       
-        if(usuario) {
+        if(usuario && usuario.tipo === 'Professor') {
                 req.session.usuario = usuario;
                 return res.redirect('/adm');
-            } else {
+            } else if(usuario && usuario.tipo === 'Aluno') {
+                req.session.usuario = usuario;
+                return res.redirect('/painel-aluno');
+            } else if(usuario && usuario.tipo === 'Empresa') {
+                req.session.usuario = usuario;
+                return res.redirect('/painel-empresa');
+            }
+
+             else {
                 res.render('login', { error: 'E-Mail ou senha inválidos, tente novamente mais tarde!.' });
             }
 
   });
-});
-      
+
+});   
 
     module.exports = router;
