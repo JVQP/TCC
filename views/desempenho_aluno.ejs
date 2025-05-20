@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Aluno</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Script -->
+  <script src="/index.js" defer></script>
+
+</head>
+<body class="bg-light">
+
+  <%- include('partials/navbar') %>
+
+  <main class="container py-4">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="text-center mb-4">Avaliação</h4>
+      </div>
+    </div>
+
+    <div>
+      <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong><%= avaliacao.aluno %></strong></h6>
+    </div>
+
+   <% avaliacoes.forEach(avaliacao => { %>
+    
+
+       <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+           <%= avaliacao.periodo %>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <div class="container-fluid p-3 p-md-5">
+
+              <h2 class="text-center mb-4">Ficha de Avaliação de Soft Skills</h2>
+              <p class="text-center mb-4">
+                0 = Não demonstrado, 1 = Muito fraco, 2 = Fraco, 3 = Regular, 4 = Bom, 5 = Excelente.
+              </p>
+              <form>
+                <div class="row g-3 mb-4">
+                  <div class="col-12 col-md-4">
+                    <label class="form-label">Nome do Aluno</label>
+                    <input type="text" class="form-control" name="avaNome" placeholder="Digite o nome do aluno" readonly />
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label">Período</label>
+                    <input type="text" class="form-control" name="avaPeriodo" placeholder="Ex: 1° Módulo" readonly />
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label">Professor Avaliador</label>
+                    <input type="text" class="form-control" name="avaProfessor" placeholder="Nome do professor" readonly />
+                  </div>
+                </div>
+
+                <div class="table-responsive mb-4">
+                  <table class="table table-bordered text-center align-middle">
+                    <thead class="table-secondary">
+                      <tr>
+                        <th>Soft Skill</th>
+                        <th>Descrição</th>
+                        <th style="width: 90px;">Nota</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Comunicação</td>
+                        <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota1" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Trabalho em Equipe</td>
+                        <td>Colaboração, respeito e contribuição em grupo.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota2" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Responsabilidade</td>
+                        <td>Comprometimento, pontualidade, ética.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota3" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Pensamento Crítico</td>
+                        <td>Argumentação, questionamento, resolução de problemas.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota4" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Proatividade</td>
+                        <td>Iniciativa e autonomia para resolver tarefas.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota5" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Liderança</td>
+                        <td>Influência positiva, tomada de decisões.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota6" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Adaptabilidade</td>
+                        <td>Flexibilidade e aceitação de mudanças.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota7" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td>Empatia</td>
+                        <td>Respeito e compreensão dos sentimentos dos outros.</td>
+                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota8" oninput="atualizarNota()" readonly /></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label">Média:</label>
+                  <input type="text" class="form-control" name="media" id="media" placeholder="Média"
+                    style="width: 200px;" readonly />
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label">Observações Gerais</label>
+                  <textarea class="form-control" name="avaObservacao" rows="4"
+                    placeholder="Comentários adicionais sobre o aluno" readonly></textarea>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <% });%>
+
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <!-- Scripts do Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+</html>

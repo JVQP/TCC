@@ -55,6 +55,7 @@ const portalRouter = require('./routers/portal_vagas.js');
 const editarFotoRouter = require('./routers/editar_foto.js');
 const painelAlunoRouter = require('./routers/painel_aluno.js');
 const listaUsuarioRouter = require('./routers/lista_usuario.js');
+const desempenhoRouter = require('./routers/desempenho_aluno.js');
 
 
 app.use('/adm', admRouter);
@@ -72,6 +73,7 @@ app.use('/portal-vagas', portalRouter);
 app.use('/editar-foto', editarFotoRouter);
 app.use('/painel-aluno', painelAlunoRouter);
 app.use('/lista-usuario', listaUsuarioRouter);
+app.use('/desempenho-aluno', desempenhoRouter);
 
 
 

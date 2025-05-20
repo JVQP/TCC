@@ -36,6 +36,7 @@ router.post('/avaliar-aluno', middleware, (req, res) => {
 
 router.post('/avaliar-aluno/salvar', middleware, (req, res) => {
 
+    let matricula = req.body.avaMatricula;
     let nome = req.body.avaNome;
     let professor = req.body.avaProfessor;
     let periodo = req.body.avaPeriodo;
@@ -62,10 +63,10 @@ router.post('/avaliar-aluno/salvar', middleware, (req, res) => {
 
             db.run(`
   INSERT INTO avaliacao (
-    aluno, professor, periodo, comunicacao, trabalho_equipe, responsabilidade, pensamento_critico,
+   matricula, aluno, professor, periodo, comunicacao, trabalho_equipe, responsabilidade, pensamento_critico,
     proatividade, lideranca, adaptabilidade, empatia, media, observacao
-  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
-`, [nome, professor, periodo, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, media, observacao], (err) => {
+  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`, [matricula ,nome, professor, periodo, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, media, observacao], (err) => {
                 if (err) {
                     console.error(err);
                    return res.render('avaliacao_aluno', { error: `Erro ao salvar a avaliação do aluno: ${nome}`, aluno: alunos });

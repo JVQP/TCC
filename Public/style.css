@@ -194,6 +194,16 @@ td {
 }
 
 
+/* ESTILIZANDO PÁGINA DESEMPENHO */
+
+
+#desempenho {
+    margin-top: 20px;
+}
+
+#aluno-desempenho {
+    margin-top: 20px;
+}
 
 /* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
@@ -211,6 +221,16 @@ td {
         list-style: none;
         font-size: 30px;
     }
+
+.text-center {
+    font-size: 50px;
+    text-align: center !important;
+}
+
+.text-center {
+    text-align: center !important;
+    font-size: 16px;
+}
 
 
 }

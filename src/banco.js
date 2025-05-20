@@ -47,8 +47,8 @@ function usuario() {
 }
 
 // SCRIPT PARA DELETAR TABELAS
-function drop(){
-    let query = `DROP TABLE IF EXISTS usuarios;`
+function drop() {
+    let query = `DROP TABLE IF EXISTS avaliacao;`
 
     db.run(query, (err) => {
         if (err) {
@@ -58,8 +58,6 @@ function drop(){
         }
     })
 }
-
-
 
 function aluno() {
 
@@ -82,7 +80,7 @@ function aluno() {
 
 }
 
-function mensagem(){
+function mensagem() {
 
     let query = `CREATE TABLE mensagens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -99,35 +97,16 @@ function mensagem(){
         }
 
     });
-    
- 
+
+
 }
 
-function imagem_perfil(){
-
-    let query = `CREATE TABLE imagem_perfil (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_usuario INT NOT NULL,
-    imagem TEXT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
-);`
-
-    db.run(query, (err) => {
-        if (err) {
-            console.log('Erro ao criar tabela imagem_perfil: ' + err.message);
-        } else {
-            console.log('Tabela imagem_perfil criada com sucesso!');
-        }
-
-    });
-    
-}
-
-function soft_skills(){
+function soft_skills() {
     let query = `CREATE TABLE IF NOT EXISTS avaliacao(
 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        aluno INTEGER,
+        matricula VARCHAR(100),
+        aluno VARCHAR(100),
         professor VARCHAR(100),
         periodo VARCHAR(100),
         trabalho_equipe INTEGER,
@@ -140,19 +119,22 @@ function soft_skills(){
         empatia INTEGER,
         media REAL,
         observacao VARCHAR(100)
+        
       
     );`
 
     db.run(query, (err) => {
-        if(err){
-                console.log('Erro ao criar tabela de Soft Skills: ' + err.message);
+        if (err) {
+            console.log('Erro ao criar tabela de Soft Skills: ' + err.message);
         } else {
-            
-                console.log('Tabela Soft Skills criada com sucesso!');
+
+            console.log('Tabela Soft Skills criada com sucesso!');
 
         }
     });
 
 }
+
+
 
 module.exports = db;
