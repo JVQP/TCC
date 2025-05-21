@@ -49,7 +49,7 @@
     </div>
 
     <div class="container-fluid">
-    <h2 class="portal-tittle"><a href="/adm"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>  Olá, <%= usuario.nome %></h2>
+    <h2 class="portal-tittle"><a href="<%= voltar %>"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>  Olá, <%= usuario.nome %></h2>
     </div>
 
 
@@ -57,7 +57,7 @@
 
 
             
-    <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
+    <form action="" method="post" class="barra-pesquisa">
       <div class="input-group" id="pesquisa-aluno">
         <input type="text" class="form-control" placeholder="Procurar vaga.."
           aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI EMPREGA</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="/index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+
+<body class="bg-light">
+
+    <%- include('partials/navbar') %>
+
+
+
+        <main class="container py-4">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="text-center mb-4">📊 Desempenho</h4>
+                </div>
+            </div>
+
+            <div class="aluno">
+                <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong>
+                        <%= usuario.nome %>
+                    </strong></h6>
+            </div>
+
+
+            <div class="accordion mt-4" id="accordionExample">
+                <% avaliacoes.forEach((avaliacao, index)=> { %>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<%= index %>">
+                            <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>"
+                                aria-expanded="<%= index === 0 ? 'true' : 'false' %>"
+                                aria-controls="collapse<%= index %>">
+                                <%= avaliacao.periodo %>
+                            </button>
+                        </h2>
+                        <div id="collapse<%= index %>"
+                            class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
+                            aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <canvas id="grafico<%= index %>"></canvas>
+                                <p class="mt-3"><strong>Observação:</strong>
+                                    <%= avaliacao.observacao %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+        </main>
+
+        <%- include('partials/footer') %>
+
+</body>
+
+<script>
+    const avaliacoes = <% JSON.stringify(avaliacoes) %>;
+
+    avaliacoes.forEach((avaliacao, index) => {
+      const ctx = document.getElementById('grafico' + index).getContext('2d');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [
+            'Trabalho em Equipe', 'Comunicação', 'Responsabilidade',
+            'Pensamento Crítico', 'Proatividade', 'Liderança',
+            'Adaptabilidade', 'Empatia'
+          ],
+          datasets: [{
+            label: 'Nota',
+            data: [
+              avaliacao.trabalho_equipe,
+              avaliacao.comunicacao,
+              avaliacao.responsabilidade,
+              avaliacao.pensamento_critico,
+              avaliacao.proatividade,
+              avaliacao.lideranca,
+              avaliacao.adaptabilidade,
+              avaliacao.empatia
+            ],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 10
+            }
+          }
+        }
+      });
+    });
+</script>
+
+
+
+</html>

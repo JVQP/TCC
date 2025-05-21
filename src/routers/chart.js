@@ -1,20 +1,18 @@
 const express = require('express');
 const db = require('../banco.js');
-const router = express.Router();
 const middleware = require('./middleware.js');
+const router = express.Router();
 
 
 
 router.get('/', middleware, (req, res) => {
 
-    res.render('loginAvaliacao', { usuario: req.session.usuario });
+res.render('loginGrafico', {usuario: req.session.usuario});    
 
 });
 
-
-router.post('/desempenho', middleware, (req, res) => {
-
-let matricula = req.body.matricula;
+router.post('/grafico-aluno', (req, res) => {
+    let matricula = req.body.matricula;
 
 db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliacoes) => {
     if (err) {
@@ -26,15 +24,15 @@ db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliac
     console.log(avaliacoes);
 
     if (avaliacoes.length === 0) {
-        res.render('loginAvaliacao', { usuario: req.session.usuario, error: `Nenhuma nota registrada para você (${req.session.usuario.nome}), volte mais tarde!`, avaliacoes });
+        res.render('loginGrafico', { usuario: req.session.usuario, error: `Nenhuma nota registrada para você (${req.session.usuario.nome}), volte mais tarde!`, avaliacoes });
         return;
     }
 
-  return res.render('desempenho_aluno', { usuario: req.session.usuario, avaliacoes });
+  return res.render('grafico', { usuario: req.session.usuario, avaliacoes });
 
 });
 
 });
 
 
-module.exports = router;
+module.exports = router

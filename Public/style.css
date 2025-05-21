@@ -24,6 +24,12 @@ main {
     margin-top: 100px;
 } */
 
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    border-color: rgba(255, 255, 255, .1);
+}
+
 .row>* {
     flex-shrink: 0;
     width: 100%;
@@ -232,5 +238,12 @@ td {
     font-size: 16px;
 }
 
+#container-home{
+    margin-top: 500px;
+}
+
+#text-center{
+    font-size: 30px;
+}
 
 }

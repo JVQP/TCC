@@ -101,7 +101,7 @@ router.post('/:id/:imagem', middleware, (req, res) => {
 
          const imagemAntiga = req.params.imagem;
 
-            if (imagemAntiga) {
+            if (!imagemAntiga === 'user.png') {
                 const RemoverImagem = path.join(__dirname, '..', '..', 'Public', 'imagem', imagemAntiga);
                 fs.unlink(RemoverImagem, (err) => {
                     if (err) {

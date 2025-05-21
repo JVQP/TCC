@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="/index.js" defer></script>    
+    <title>Avaliação</title>
+</head>
+    
+    <body class="bg-light text-center">
+
+        <%- include('partials/navbar') %>
+    
+    
+            <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+                <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+                 <h4>Bem vindo, aluno(a)</h4>
+                 <div>
+                    <p id="aluno"><%= usuario.nome %></p>
+                 </div>
+                    <form action="/grafico/grafico-aluno" method="POST">
+                        <div class="mb-3">
+                            <label for="matricula" class="form-label">Matrícula</label>
+                            <input type="matricula" class="form-control" name="matricula" placeholder="Informe a maricula..">
+                        </div>
+                        <button type="submit" id="btn-procurar" class="btn btn-primary w-100">Acessar</button>
+                    </form>
+                     <a href="/painel-aluno"><button type="submit" class="btn btn-danger w-100">Voltar</button></a>
+                   
+                      <% if (typeof error !== 'undefined' && error) { %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong><%= error %></strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" id="btn-procurar" aria-label="Close"></button>
+                            </div>
+                          <% } %>
+
+                </div>
+            </div>
+    <%- include('partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

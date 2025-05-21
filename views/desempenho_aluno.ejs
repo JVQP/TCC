@@ -29,121 +29,120 @@
     </div>
 
     <div>
-      <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong><%= avaliacao.aluno %></strong></h6>
+      <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong><%= usuario.nome %></strong></h6>
     </div>
 
-   <% avaliacoes.forEach(avaliacao => { %>
-    
 
-       <div class="accordion" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-            aria-controls="panelsStayOpen-collapseOne">
-           <%= avaliacao.periodo %>
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-          aria-labelledby="panelsStayOpen-headingOne">
-          <div class="accordion-body">
-            <div class="container-fluid p-3 p-md-5">
 
-              <h2 class="text-center mb-4">Ficha de Avaliação de Soft Skills</h2>
-              <p class="text-center mb-4">
-                0 = Não demonstrado, 1 = Muito fraco, 2 = Fraco, 3 = Regular, 4 = Bom, 5 = Excelente.
-              </p>
-              <form>
-                <div class="row g-3 mb-4">
-                  <div class="col-12 col-md-4">
-                    <label class="form-label">Nome do Aluno</label>
-                    <input type="text" class="form-control" name="avaNome" placeholder="Digite o nome do aluno" readonly />
-                  </div>
-                  <div class="col-12 col-md-4">
-                    <label class="form-label">Período</label>
-                    <input type="text" class="form-control" name="avaPeriodo" placeholder="Ex: 1° Módulo" readonly />
-                  </div>
-                  <div class="col-12 col-md-4">
-                    <label class="form-label">Professor Avaliador</label>
-                    <input type="text" class="form-control" name="avaProfessor" placeholder="Nome do professor" readonly />
-                  </div>
-                </div>
+      <!-- EXIBINDO MENSAGEM QUANDO NÃO TIVER NOTA REGISTRADA -->
 
-                <div class="table-responsive mb-4">
-                  <table class="table table-bordered text-center align-middle">
-                    <thead class="table-secondary">
-                      <tr>
-                        <th>Soft Skill</th>
-                        <th>Descrição</th>
-                        <th style="width: 90px;">Nota</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Comunicação</td>
-                        <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota1" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Trabalho em Equipe</td>
-                        <td>Colaboração, respeito e contribuição em grupo.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota2" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Responsabilidade</td>
-                        <td>Comprometimento, pontualidade, ética.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota3" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Pensamento Crítico</td>
-                        <td>Argumentação, questionamento, resolução de problemas.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota4" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Proatividade</td>
-                        <td>Iniciativa e autonomia para resolver tarefas.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota5" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Liderança</td>
-                        <td>Influência positiva, tomada de decisões.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota6" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Adaptabilidade</td>
-                        <td>Flexibilidade e aceitação de mudanças.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota7" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                      <tr>
-                        <td>Empatia</td>
-                        <td>Respeito e compreensão dos sentimentos dos outros.</td>
-                        <td><input type="number" min="0" max="5" class="form-control" name="avaNota8" oninput="atualizarNota()" readonly /></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
 
-                <div class="mb-4">
-                  <label class="form-label">Média:</label>
-                  <input type="text" class="form-control" name="media" id="media" placeholder="Média"
-                    style="width: 200px;" readonly />
-                </div>
+      <% if(typeof avaliacoes === " " || avaliacoes === "undefinid" || avaliacoes === "NULL") { %>
 
-                <div class="mb-4">
-                  <label class="form-label">Observações Gerais</label>
-                  <textarea class="form-control" name="avaObservacao" rows="4"
-                    placeholder="Comentários adicionais sobre o aluno" readonly></textarea>
-                </div>
-              </form>
+          <h5>Nenhuma nota registrada no momento. </h5>
 
+
+        <% } %>
+
+     <% avaliacoes.forEach((aluno, index) => { %>
+  <div class="accordion" id="accordionExample<%= index %>">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading<%= index %>">
+        <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapse<%= index %>" aria-expanded="<%= index === 0 %>" aria-controls="collapse<%= index %>">
+          <%= aluno.periodo %>
+        </button>
+      </h2>
+      <div id="collapse<%= index %>" class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>" aria-labelledby="heading<%= index %>">
+        <div class="accordion-body">
+          
+          <form>
+       
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-md-4">
+                <label class="form-label">Nome do Aluno</label>
+                <input type="text" class="form-control" value="<%= aluno.aluno %>" readonly />
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label">Período</label>
+                <input type="text" class="form-control" value="<%= aluno.periodo %>" readonly />
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label">Professor Avaliador</label>
+                <input type="text" class="form-control" value="<%= aluno.professor %>" readonly />
+              </div>
             </div>
-          </div>
+
+         
+            <div class="table-responsive mb-4">
+              <table class="table table-bordered text-center align-middle">
+                <thead class="table-secondary">
+                  <tr>
+                    <th>Soft Skill</th>
+                    <th>Descrição</th>
+                    <th style="width: 90px;">Nota</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Comunicação</td>
+                    <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.comunicacao %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Trabalho em Equipe</td>
+                    <td>Colaboração, respeito e contribuição em grupo.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.trabalho_equipe %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Responsabilidade</td>
+                    <td>Comprometimento, pontualidade, ética.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.responsabilidade %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Pensamento Crítico</td>
+                    <td>Argumentação, questionamento, resolução de problemas.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.pensamento_critico %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Proatividade</td>
+                    <td>Iniciativa e autonomia para resolver tarefas.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.proatividade %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Liderança</td>
+                    <td>Influência positiva, tomada de decisões.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.lideranca %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Adaptabilidade</td>
+                    <td>Flexibilidade e aceitação de mudanças.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.adaptabilidade %>" readonly /></td>
+                  </tr>
+                  <tr>
+                    <td>Empatia</td>
+                    <td>Respeito e compreensão dos sentimentos dos outros.</td>
+                    <td><input type="number" min="0" max="5" class="form-control" value="<%= aluno.empatia %>" readonly /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mb-4" style="width: 200px;">
+              <label class="form-label">Média:</label>
+              <input type="text" class="form-control" value="<%= aluno.media %>" readonly />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Observações Gerais</label>
+              <textarea class="form-control" rows="4" readonly><%= aluno.observacao %></textarea>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-
-  <% });%>
+  </div>
+<% }) %>
 
   </main>
 

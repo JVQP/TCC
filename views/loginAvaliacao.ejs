@@ -18,7 +18,9 @@
             <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
                 <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
                  <h4>Bem vindo, aluno(a)</h4>
-                 <p id="aluno"></p>
+                 <div>
+                    <p id="aluno"><%= usuario.nome %></p>
+                 </div>
                     <form action="/desempenho-aluno/desempenho" method="POST">
                         <div class="mb-3">
                             <label for="matricula" class="form-label">Matrícula</label>

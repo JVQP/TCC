@@ -6,7 +6,17 @@ const router = express.Router();
 
 router.get('/', middleware, (req, res) => {
 
-res.render('portal_vagas', {usuario: req.session.usuario});
+let tipo = req.session.usuario.tipo;
+
+let rotas = {
+    Aluno: '/painel-aluno',
+    Professor: '/adm',
+    Empresa: '/painel-empresa'
+}
+
+let voltar = rotas[tipo] || '/';
+
+res.render('portal_vagas', {usuario: req.session.usuario, voltar});
 
 });
 

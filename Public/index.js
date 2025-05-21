@@ -96,12 +96,11 @@ btn.innerHTML = "Registrando...";
 if(path === '/desempenho-aluno'){
 
 let btn = document.getElementById('btn-procurar');
-let aluno = document.getElementById('aluno');
 btn.addEventListener('click', function (e) {
 btn.innerHTML = "Aguarde...";
 
-aluno.innerHTML = `<p> <%= avaliacao.nome %> </p>`;
 
 });
 }
+
 });
