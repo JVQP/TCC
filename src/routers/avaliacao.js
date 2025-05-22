@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../banco.js');
 const middleware = require('./middleware.js');
 const router = express.Router();
+const permisao = require('./permisao.js');
 
 
 router.get('/', middleware, (req, res) => {
@@ -10,7 +11,7 @@ router.get('/', middleware, (req, res) => {
 
 });
 
-router.post('/avaliar-aluno', middleware, (req, res) => {
+router.post('/avaliar-aluno', middleware, permisao('Professsor'), (req, res) => {
     let matricula = req.body.matricula;
 
     db.get(`SELECT * FROM alunos WHERE matricula = ?`, [matricula], (err, alunos) => {
@@ -34,7 +35,7 @@ router.post('/avaliar-aluno', middleware, (req, res) => {
 //     res.render('avaliacao_aluno', { usuario: req.session.usuario });
 // });
 
-router.post('/avaliar-aluno/salvar', middleware, (req, res) => {
+router.post('/avaliar-aluno/salvar', middleware, permisao('Professor'), (req, res) => {
 
     let matricula = req.body.avaMatricula;
     let nome = req.body.avaNome;

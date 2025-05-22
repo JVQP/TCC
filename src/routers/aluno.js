@@ -2,8 +2,9 @@ const express = require('express');
 const db = require('../banco.js');
 const middleware = require('./middleware.js');
 const router = express.Router();
+const permisao = require('./permisao.js');
 
-router.get('/', (req, res) => {
+router.get('/', middleware, permisao('Professor'), (req, res) => {
 
     db.all(`SELECT * FROM usuarios WHERE tipo = 'Aluno'`, (err, usuarios) => {
         if (err) {
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 
 });
 
-router.post('/registro-aluno', middleware, (req, res) => {
+router.post('/registro-aluno', middleware, permisao('Professor') ,(req, res) => {
     const matricula = req.body.inputMatricula;
     const nome = req.body.inputAluno;
     const curso = req.body.inputCurso;

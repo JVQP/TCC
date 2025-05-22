@@ -5,12 +5,12 @@ const middleware = require('./middleware.js');
 
 
 
-router.get('/', (req, res) => {
+router.get('/', middleware, (req, res) => {
 
-    db.all('SELECT * FROM usuarios WHERE id = ?', [req.session.usuario.id], (err, usuario) => {
+    db.all(`SELECT * FROM usuarios WHERE id = ? `, [req.session.usuario.id], (err, usuario) => {
         if (err) {
             console.error(err.message);
-            return res.status(500).send('Erro ao buscar usuário.');
+            return res.redirect('/login');
         }
         res.render('painel_aluno', { usuario: req.session.usuario, usuarios: usuario, id: req.session.usuario.id });
     });

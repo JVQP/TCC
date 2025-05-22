@@ -4,18 +4,19 @@ const fileUpload = require('express-fileupload');
 const router = express.Router();
 const path = require('path');
 const middleware = require('./middleware.js');
+const permisao = require('./permisao.js');
 
 let app = express();
 app.use(fileUpload());
 
 
-router.get('/', (req, res) => {
+router.get('/', middleware, permisao('Professor'), (req, res) => {
     res.render('cadastro_usuarios');
 });
 
 
 
-router.post('/cadastro', middleware, (req, res) => {
+router.post('/cadastro', middleware, permisao('Professor'), (req, res) => {
     const { inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario } = req.body;
 
     if (!inputEmail || !inputNome || !inputData || !inputSenha || !inputConfirmar) {

@@ -2,9 +2,10 @@ const express = require('express');
 const db = require('../banco.js');
 const router = express.Router();
 const middleware = require('./middleware.js');
+const permisao = require('./permisao.js');
 
 
-router.get('/', middleware, (req, res) => {
+router.get('/', middleware, permisao('Professor'), (req, res) => {
 
     db.all(`SELECT * FROM usuarios`, (err, usuario) => {
         if (err) {
@@ -16,7 +17,7 @@ router.get('/', middleware, (req, res) => {
 
 });
 
-router.get('/remover/:id', middleware, (req, res) => {
+router.get('/remover/:id', middleware, permisao('Professor'), (req, res) => {
     const id = req.params.id;
 
     db.run(`DELETE FROM usuarios WHERE id = ?`, [id], (err) => {

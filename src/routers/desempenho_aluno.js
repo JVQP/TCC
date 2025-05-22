@@ -7,7 +7,16 @@ const middleware = require('./middleware.js');
 
 router.get('/', middleware, (req, res) => {
 
-    res.render('loginAvaliacao', { usuario: req.session.usuario });
+
+    if(req.session.usuario.tipo === 'Aluno'){
+        
+             return res.render('loginAvaliacao', { usuario: req.session.usuario });
+
+    } else {
+        return res.redirect('/login')
+    }
+
+  
 
 });
 

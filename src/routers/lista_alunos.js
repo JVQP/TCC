@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../banco.js');
 const middleware = require('./middleware.js');
+const permisao = require('./permisao.js');
 
-
-router.get('/', middleware, (req, res) => {
+router.get('/', middleware, permisao('Professor'), (req, res) => {
 
 
 db.all('SELECT * FROM alunos', (err, alunos) => {
@@ -18,7 +18,7 @@ db.all('SELECT * FROM alunos', (err, alunos) => {
 });
 
 
-router.post('/pesquisa', middleware, (req, res) => {
+router.post('/pesquisa', middleware, permisao('Professor'), (req, res) => {
 
 let pesquisa = req.body.pesquisa;
 
