@@ -11,7 +11,7 @@ res.render('loginGrafico', {usuario: req.session.usuario});
 
 });
 
-router.post('/grafico-aluno', (req, res) => {
+router.post('/grafico-aluno', middleware, (req, res) => {
     let matricula = req.body.matricula;
 
 db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliacoes) => {
@@ -21,7 +21,7 @@ db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliac
         return;
     }
 
-    console.log(avaliacoes);
+   
 
     if (avaliacoes.length === 0) {
         res.render('loginGrafico', { usuario: req.session.usuario, error: `Nenhuma nota registrada para você (${req.session.usuario.nome}), volte mais tarde!`, avaliacoes });
