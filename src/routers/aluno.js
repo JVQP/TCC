@@ -41,8 +41,31 @@ router.post('/registro-aluno', middleware, (req, res) => {
                     error: 'Aluno(a) já cadastrado(a)!'
                 });
             });
-        } else {
-            // Matrícula não existe, prossegue com cadastro
+        } 
+
+        db.get('SELECT * FROM alunos WHERE nome = ?', [nome], (err, aluno) => {
+            if(err){
+                console.log('Erro de consulta do banco de dados! ', err.message);
+                return res.status(500).send('Errro de consulta do banco de dados!', err.message);
+            } 
+            
+            if(aluno){
+                
+                    // nome já existe
+            db.all(`SELECT * FROM alunos WHERE nome = ?`, [nome], (err, usuarios) => {
+                if (err) {
+                    return res.status(500).send('Erro interno ao buscar usuários.');
+                }
+
+                return res.render('aluno', {
+                    usuarios: usuarios || [],
+                    usuario: req.session.usuario,
+                    error: 'Nome já registrado no sistema!'
+                });
+            }); 
+
+            } else {
+            // Matrícula e nome não existe, prossegue com cadastro
             db.run(`INSERT INTO alunos (matricula, nome, curso, turno) VALUES (?, ?, ?, ?)`,
                 [matricula, nome, curso, turno],
                 (err) => {
@@ -64,6 +87,12 @@ router.post('/registro-aluno', middleware, (req, res) => {
                 }
             );
         }
+
+        
+
+            
+
+        })
     });
 });
 
