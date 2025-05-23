@@ -34,9 +34,11 @@
             </div>
 
             <div class="aluno">
-                <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong>
+               
+                       <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong>
                         <%= usuario.nome %>
                     </strong></h6>
+
             </div>
 
 
@@ -55,6 +57,7 @@
                             class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
                             aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+                                <h6><%= avaliacao.aluno %></h6>
                                 <canvas id="grafico<%= index %>"></canvas>
                                 <p class="mt-3"><strong>Observação:</strong>
                                     <%= avaliacao.observacao %>
@@ -72,49 +75,54 @@
 </body>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const avaliacoes = <%- JSON.stringify(avaliacoes) %>;
 
-    const avaliacoes = <%- JSON.stringify(avaliacoes) %>;
+        avaliacoes.forEach((avaliacao, index) => {
+            const canvas = document.getElementById('grafico' + index);
+            if (!canvas) return; 
 
-    avaliacoes.forEach((avaliacao, index) => {
-        const ctx = document.getElementById('grafico' + index).getContext('2d');
+            const ctx = canvas.getContext('2d');
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [
-                    'Trabalho em Equipe', 'Comunicação', 'Responsabilidade',
-                    'Pensamento Crítico', 'Proatividade', 'Liderança',
-                    'Adaptabilidade', 'Empatia'
-                ],
-                datasets: [{
-                    label: 'Avaliação',
-                    data: [
-                        avaliacao.trabalho_equipe,
-                        avaliacao.comunicacao,
-                        avaliacao.responsabilidade,
-                        avaliacao.pensamento_critico,
-                        avaliacao.proatividade,
-                        avaliacao.lideranca,
-                        avaliacao.adaptabilidade,
-                        avaliacao.empatia
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Trabalho em Equipe', 'Comunicação', 'Responsabilidade',
+                        'Pensamento Crítico', 'Proatividade', 'Liderança',
+                        'Adaptabilidade', 'Empatia'
                     ],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 5
+                    datasets: [{
+                        label: 'Avaliação',
+                        data: [
+                            avaliacao.trabalho_equipe,
+                            avaliacao.comunicacao,
+                            avaliacao.responsabilidade,
+                            avaliacao.pensamento_critico,
+                            avaliacao.proatividade,
+                            avaliacao.lideranca,
+                            avaliacao.adaptabilidade,
+                            avaliacao.empatia
+                        ],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
                     }
                 }
-            }
+            });
         });
     });
 </script>
+
 
 
 

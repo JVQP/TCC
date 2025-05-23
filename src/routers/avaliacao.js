@@ -11,7 +11,7 @@ router.get('/', middleware, (req, res) => {
 
 });
 
-router.post('/avaliar-aluno', middleware, permisao('Professsor'), (req, res) => {
+router.post('/avaliar-aluno', middleware, permisao('Professor'), (req, res) => {
     let matricula = req.body.matricula;
 
     db.get(`SELECT * FROM alunos WHERE matricula = ?`, [matricula], (err, alunos) => {
@@ -35,7 +35,7 @@ router.post('/avaliar-aluno', middleware, permisao('Professsor'), (req, res) => 
 //     res.render('avaliacao_aluno', { usuario: req.session.usuario });
 // });
 
-router.post('/avaliar-aluno/salvar', middleware, permisao('Professor'), (req, res) => {
+router.post('/avaliar-aluno/salvar', middleware, (req, res) => {
 
     let matricula = req.body.avaMatricula;
     let nome = req.body.avaNome;

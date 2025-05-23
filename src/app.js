@@ -57,6 +57,7 @@ const painelAlunoRouter = require('./routers/painel_aluno.js');
 const listaUsuarioRouter = require('./routers/lista_usuario.js');
 const desempenhoRouter = require('./routers/desempenho_aluno.js');
 const graficoRouter = require('./routers/chart.js');
+const visualizarNotaRouter = require('./routers/visualizar_nota.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -75,6 +76,7 @@ app.use('/painel-aluno', painelAlunoRouter);
 app.use('/lista-usuario', listaUsuarioRouter);
 app.use('/desempenho-aluno', desempenhoRouter);
 app.use('/grafico', graficoRouter);
+app.use('/visualizar', visualizarNotaRouter);
 
 
 

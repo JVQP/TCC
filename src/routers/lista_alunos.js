@@ -6,23 +6,36 @@ const permisao = require('./permisao.js');
 
 router.get('/', middleware, permisao('Professor'), (req, res) => {
 
+    db.all('SELECT * FROM avaliacao', (err, avaliacao) => {
+        if (err) {
+            console.log('Erro de consulta no banco de dados!', err.message);
+            return res.status(500).send('Erro de consulta no banco de dados!', err.message);
+        } else {
 
-db.all('SELECT * FROM alunos', (err, alunos) => {
-    if (err) {
-        console.error(err);
-        return res.status(500).send('Erro ao acessar o banco de dados.');
-    }
-    res.render('lista_alunos', { alunos: alunos, total: alunos.length, usuario: req.session.usuario });
 
-});
+            db.all('SELECT * FROM alunos', (err, alunos) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send('Erro ao acessar o banco de dados.');
+                }
+                     return res.render('lista_alunos', { alunos: alunos, 
+                        total: alunos.length, 
+                        usuario: req.session.usuario,
+                         avaliacao: avaliacao });
+            });
+
+        }
+    })
+
+
 });
 
 
 router.post('/pesquisa', middleware, permisao('Professor'), (req, res) => {
 
-let pesquisa = req.body.pesquisa;
+    let pesquisa = req.body.pesquisa;
 
-db.all(`
+    db.all(`
         SELECT * FROM alunos 
         WHERE 
             matricula LIKE ? OR 
@@ -30,19 +43,19 @@ db.all(`
             curso LIKE ? OR 
             turno LIKE ?
     `, [`%${pesquisa}%`], (err, alunos) => {
-    if (err) {
-        console.error(err);
-        return res.status(500).send('Erro ao acessar o banco de dados.');
-    }
-   
-    if(alunos.length === 0) {
-        res.render('pesquisa_aluno', {error: 'Nenhum aluno encontrado', alunos: [], usuario: req.session.usuario});
-    } else {
-        let total = alunos.length;
-        res.render('pesquisa_aluno', { alunos: alunos, total: total});
-    }
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Erro ao acessar o banco de dados.');
+        }
 
-});
+        if (alunos.length === 0) {
+            res.render('pesquisa_aluno', { error: 'Nenhum aluno encontrado', alunos: [], usuario: req.session.usuario });
+        } else {
+            let total = alunos.length;
+            res.render('pesquisa_aluno', { alunos: alunos, total: total });
+        }
+
+    });
 
 
 

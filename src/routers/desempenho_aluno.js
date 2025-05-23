@@ -1,21 +1,15 @@
 const express = require('express');
 const db = require('../banco.js');
 const router = express.Router();
+const permisao = require('./permisao.js');
 const middleware = require('./middleware.js');
 
 
 
-router.get('/', middleware, (req, res) => {
+router.get('/', middleware,  (req, res) => {
 
 
-    if(req.session.usuario.tipo === 'Aluno'){
-        
-             return res.render('loginAvaliacao', { usuario: req.session.usuario });
-
-    } else {
-        return res.redirect('/login')
-    }
-
+   res.render('loginAvaliacao', {usuario: req.session.usuario});
   
 
 });
