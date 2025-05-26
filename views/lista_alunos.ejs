@@ -11,7 +11,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <script src="/index.js" defer></script>
- 
+
 
 
 </head>
@@ -21,97 +21,126 @@
 
   <%- include('partials/navbar') %>
 
-    <!-- Filtragem de aluno -->
 
-    <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
-      <div class="input-group" id="pesquisa-aluno">
-        <input type="text" class="form-control" placeholder="Informe a matricula do aluno.."
-          aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
-        <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
-      </div>
-    </form>
-
-    <!-- Tabela responsiva -->
-    <main>
-      <div class="table-responsive" id="table">
-        <table class="table table-striped table-hover table-sm" id="tabelaAlunos">
-          <thead class="table-dark">
-            <tr>
-              <th style="text-align: center;">#</th>
-              <th style="text-align: center;">Matrícula</th>
-              <th style="text-align: center;">Aluno</th>
-              <th style="text-align: center;">Curso</th>
-              <th style="text-align: center;">Turno</th>
-              <th style="width: 70px; text-align: center;">Ações</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <% alunos.forEach(aluno => { %>
-              <tr>
-                <td>
-                  <%= aluno.id %>
-                </td>
-                <td>
-                  <%= aluno.matricula %>
-                </td>
-                <td>
-                  <%= aluno.nome %>
-                </td>
-                <td>
-                  <%= aluno.curso %>
-                </td>
-                <td>
-                  <%= aluno.turno %>
-                </td>
-
-                <td style="width: 70px;">
-                  <div class="d-flex justify-content-center align-items-center gap-1">
-                    <a href="/editar/<%=aluno.id  %>"><button class="btn btn-outline-primary btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;"title="Editar">
-                        <i class="bi bi-pencil"></i>
-                      </button></a>
-                    <a href="/excluir/<%= aluno.id %>"><button class="btn btn-outline-danger btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;" onclick="excluir(event)" title="Excluir">
-                        <i class="bi bi-trash"></i>
-                    </button></a>
-                    <a href="/visualizar/<%= aluno.matricula %>"><button class="btn btn-outline-warning btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;"  title="Visualizar nota">
-                        <i class="bi bi-clipboard-data"></i>
-                    </button></a>
-                  </div>
-                </td>
+    <!-- MENSGAEM DE ERRO  -->
 
 
 
-              </tr>
-              <% }); %>
-          </tbody>
-        </table>
+    <% if (typeof mensagem !=='undefined' && mensagem) { %>
+
+      <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">AVISO</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><%= mensagem %></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-                      <% if (typeof error !== 'undefined' && error) { %>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <strong><%= error %></strong>
-                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                          <% } %>
-
-        <p><strong>TOTAL:</strong> <%= total %></p>
-
-      <div class="back-button">
-        <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
-            <i class="bi bi-box-arrow-left"></i>
-          </button> </a>
-      </div>
-    </main>
+      <% } %>
 
 
-    <%- include('partials/footer') %>
+        <!-- Filtragem de aluno -->
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
+          <div class="input-group" id="pesquisa-aluno">
+            <input type="text" class="form-control" placeholder="Informe a matricula do aluno.."
+              aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
+            <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
 
-</body> 
+        <!-- Tabela responsiva -->
+        <main>
+          <div class="table-responsive" id="table">
+            <table class="table table-striped table-hover table-sm" id="tabelaAlunos">
+              <thead class="table-dark">
+                <tr>
+                  <th style="text-align: center;">#</th>
+                  <th style="text-align: center;">Matrícula</th>
+                  <th style="text-align: center;">Aluno</th>
+                  <th style="text-align: center;">Curso</th>
+                  <th style="text-align: center;">Turno</th>
+                  <th style="width: 70px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% alunos.forEach(aluno=> { %>
+                  <tr>
+                    <td>
+                      <%= aluno.id %>
+                    </td>
+                    <td>
+                      <%= aluno.matricula %>
+                    </td>
+                    <td>
+                      <%= aluno.nome %>
+                    </td>
+                    <td>
+                      <%= aluno.curso %>
+                    </td>
+                    <td>
+                      <%= aluno.turno %>
+                    </td>
+
+                    <td style="width: 70px;">
+                      <div class="d-flex justify-content-center align-items-center gap-1">
+                        <a href="/editar/<%=aluno.id  %>"><button class="btn btn-outline-primary btn-sm px-1 py-0"
+                            style="width: 28px; height: 28px;" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                          </button></a>
+
+                             <a href="/excluir/<%= aluno.id %>"><button class="btn btn-outline-danger btn-sm px-1 py-0"
+                            style="width: 28px; height: 28px;" onclick="excluir(event)" title="Excluir">
+                            <i class="bi bi-trash"></i>
+                          </button></a>
+                          
+                        <a href="/visualizar/<%= aluno.matricula %>"><button
+                            class="btn btn-outline-warning btn-sm px-1 py-0" style="width: 28px; height: 28px;"
+                            title="Visualizar nota">
+                            <i class="bi bi-clipboard-data"></i>
+                          </button></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+            </table>
+
+                  <%if (typeof alunos === 'undefined' || alunos.length === 0) { %>
+                  
+                      <p colspan="6" class="text-center">Nenhum aluno encontrado.</p>
+                 
+                <% } %>  
+
+          </div>
+
+              <p class="container"><strong>TOTAL:</strong>
+                <%= total %>
+              </p>
+
+              <div class="back-button">
+                <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
+                    <i class="bi bi-box-arrow-left"></i>
+                  </button> </a>
+              </div>
+        </main>
+
+
+        <%- include('partials/footer') %>
+
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+</body>
+
 </html>

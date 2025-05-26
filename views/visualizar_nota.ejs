@@ -24,35 +24,54 @@
 
             <!-- EXIBINDO MENSAGEM DE ERRO -->
 
-            <% if (typeof error !=='undefined' && error) { %>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>
-                        <%= error %>
-                    </strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+
+            <% if (typeof mensagem !=='undefined' && mensagem) { %>
+
+                <div class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">AVISO</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <%= mensagem %>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <% } %>
 
-                    <a href="/adm"><button class="btn btn-danger center" title="Voltar"><i
+                    <a href="/lista_alunos"><button class="btn btn-danger center" title="Voltar"><i
                                 class="bi bi-arrow-bar-left"></i></button></a>
 
 
-                    <form action="" method="POST">
-                        <input type="hidden" class="form-control" name="avaMatricula" value="<%= avaliacao.matricula %>">
+                    <form action="/editar-nota/matricula" method="POST">
+                        <input type="hidden" class="form-control" name="avaMatricula"
+                            value="<%= avaliacao.matricula %>">
                         <div class="row g-3 mb-4">
                             <div class="col-12 col-md-4">
                                 <label class="form-label">Nome do Aluno</label>
                                 <input type="text" class="form-control" value="<%= avaliacao.aluno %>" name="avaNome"
-                                    placeholder="Digite o nome do aluno">
+                                    placeholder="Digite o nome do aluno" readonly>
                             </div>
                             <div class="col-12 col-md-4">
                                 <label class="form-label">Período</label>
-                                <input type="text" class="form-control" name="avaPeriodo" value="<%= avaliacao.periodo %>" placeholder="Ex: 1° Módulo">
+                                <input type="text" class="form-control" name="avaPeriodo"
+                                    value="<%= avaliacao.periodo %>" placeholder="Ex: 1° Módulo" readonly>
                             </div>
                             <div class="col-12 col-md-4">
                                 <label class="form-label">Professor Avaliador</label>
-                                <input type="text" class="form-control" value="<%= avaliacao.professor %>" name="avaProfessor"
-                                    placeholder="Nome do professor">
+                                <input type="text" class="form-control" value="<%= avaliacao.professor %>"
+                                    name="avaProfessor" placeholder="Nome do professor">
                             </div>
                         </div>
 
@@ -72,28 +91,32 @@
                                     <tr>
                                         <td>Comunicação</td>
                                         <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()" value="<%= avaliacao.comunicacao%>" id="avaNota1"
-                                                name="avaNota1" class="form-control"></td>
+                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
+                                                value="<%= avaliacao.comunicacao%>" id="avaNota1" name="avaNota1"
+                                                class="form-control"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Trabalho em Equipe</td>
                                         <td>Colaboração, respeito e contribuição em grupo.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()" value="<%= avaliacao.trabalho_equipe %>" id="avaNota2"
-                                                name="avaNota2" class="form-control"></td>
+                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
+                                                value="<%= avaliacao.trabalho_equipe %>" id="avaNota2" name="avaNota2"
+                                                class="form-control"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Responsabilidade</td>
                                         <td>Comprometimento, pontualidade, ética.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()" value="<%= avaliacao.responsabilidade %>" id="avaNota3"
-                                                name="avaNota3" class="form-control"></td>
+                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
+                                                value="<%= avaliacao.responsabilidade %>" id="avaNota3" name="avaNota3"
+                                                class="form-control"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Pensamento Crítico</td>
                                         <td>Argumentação, questionamento, resolução de problemas.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()" value="<%= avaliacao.pensamento_critico %>" id="avaNota4"
+                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
+                                                value="<%= avaliacao.pensamento_critico %>" id="avaNota4"
                                                 name="avaNota4" class="form-control"></td>
 
                                     </tr>
@@ -101,27 +124,31 @@
                                         <td>Proatividade</td>
                                         <td>Iniciativa e autonomia para resolver tarefas.</td>
                                         <td><input type="number" min="0" max="5" id="avaNota5" oninput="atualizarNota()"
-                                                name="avaNota5" class="form-control" value="<%= avaliacao.proatividade %>"></td>
+                                                name="avaNota5" class="form-control"
+                                                value="<%= avaliacao.proatividade %>"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Liderança</td>
                                         <td>Influência positiva, tomada de decisões.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota6" value="<%= avaliacao.lideranca %>" oninput="atualizarNota()"
+                                        <td><input type="number" min="0" max="5" id="avaNota6"
+                                                value="<%= avaliacao.lideranca %>" oninput="atualizarNota()"
                                                 name="avaNota6" class="form-control"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Adaptabilidade</td>
                                         <td>Flexibilidade e aceitação de mudanças.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota7" value="<%= avaliacao.adaptabilidade %>" oninput="atualizarNota()"
+                                        <td><input type="number" min="0" max="5" id="avaNota7"
+                                                value="<%= avaliacao.adaptabilidade %>" oninput="atualizarNota()"
                                                 name="avaNota7" class=" form-control"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Empatia</td>
                                         <td>Respeito e compreensão dos sentimentos dos outros.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota8" value="<%= avaliacao.empatia %>" oninput="atualizarNota()"
+                                        <td><input type="number" min="0" max="5" id="avaNota8"
+                                                value="<%= avaliacao.empatia %>" oninput="atualizarNota()"
                                                 name="avaNota8" class="form-control"></td>
 
                                     </tr>
@@ -132,8 +159,8 @@
 
                         <div class="mb-4">
                             <label class="form-label">Média: </label>
-                            <input type="text" class="form-control" name="media" value="<%= avaliacao.media %>" id="media" placeholder="Média"
-                                style="width: 200px;" readonly>
+                            <input type="text" class="form-control" name="media" value="<%= avaliacao.media %>"
+                                id="media" placeholder="Média" style="width: 200px;" readonly>
                         </div>
 
                         <div class="mb-4">
@@ -143,11 +170,38 @@
                         </div>
 
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary px-4">Editar</button>
-                            <button type="submit" class="btn btn-primary px-4">Editar</button>
-                        </div>
+                            <button type="submit" class="btn btn-warning px-4">Editar</button>
 
+                            <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Deletar
+                            </button>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">AVISO </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            Você tem certeza que deseja excluir essa avaliação?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="/deletar/<%= avaliacao.id%>"><button type="button"
+                                                    class="btn btn-danger">Confirmar</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
+
         </div>
 
 

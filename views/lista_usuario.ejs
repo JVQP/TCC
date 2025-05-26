@@ -80,16 +80,16 @@
               <% }); %>
           </tbody>
         </table>
+
+          <%if (typeof usuarios === 'undefined' || usuarios.length === 0) { %>
+                  
+                      <p colspan="6" class="text-center">Nenhum usuario encontrado.</p>
+                 
+                <% } %>  
+
       </div>
 
-                      <% if (typeof error !== 'undefined' && error) { %>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <strong><%= error %></strong>
-                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                          <% } %>
-
-        <p><strong>TOTAL:</strong> <%= total %></p>
+        <p class="container"><strong>TOTAL:</strong> <%= total %></p>
 
       <div class="back-button">
         <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
