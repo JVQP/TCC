@@ -58,6 +58,10 @@ const listaUsuarioRouter = require('./routers/lista_usuario.js');
 const desempenhoRouter = require('./routers/desempenho_aluno.js');
 const graficoRouter = require('./routers/chart.js');
 const visualizarNotaRouter = require('./routers/visualizar_nota.js');
+const editarNotaRouter = require('./routers/editar_nota.js');
+const erroNotaRouter = require('./routers/erro_nota.js');
+const deletarNotaRouter = require('./routers/deletar_nota.js');
+const editarUsuarioRouter = require('./routers/editar_usuario.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -77,7 +81,10 @@ app.use('/lista-usuario', listaUsuarioRouter);
 app.use('/desempenho-aluno', desempenhoRouter);
 app.use('/grafico', graficoRouter);
 app.use('/visualizar', visualizarNotaRouter);
-
+app.use('/editar-nota', editarNotaRouter);
+app.use('/erro-nota', erroNotaRouter);
+app.use('/deletar', deletarNotaRouter);
+app.use('/editar-usuario', editarUsuarioRouter);
 
 
 

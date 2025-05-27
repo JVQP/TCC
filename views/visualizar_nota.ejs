@@ -1,218 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Ficha de avaliação</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Aluno</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- Script -->
     <script src="/index.js" defer></script>
 </head>
 
 <body class="bg-light">
-
-
     <%- include('partials/navbar') %>
 
-        <!-- TABELA -->
+    <main class="container py-4">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center mb-4">Avaliação</h4>
+            </div>
+        </div>
 
-        <div class="container-fluid p-3 p-md-5">
-            <h2 class="text-center mb-4">Ficha de Avaliação de Soft Skills</h2>
-            <p class="text-center mb-4">0 = Não demonstrado, 1 = Muito fraco, 2 = Fraco, 3 = Regular, 4 = Bom, 5
-                = Excelente.</p>
+    
+        <% if (!avaliacoes || avaliacoes.length === 0) { %>
+            <h5 class="text-center" style="margin-top: 50px;">Nenhuma nota registrada no momento, volte mais tarde!</h5>
+            <div class="text-center">
+                <a href="/lista_alunos" class="btn btn-danger px-4" type="button">Voltar</a>
+            </div>
+        <% } else { %>
+        <h6><a href="/lista_alunos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Usuário: <%= usuario.nome %></h6>
+            <% avaliacoes.forEach((aluno, index) => { %>
+                <div class="accordion" id="accordionExample<%= index %>">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<%= index %>">
+                            <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>"
+                                aria-expanded="<%= index === 0 %>" aria-controls="collapse<%= index %>">
+                                <%= aluno.periodo %>
+                            </button>
+                        </h2>
+                        <div id="collapse<%= index %>" class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
+                            aria-labelledby="heading<%= index %>">
+                            <div class="accordion-body">
+                                <form action="/editar-nota" method="post">
+                                    <input type="hidden" name="avaMatricula" value="<%= aluno.matricula %>">
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label">Nome do Aluno</label>
+                                            <input type="text" name="avaNome" class="form-control" value="<%= aluno.aluno %>" readonly />
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label">Período</label>
+                                            <input type="text" class="form-control" name="avaPeriodo" value="<%= aluno.periodo %>" readonly />
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label">Professor Avaliador</label>
+                                            <input type="text" class="form-control" name="avaProfessor" value="<%= aluno.professor %>"/>
+                                        </div>
+                                    </div>
 
-            <!-- EXIBINDO MENSAGEM DE ERRO -->
+                                    <div class="table-responsive mb-4">
+                                        <table class="table table-bordered text-center align-middle">
+                                            <thead class="table-secondary">
+                                                <tr>
+                                                    <th>Soft Skill</th>
+                                                    <th>Descrição</th>
+                                                    <th style="width: 90px;">Nota</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Comunicação</td>
+                                                    <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
+                                                    <td><input type="number" name= "avaNota1" min="0" max="5" class="form-control" value="<%= aluno.comunicacao %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Trabalho em Equipe</td>
+                                                    <td>Colaboração, respeito e contribuição em grupo.</td>
+                                                    <td><input type="number" name="avaNota2" min="0" max="5" class="form-control" value="<%= aluno.trabalho_equipe %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Responsabilidade</td>
+                                                    <td>Comprometimento, pontualidade, ética.</td>
+                                                    <td><input type="number" name="avaNota3" min="0" max="5" class="form-control" value="<%= aluno.responsabilidade %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pensamento Crítico</td>
+                                                    <td>Argumentação, questionamento, resolução de problemas.</td>
+                                                    <td><input type="number" name="avaNota4" min="0" max="5" class="form-control" value="<%= aluno.pensamento_critico %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Proatividade</td>
+                                                    <td>Iniciativa e autonomia para resolver tarefas.</td>
+                                                    <td><input type="number" name="avaNota5" min="0" max="5" class="form-control" value="<%= aluno.proatividade %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Liderança</td>
+                                                    <td>Influência positiva, tomada de decisões.</td>
+                                                    <td><input type="number" name="avaNota6" min="0" max="5" class="form-control" value="<%= aluno.lideranca %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Adaptabilidade</td>
+                                                    <td>Flexibilidade e aceitação de mudanças.</td>
+                                                    <td><input type="number" name="avaNota7" min="0" max="5" class="form-control" value="<%= aluno.adaptabilidade %>"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Empatia</td>
+                                                    <td>Respeito e compreensão dos sentimentos dos outros.</td>
+                                                    <td><input type="number" name="avaNota8" min="0" max="5" class="form-control" value="<%= aluno.empatia %>"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
+                                    <div class="mb-4" style="max-width: 200px;">
+                                        <label class="form-label">Média:</label>
+                                        <input type="text" name="media" class="form-control" value="<%= aluno.media %>" readonly />
+                                    </div>
 
+                                    <div class="mb-4">
+                                        <label class="form-label">Observações Gerais</label>
+                                        <textarea class="form-control" name="avaObservacao" rows="4"><%= aluno.observacao %></textarea>
+                                    </div>
 
-            <% if (typeof mensagem !=='undefined' && mensagem) { %>
+                                    <!-- Botões responsivos -->
+                                    <div class="d-flex justify-content-end gap-2 flex-wrap">
+                                        <button type="submit" class="btn btn-warning btn-sm px-3 w-100 w-md-auto">Editar</button>
+                                        <button type="button" class="btn btn-danger btn-sm px-3 w-100 w-md-auto" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop<%= index %>">
+                                            Deletar
+                                        </button>
+                                    </div>
 
-                <div class="modal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">AVISO</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    <%= mensagem %>
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                                    <!-- Modal com ID dinâmico -->
+                                    <div class="modal fade" id="staticBackdrop<%= index %>" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<%= index %>"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel<%= index %>">AVISO</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Fechar"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Você tem certeza que deseja excluir essa avaliação?
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-end gap-2 flex-wrap">
+                                                    <button type="button" class="btn btn-secondary btn-sm w-100 w-md-auto"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="/deletar/<%= aluno.id %>" class="w-100 w-md-auto">
+                                                        <button type="button" class="btn btn-danger btn-sm w-100 w-md-auto">Confirmar</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            <% }) %>
+        <% } %>
+    </main>
 
-                <% } %>
+    <%- include('partials/footer') %>
 
-                    <a href="/lista_alunos"><button class="btn btn-danger center" title="Voltar"><i
-                                class="bi bi-arrow-bar-left"></i></button></a>
-
-
-                    <form action="/editar-nota/matricula" method="POST">
-                        <input type="hidden" class="form-control" name="avaMatricula"
-                            value="<%= avaliacao.matricula %>">
-                        <div class="row g-3 mb-4">
-                            <div class="col-12 col-md-4">
-                                <label class="form-label">Nome do Aluno</label>
-                                <input type="text" class="form-control" value="<%= avaliacao.aluno %>" name="avaNome"
-                                    placeholder="Digite o nome do aluno" readonly>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="form-label">Período</label>
-                                <input type="text" class="form-control" name="avaPeriodo"
-                                    value="<%= avaliacao.periodo %>" placeholder="Ex: 1° Módulo" readonly>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="form-label">Professor Avaliador</label>
-                                <input type="text" class="form-control" value="<%= avaliacao.professor %>"
-                                    name="avaProfessor" placeholder="Nome do professor">
-                            </div>
-                        </div>
-
-
-                        <div class="table-responsive mb-4">
-                            <table class="table table-bordered align-middle text-nowrap">
-                                <thead class="table-secondary text-center">
-                                    <tr>
-                                        <th>Soft Skill</th>
-                                        <th>Descrição</th>
-                                        <th style="width: 90px;">Nota</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>Comunicação</td>
-                                        <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
-                                                value="<%= avaliacao.comunicacao%>" id="avaNota1" name="avaNota1"
-                                                class="form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Trabalho em Equipe</td>
-                                        <td>Colaboração, respeito e contribuição em grupo.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
-                                                value="<%= avaliacao.trabalho_equipe %>" id="avaNota2" name="avaNota2"
-                                                class="form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Responsabilidade</td>
-                                        <td>Comprometimento, pontualidade, ética.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
-                                                value="<%= avaliacao.responsabilidade %>" id="avaNota3" name="avaNota3"
-                                                class="form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Pensamento Crítico</td>
-                                        <td>Argumentação, questionamento, resolução de problemas.</td>
-                                        <td><input type="number" min="0" max="5" oninput="atualizarNota()"
-                                                value="<%= avaliacao.pensamento_critico %>" id="avaNota4"
-                                                name="avaNota4" class="form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Proatividade</td>
-                                        <td>Iniciativa e autonomia para resolver tarefas.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota5" oninput="atualizarNota()"
-                                                name="avaNota5" class="form-control"
-                                                value="<%= avaliacao.proatividade %>"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Liderança</td>
-                                        <td>Influência positiva, tomada de decisões.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota6"
-                                                value="<%= avaliacao.lideranca %>" oninput="atualizarNota()"
-                                                name="avaNota6" class="form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Adaptabilidade</td>
-                                        <td>Flexibilidade e aceitação de mudanças.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota7"
-                                                value="<%= avaliacao.adaptabilidade %>" oninput="atualizarNota()"
-                                                name="avaNota7" class=" form-control"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Empatia</td>
-                                        <td>Respeito e compreensão dos sentimentos dos outros.</td>
-                                        <td><input type="number" min="0" max="5" id="avaNota8"
-                                                value="<%= avaliacao.empatia %>" oninput="atualizarNota()"
-                                                name="avaNota8" class="form-control"></td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                        <div class="mb-4">
-                            <label class="form-label">Média: </label>
-                            <input type="text" class="form-control" name="media" value="<%= avaliacao.media %>"
-                                id="media" placeholder="Média" style="width: 200px;" readonly>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label">Observações Gerais</label>
-                            <textarea class="form-control" rows="4" name="avaObservacao"
-                                placeholder="Comentários adicionais sobre o aluno"><%= avaliacao.observacao %></textarea>
-                        </div>
-
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-warning px-4">Editar</button>
-
-                            <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Deletar
-                            </button>
-
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">AVISO </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-start">
-                                            Você tem certeza que deseja excluir essa avaliação?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancelar</button>
-                                            <a href="/deletar/<%= avaliacao.id%>"><button type="button"
-                                                    class="btn btn-danger">Confirmar</button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-        </div>
-
-
-        <%- include('partials/footer') %>
-
+    <!-- Bootstrap Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-
-
 </html>

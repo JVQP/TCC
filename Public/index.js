@@ -103,4 +103,17 @@ btn.innerHTML = "Aguarde...";
 });
 }
 
+if(path.startsWith('/editar-usuario/')){
+  path.split('/')[2];
+
+
+    let nome = document.getElementById(inputNome);
+    if (nome) {
+     nome.addEventListener('input', () => upperCaseById('inputNome'));
+    }
+  
+  
+
+}
+
 });

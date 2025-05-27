@@ -7,44 +7,30 @@ const router = express.Router();
 
 router.get('/:matricula', middleware, permisao('Professor'), (req, res) => {
 
-    let matricula = req.params.matricula;
+let matricula = req.params.matricula
 
-    db.get('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliacao) => {
+db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliacoes) => {
+    if (err) {
+        console.error(err.message);
+        res.status(500).send('Erro ao buscar aluno');
+        return;
+    }
 
-        if (err) {
-            console.log('Erro de consulta do banco de dados!', err.message);
-            return res.status(500).send('Erro de consulta do banco de dados!', err.message);
-        }
+    console.log(avaliacoes);
 
-
-        db.all('SELECT * FROM alunos', (err, alunos) => {
-            if (err) {
-                console.log('Erro de consulta do banco de dados!', err.message);
-                return res.status(500).send('Erro de consulta do banco de dados!', err.message);
-            }
-
-
-
-            if (!avaliacao) {
-                return res.render('lista_alunos', {
-                    usuario: req.session.usuario,
-                    avaliacao: avaliacao,
-                    mensagem: 'Nenhuma nota registrada para este aluno.',
-                    alunos: alunos,
-                    total: alunos.length
-                });
-            }
-
-            return res.render('visualizar_nota', {
-                usuario: req.session.usuario,
-                avaliacao: avaliacao
-            });
-
-        });
-
+  if (!avaliacoes || avaliacoes.length === 0) {
+    return res.render('visualizar_nota', {
+        usuario: req.session.usuario,
+        avaliacoes: [],
+        mensagem: 'Nenhuma nota registrada para esse aluno(a)!'
     });
+}
 
+
+  return res.render('visualizar_nota', { usuario: req.session.usuario, avaliacoes});
+
+});
 });
 
 
-module.exports = router
+module.exports = router;
