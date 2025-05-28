@@ -62,6 +62,7 @@ const editarNotaRouter = require('./routers/editar_nota.js');
 const erroNotaRouter = require('./routers/erro_nota.js');
 const deletarNotaRouter = require('./routers/deletar_nota.js');
 const editarUsuarioRouter = require('./routers/editar_usuario.js');
+const painelEmpresaRouter = require('./routers/empresa.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -85,6 +86,7 @@ app.use('/editar-nota', editarNotaRouter);
 app.use('/erro-nota', erroNotaRouter);
 app.use('/deletar', deletarNotaRouter);
 app.use('/editar-usuario', editarUsuarioRouter);
+app.use('/painel-empresa',painelEmpresaRouter);
 
 
 
