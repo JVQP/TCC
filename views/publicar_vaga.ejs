@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Vagas</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="/index.js" defer></script>
+
+</head>
+
+<body>
+
+    <%- include('partials/navbar') %>
+
+       <main>
+
+  <!-- Exibindo mensagens
+  <% if (typeof mensagem1 !== 'undefined' && mensagem1) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong><%= mensagem1 %></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <% if (typeof mensagem2 !== 'undefined' && mensagem2) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong><%= mensagem2 %></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <% if (typeof mensagem3 !== 'undefined' && mensagem3) { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong><%= mensagem3 %></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <% if (typeof mensagem4 !== 'undefined' && mensagem4) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong><%= mensagem4 %></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <% if (typeof mensagem5 !== 'undefined' && mensagem5) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong><%= mensagem5 %></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %> -->
+
+  <!-- ESTRUTURA DO FORMULÁRIO DE CADASTRO -->
+
+  <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
+    style="min-height: 80vh;">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 500px; overflow-y: auto; max-height: 90vh;">
+      <h1>
+        <a href="/painel-empresa"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>
+        Publicar Vagas
+      </h1>
+      <form action="/publicar-vagas/vaga-publicada" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label for="inputEmpresa" class="form-label">Empresa: </label>
+          <input type="email" class="form-control" name="inputEmpresa" id="inputEmpresa"
+            value="<%= usuario.nome %>" readonly required>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputTitulo" class="form-label">Título: </label>
+          <input type="text" class="form-control" oninput="upperCase()" id="inputTitulo"
+            name="inputTitulo" placeholder="Título da vaga..." required>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputDescricao" class="form-label">Descrição: </label>
+          <textarea class="form-control" name="inputDescricao" id="inputDescricao" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputRequisito" class="form-label">Requisitos: </label>
+          <textarea class="form-control" name="inputRequisito" id="inputRequisito" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputData" class="form-label">Data: </label>
+          <input type="date" class="form-control" name="inputData" id="inputData" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputSituacao" class="form-label">Situação:</label>
+          <select class="form-select" id="inputSituacao" name="inputSituacao" required>
+            <option selected>Selecione a Situação...</option>
+            <option value="Ativa">Ativa</option>
+            <option value="Encerrada">Encerrada</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputTipo" class="form-label">Tipo:</label>
+          <select class="form-select" id="inputTipo" name="inputTipo" required>
+            <option selected>Selecione o tipo...</option>
+            <option value="CLT">CLT</option>
+            <option value="Freelancer">Freelancer</option>
+            <option value="Estágio">Estágio</option>
+            <option value="Trainer">Trainer</option>
+          </select>
+        </div>
+
+        <br>
+        <input type="submit" id="registro" class="btn btn-primary w-100" value="Publicar">
+        
+      </form>
+    </div>
+  </div>
+</main>
+
+
+       <!-- RODA PÉ DO SISTEMA -->
+       
+        <footer class="bg-primary text-white text-center text-lg-start mt-5">
+            <div class="container p-4">
+                <div class="row">
+
+                    <div
+                        class="col-lg-6 col-md-12 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-lg-start">
+                        <img src="/imagem/Logo.png" alt="Logo SenaiEmprega" height="90" class="mb-2">
+                        <p class="text-center text-lg-start">
+                            <strong>Conectando alunos, professores e empresas para oportunidades reais no mercado de
+                                trabalho.</strong>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Links úteis</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="/" class="text-white">Início</a></li>
+                            <li><a href="/contato" class="text-white">Contato</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Redes sociais</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="https://www.instagram.com/p/CZ5qbFSNHZq/" class="text-white" target="_blank"
+                                    rel="noopener noreferrer">Instagram</a></li>
+                            <li><a href="#" class="text-white">LinkedIn</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-center p-3 bg-dark">
+                © 2025 SenaiEmprega | Desenvolvido por João Vitor - Junior - Patrick &#x1f609;
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

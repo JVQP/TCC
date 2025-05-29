@@ -135,6 +135,27 @@ function soft_skills() {
 
 }
 
+function vagas(){
+    let query = `CREATE TABLE vagas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    empresa VARCHAR(100),
+    titulo_vaga VARCHAR(100),
+    descricao VARCHAR(1000),
+    requisitos VARCHAR(1000),
+    data DATA,
+    situacao VARCHAR(100),
+    tipo_contrato VARCHAR(100)
+    );`
+
+    db.run(query, (err) => {
+        if(!err){
+            console.log('Tabela de vagas criada com sucesso!');
+        } else {
+            console.log('Erro ao criar tabela de vagas: ' + err.message);
+        }
+    });
+
+}
 
 
 module.exports = db;
