@@ -111,8 +111,38 @@ if(path.startsWith('/editar-usuario/')){
     if (nome) {
      nome.addEventListener('input', () => upperCaseById('inputNome'));
     }
-  
-  
+
+}
+
+if(path === '/publicar-vagas' || path === 'vaga-publicada'){
+
+let btn = document.getElementById('registro');
+let nova_div = document.createElement('div');
+
+btn.addEventListener('click', function(e)  {
+btn.innerHTML = 'Publicando..'
+
+nova_div.innerHTML = `<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">AVISO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Vaga publicada com sucesso!.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>`
+
+document.body.appendChild(nova_div);
+
+});
 
 }
 

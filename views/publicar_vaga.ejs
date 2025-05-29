@@ -54,6 +54,10 @@
     </div>
   <% } %> -->
 
+  <div class="modal" id="modal">
+
+  </div>
+
   <!-- ESTRUTURA DO FORMULÁRIO DE CADASTRO -->
 
   <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
@@ -63,7 +67,7 @@
         <a href="/painel-empresa"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>
         Publicar Vagas
       </h1>
-      <form action="/publicar-vagas/vaga-publicada" method="POST" enctype="multipart/form-data">
+      <form action="" method="POST" enctype="multipart/form-data">
 
         <div class="mb-3">
           <label for="inputEmpresa" class="form-label">Empresa: </label>
@@ -73,7 +77,7 @@
 
         <div class="mb-3">
           <label for="inputTitulo" class="form-label">Título: </label>
-          <input type="text" class="form-control" oninput="upperCase()" id="inputTitulo"
+          <input type="text" class="form-control" id="inputTitulo"
             name="inputTitulo" placeholder="Título da vaga..." required>
         </div>
 
