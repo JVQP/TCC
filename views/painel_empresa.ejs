@@ -6,56 +6,161 @@
   <title>SenaiEmprega</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
 
-<%- include('partials/navbar') %>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+    <div class="container-fluid">
 
 
-<main>
+      <!-- MENU DE OPÇÕES -->
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling"><i class="bi bi-list" id="menu"></i></button>
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Painel de controle</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="container-fluid" id="container">
+            <div class="row">
 
-<div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-          aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-          aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-          aria-label="Slide 3"></button>
+              <div class="col-4" id="col1">
+                <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
+                  <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil" class="img-profile" loading="lazy">
+                  <% } else { %>
+                    <img src="/imagem/user.png" alt="Foto padrão" class="img-profile" loading="lazy">
+                    <% } %>
+              </div>
+
+
+              <div class="editar">
+                <a href="/editar-foto/<%= usuario.id %>/<%= usuarios[0].imagem || '' %>"
+                  style="text-decoration: none; margin-right: 20px;" class="icon-profile" title="Editar"><i
+                    class="bi bi-pencil-square"></i></a>
+              </div>
+
+
+
+
+              <div class="nomes">
+                <p class="nome">
+                  <%= usuario.nome %>
+                </p>
+                <p class="frase">"Pelo futuro do trabalho."</p>
+
+              </div>
+              <div class="conteudo">
+                <a href="/portal-vagas"><button type="button" class="btn-interacao"><i class="bi bi-menu-up"></i> Portal
+                    de Vagas.</button></a>
+                <br>
+                <button type="button" class="btn-interacao"><i class="bi bi-link-45deg"></i>
+                  Links.</button>
+                <br>
+
+                <div class="logout">
+                  <a href="/logout"> <button type="button" class="btn btn-danger" id="logout-btn">
+                      Sair
+                      <i class="bi bi-box-arrow-left"></i>
+                    </button> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/imagem/banner1.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="/imagem/banner2.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="/imagem/banner3.png" class="d-block w-100" alt="...">
+
+      <!-- LOGO -->
+
+      <img src="/imagem/Logo.png" alt="SenaiEmprega" style="height: 100px; align-items: center;">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contato">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+  <main>
+
+    <div class="container">
+
+      <div class="rows">
+        <h4 class="text-start" style="margin-top: 50px; font-family: 'Times New Roman', Times, serif;">Olá, <%=
+            usuario.nome %> 👋</h4>
+        <div class="row">
+          <div class="col-sm-4" id="conteudo-empresa">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Candidatos 👨‍💼</h5>
+                <p class="card-text">Total: </p>
+                <a href="#" class="btn btn-primary">Visualizar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4" id="conteudo-empresa">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Vagas Publicadas 📃</h5>
+                <p class="card-text">Total: </p>
+                <a href="#" class="btn btn-primary">Visualizar</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4" id="conteudo-empresa">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Contratados 📋</h5>
+                <p class="card-text">Total: </p>
+                <a href="#" class="btn btn-primary">Visualizar</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
 
-    
-</main>
+
+    <div class="container-fluid" style="margin-top: 100px;">
+
+      <div class="row">
+        <!-- Filtro de pesquisas -->
+        <form class="d-flex" action="" style="gap: 20px;">
+          <input type="text" class="form-control" placeholder="Procurar Candidatos..." style="width: 200px;">
+          <input type="text" class="form-control" placeholder="Procurar Candidatos..." style="width: 200px;">
+        </form>
+
+        <div class="col-md-6"></div>
+
+      </div>
+
+    </div>
+
+  </main>
 
 
 
-<%- include('partials/footer') %>
+  <%- include('partials/footer') %>
 
 </body>
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </html>

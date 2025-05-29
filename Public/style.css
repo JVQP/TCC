@@ -212,6 +212,14 @@ td {
     margin-top: 20px;
 }
 
+
+/* ESTILIZANDO PÁGINA PAINEL DE EMPRESA */
+
+#conteudo-empresa{
+    margin-top: 50px;
+}
+
+
 /* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
     #col1 {
