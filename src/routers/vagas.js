@@ -8,16 +8,24 @@ const router = express.Router();
 
 router.get('/', middleware, permisao('Empresa'), (req, res) => {
 
-res.render('publicar_vaga', {usuario: req.session.usuario});
+    res.render('publicar_vaga', { usuario: req.session.usuario });
 
 });
 
 router.post('/vaga-publicada', middleware, permisao('Empresa'), (req, res) => {
 
-    const {inputEmpresa, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo} = req.body;
+    const { inputEmpresa, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo } = req.body;
 
 
-    console.log('Dados: ', inputEmpresa, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo);
+    db.run('INSERT INTO vagas (empresa, titulo_vaga, descricao, requisitos, data, situacao, tipo_contrato) VALUES (?, ?, ?, ?, ?, ?, ?)', [inputEmpresa, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo], (err) => {
+
+        if (!err) {
+            console.log('Vaga publicada com sucesso!');
+            return res.render('publicar_vaga', { usuario: req.session.usuario, mensagem: 'Vaga publica com sucesso!' });
+        }
+
+        return res.render('publicar_vaga', { usuario: req.session.usuario, error: 'Error ao publicar vaga, tente novamente mais tarde!' });
+    });
 
 });
 

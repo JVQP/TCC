@@ -76,42 +76,42 @@
                                                 <tr>
                                                     <td>Comunicação</td>
                                                     <td>Clareza ao se expressar, ouvir com atenção, participação em discussões.</td>
-                                                    <td><input type="number" name= "avaNota1" min="0" max="5" class="form-control" value="<%= aluno.comunicacao %>"/></td>
+                                                    <td><input type="number" name= "avaNota1" id="avaNota1" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.comunicacao %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Trabalho em Equipe</td>
                                                     <td>Colaboração, respeito e contribuição em grupo.</td>
-                                                    <td><input type="number" name="avaNota2" min="0" max="5" class="form-control" value="<%= aluno.trabalho_equipe %>"/></td>
+                                                    <td><input type="number" name="avaNota2" id="avaNota2" min="0" max="5" class="form-control" value="<%= aluno.trabalho_equipe %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Responsabilidade</td>
                                                     <td>Comprometimento, pontualidade, ética.</td>
-                                                    <td><input type="number" name="avaNota3" min="0" max="5" class="form-control" value="<%= aluno.responsabilidade %>"/></td>
+                                                    <td><input type="number" name="avaNota3" id="avaNota3" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.responsabilidade %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Pensamento Crítico</td>
                                                     <td>Argumentação, questionamento, resolução de problemas.</td>
-                                                    <td><input type="number" name="avaNota4" min="0" max="5" class="form-control" value="<%= aluno.pensamento_critico %>"/></td>
+                                                    <td><input type="number" name="avaNota4" id="avaNota4" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.pensamento_critico %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Proatividade</td>
                                                     <td>Iniciativa e autonomia para resolver tarefas.</td>
-                                                    <td><input type="number" name="avaNota5" min="0" max="5" class="form-control" value="<%= aluno.proatividade %>"/></td>
+                                                    <td><input type="number" name="avaNota5" id="avaNota5" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.proatividade %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Liderança</td>
                                                     <td>Influência positiva, tomada de decisões.</td>
-                                                    <td><input type="number" name="avaNota6" min="0" max="5" class="form-control" value="<%= aluno.lideranca %>"/></td>
+                                                    <td><input type="number" name="avaNota6" id="avaNota6" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.lideranca %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Adaptabilidade</td>
                                                     <td>Flexibilidade e aceitação de mudanças.</td>
-                                                    <td><input type="number" name="avaNota7" min="0" max="5" class="form-control" value="<%= aluno.adaptabilidade %>"/></td>
+                                                    <td><input type="number" name="avaNota7" id="avaNota7" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.adaptabilidade %>"/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Empatia</td>
                                                     <td>Respeito e compreensão dos sentimentos dos outros.</td>
-                                                    <td><input type="number" name="avaNota8" min="0" max="5" class="form-control" value="<%= aluno.empatia %>"/></td>
+                                                    <td><input type="number" name="avaNota8" id="avaNota8" oninput="atualizarNota()" min="0" max="5" class="form-control" value="<%= aluno.empatia %>"/></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -119,7 +119,7 @@
 
                                     <div class="mb-4" style="max-width: 200px;">
                                         <label class="form-label">Média:</label>
-                                        <input type="text" name="media" class="form-control" value="<%= aluno.media %>" readonly />
+                                        <input type="text" name="media" id="media" class="form-control" value="<%= aluno.media %>" readonly />
                                     </div>
 
                                     <div class="mb-4">

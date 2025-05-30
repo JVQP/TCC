@@ -80,6 +80,32 @@ btn.innerHTML = "Aguarde...";
 
 }
 
+
+// Script para editar nota 
+
+if(path.startsWith('/visualizar/')){
+  path.split('/')[2];
+
+ window.atualizarNota = function () { 
+
+    let nota1 = document.getElementById('avaNota1').value;
+    let nota2 = document.getElementById('avaNota2').value;
+    let nota3 = document.getElementById('avaNota3').value;
+    let nota4 = document.getElementById('avaNota4').value;
+    let nota5 = document.getElementById('avaNota5').value;
+    let nota6 = document.getElementById('avaNota6').value;
+    let nota7 = document.getElementById('avaNota7').value;
+    let nota8 = document.getElementById('avaNota8').value;
+    let mediaDisplay = document.getElementById('media');
+
+    let media = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4) + Number(nota5) + Number(nota6) + Number(nota7) + Number(nota8)) / 8;
+
+    mediaDisplay.value = media.toFixed(2);
+  }
+
+}
+
+
 // SCRIPT DA PÁGINA DE CADASTRO DE USUÁRIO
 
 if(path === '/usuario' || path === '/usuario/cadastro'){
@@ -114,36 +140,55 @@ if(path.startsWith('/editar-usuario/')){
 
 }
 
-if(path === '/publicar-vagas' || path === 'vaga-publicada'){
 
-let btn = document.getElementById('registro');
-let nova_div = document.createElement('div');
+// Scritp da página de publicação de vagas
 
-btn.addEventListener('click', function(e)  {
-btn.innerHTML = 'Publicando..'
+  if (path === '/publicar-vagas' || path === '/publicar-vagas/vaga-publicada') {
+  let btn = document.getElementById('publicar');
 
-nova_div.innerHTML = `<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">AVISO</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Vaga publicada com sucesso!.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>`
+  if (!btn) {
+    console.error('Botão #publicar não encontrado!');
+    return;
+  }
 
-document.body.appendChild(nova_div);
+  btn.addEventListener('click', function (e) {
+    btn.innerHTML = 'Publicando...';
+  //   let existente = document.getElementById('modalAviso');
+  //   if (!existente) {
+  //     let nova_div = document.createElement('div');
 
-});
+  //     nova_div.innerHTML = `
+  //       <div class="modal fade" id="modalAviso" tabindex="-1">
+  //         <div class="modal-dialog">
+  //           <div class="modal-content">
+  //             <div class="modal-header">
+  //               <h5 class="modal-title success">AVISO</h5>
+  //               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+  //             </div>
+  //             <div class="modal-body">
+  //               <p>Vaga publicada com sucesso!</p>
+  //             </div>
+  //             <div class="modal-footer">
+  //               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>`;
 
+  //     document.body.appendChild(nova_div);
+  //   }
+
+    
+  //   setTimeout(() => {
+  //     const el = document.getElementById('modalAviso');
+  //     if (el) {
+  //       const modal = new bootstrap.Modal(el);
+  //       modal.show();
+  //     }
+  //   }, 50);
+  // });
+  // }
+  });
 }
-
 });
+
