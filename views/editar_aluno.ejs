@@ -21,8 +21,8 @@
 
             <div class="container d-flex justify-content-center align-items-center" id="form-cadastro"
                 style="min-height: 80vh;">
-                <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
-                    <h1>Editar</h1>
+                <div class="card p-4 shadow" style="width: 100%; max-width: 500px; overflow-y: auto; height: 90vh;">
+                  <h1><a href="/lista_alunos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>  Editar</h1>
                     <form action="/editar/<%= aluno.id %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="editarMatricula" class="form-label">N° de matrícula:</label>

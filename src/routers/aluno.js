@@ -58,11 +58,7 @@ router.post('/registro-aluno', middleware, permisao('Professor') ,(req, res) => 
                     return res.status(500).send('Erro interno ao buscar usuários.');
                 }
 
-                return res.render('aluno', {
-                    usuarios: usuarios || [],
-                    usuario: req.session.usuario,
-                    error: 'Nome já registrado no sistema!'
-                });
+                return res.redirect('/aluno');
             }); 
 
             } else {

@@ -27,11 +27,11 @@ router.get('/:id', middleware, permisao('Professor'), (req, res) => {
 router.post('/:id/editar_usuario', middleware, permisao('Professor'), (req, res) => {
 
 
-  const { inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputID } = req.body;
+  const { inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputId } = req.body;
 
     // if (!inputEmail || !inputNome || !inputData || !inputSenha || !inputConfirmar || inputTipoUsuario){
     //     return res.render('editar_usuario', {
-    //         mensagem3: 'Preencha todos os campos!',
+    //         mensagem1: 'Preencha todos os campos!',
     //         usuarios: req.session.usuario
     //     });
     // }
@@ -49,7 +49,7 @@ router.post('/:id/editar_usuario', middleware, permisao('Professor'), (req, res)
     senha = ?, 
     confirmar_senha = ?,
     tipo = ?
-    WHERE id = ? `, [inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputID], (err) => {
+    WHERE id = ? `, [inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputId], (err) => {
         if(err){
             console.log('Erro ao editar usuário: ' + err.message);
             return res.status(500).send('Erro ao editar usuário, consulte ao desenvolvedor!' + err.message);
@@ -57,6 +57,9 @@ router.post('/:id/editar_usuario', middleware, permisao('Professor'), (req, res)
             return res.redirect('/lista-usuario');
     
     });
+
+
+
 
 });
 
