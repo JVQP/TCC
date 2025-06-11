@@ -48,7 +48,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop() {
-    let query = `DROP TABLE IF EXISTS avaliacao;`
+    let query = `DROP TABLE IF EXISTS vagas;`
 
     db.run(query, (err) => {
         if (err) {
@@ -157,6 +157,37 @@ function vagas(){
     });
 
 }
+
+function candidatos(){
+
+let query = `
+
+CREATE TABLE candidatos(
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+candidatos_id INTEGER,
+vagas_id INTEGER,
+nome VARCHAR(100),
+email VARCHAR(100),
+status VARCHAR(20),
+
+FOREIGN KEY (candidatos_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+FOREIGN KEY (vagas_id) REFERENCES vagas(id) ON DELETE CASCADE
+
+);
+
+`
+
+db.run(query, (err) => {
+    if(!err){
+        console.log('Tabela de candidatos criado com sucesso!');
+    } else {
+        console.log('Erro ao criar tabela candidatos' + err.message);
+    }
+})
+
+}
+
 
 
 module.exports = db;

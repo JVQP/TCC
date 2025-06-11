@@ -16,7 +16,19 @@ let rotas = {
 
 let voltar = rotas[tipo] || '/';
 
-res.render('portal_vagas', {usuario: req.session.usuario, voltar});
+db.all('SELECT * FROM vagas', (err, vagas) => {
+
+    if(err){
+        console.log('Erro de consultar vagas ' + err.message);
+        return res.status(500).send('Erro de consultar vagas ' + err.message);
+    }
+
+        return res.render('portal_vagas', {usuario: req.session.usuario, 
+            voltar,
+            vagas: vagas
+        });
+
+});
 
 });
 
