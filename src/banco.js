@@ -60,7 +60,6 @@ function drop() {
 }
 
 
-
 function aluno() {
 
     let query = `CREATE TABLE alunos (

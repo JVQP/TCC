@@ -55,7 +55,8 @@
 
               </div>
               <div class="conteudo">
-                <a href="/publicar-vagas"><button type="button" class="btn-interacao"><i class="bi bi-newspaper"></i> Publicar
+                <a href="/publicar-vagas"><button type="button" class="btn-interacao"><i class="bi bi-newspaper"></i>
+                    Publicar
                     Vagas.</button></a>
                 <br>
                 <a href="/portal-vagas"><button type="button" class="btn-interacao"><i class="bi bi-menu-up"></i> Portal
@@ -147,9 +148,12 @@
         <h5 class="text-center">Procuarar candidatos: </h5>
 
         <!-- Filtro de pesquisas -->
-        <form class="d-flex text-center" action="" style="margin-top: 30px;">
-          <input type="text" class="form-control" placeholder="Procurar..." style="width: 200px;">
-          <button class="btn btn-success">Pesquisar</button>
+        <form action="" method="post" class="barra-pesquisa">
+          <div class="input-group" id="pesquisa-aluno">
+            <input type="text" class="form-control" placeholder="Pesquisar.." aria-label="Input group example"
+              name="pesquisa" aria-describedby="btnGroupAddon">
+            <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
+          </div>
         </form>
 
         <div class="col-md-6"></div>
