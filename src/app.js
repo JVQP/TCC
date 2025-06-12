@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8080;
 const db = require('./banco.js');
 const fs = require('fs');
 
+
 // Configurando o servidor
 const app = express();
 app.set('view engine', 'ejs');
@@ -63,6 +64,7 @@ const deletarNotaRouter = require('./routers/deletar_nota.js');
 const editarUsuarioRouter = require('./routers/editar_usuario.js');
 const painelEmpresaRouter = require('./routers/empresa.js');
 const PublicarVagasRouter = require('./routers/vagas.js');
+const CandidatarRouter = require('./routers/candidatar.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -87,6 +89,7 @@ app.use('/deletar', deletarNotaRouter);
 app.use('/editar-usuario', editarUsuarioRouter);
 app.use('/painel-empresa',painelEmpresaRouter);
 app.use('/publicar-vagas', PublicarVagasRouter);
+app.use('/candidatar', CandidatarRouter);
 
 
 module.exports = app;

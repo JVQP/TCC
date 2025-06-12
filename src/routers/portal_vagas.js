@@ -25,7 +25,7 @@ db.all('SELECT * FROM vagas', (err, vagas) => {
 
         return res.render('portal_vagas', {usuario: req.session.usuario, 
             voltar,
-            vagas: vagas
+            vagas: vagas,
         });
 
 });

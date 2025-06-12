@@ -14,135 +14,181 @@
 
   <%- include('partials/navbar') %>
 
+        <main>
 
-    <main>
-
-      <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/imagem/banner1.png" class="d-block w-100" alt="...">
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/imagem/banner1.png" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/imagem/banner2.png" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/imagem/banner3.png" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-          <div class="carousel-item">
-            <img src="/imagem/banner2.png" class="d-block w-100" alt="...">
+
+          <div class="container-fluid">
+            <h2 class="portal-tittle"><a href="<%= voltar %>"><i class="bi bi-box-arrow-left" title="Voltar"></i></a>
+              Olá,
+              <%= usuario.nome %>
+            </h2>
           </div>
-          <div class="carousel-item">
-            <img src="/imagem/banner3.png" class="d-block w-100" alt="...">
+
+
+          <!-- BARRA DE PESQUISA -->
+
+
+
+          <form action="" method="post" class="barra-pesquisa" style="margin-top: 50px;">
+            <div class="input-group" id="pesquisa-aluno">
+              <input type="text" class="form-control" placeholder="Procurar vaga.." aria-label="Input group example"
+                name="pesquisa" aria-describedby="btnGroupAddon">
+              <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
+            </div>
+          </form>
+
+          <hr>
+
+                <!-- MENSAGEM DE ERRO -->
+
+      
+              <% if (typeof mensagem !== 'undefined' && mensagem) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong><%= mensagem %></strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <% } %>
+              <% if (typeof mensagem_email !== 'undefined' && mensagem_email) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong><%= mensagem_email %></strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <% } %>
+
+          <div class="container-fluid" id="vagas">
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+
+              <% vagas.forEach(vagas=> { %>
+                <!-- Card da vaga -->
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= vagas.titulo_vaga %>
+                      </h5>
+                      <p>
+                        <%= vagas.empresa %>
+                      </p>
+                      <p class="card-text">
+                        <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' : vagas.descricao %>
+                      </p>
+
+                      <!-- Botão para abrir o modal -->
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalVaga<%= vagas.id %>">
+                        Ver mais
+                      </button>
+                    </div>
+                    <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
+                      <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal Scrollável da vaga -->
+                <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
+                  aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
+                          <%= vagas.titulo_vaga %>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p><strong>Descrição da vaga: </strong></p>
+                        <p>
+                          <%= vagas.descricao %>
+                        </p>
+                        <hr>
+                        <p><strong>Requisitos: </strong></p>
+                        <p>
+                          <%= vagas.requisitos || "Não informado." %>
+                        </p>
+                        <hr>
+                        <p><strong>Situação: </strong></p>
+                        <p>
+                          <%= vagas.situacao || "Não informado." %>
+                        </p>
+                        <hr>
+                        <p><strong>Tipo de contrato: </strong></p>
+                        <p>
+                          <%= vagas.tipo_contrato || "Não informado." %>
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <form action="/candidatar" method="post">
+                          <input type="hidden" name="inputEmpresa" value="<%= vagas.empresa %>" id="">
+                          <input type="hidden" name="inputData" value="<%= vagas.data %>" id="">
+                          <input type="hidden" name="inputTitulo" value="<%= vagas.titulo_vaga %>" id="">
+                          <input type="hidden" name="inputVagaId" value="<%= vagas.id %>" readonly>
+                          <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>" readonly>
+                          <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
+                          <input type="hidden" name="inputEmail" value="<%= usuario.email %>" readonly>
+                          <input type="hidden" name="inputStatus" value="Pendente" readonly>
+                          <input type="submit" class="btn btn-primary" value="Candidatar">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <% }) %>
+            </div>
           </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <div class="container-fluid">
-        <h2 class="portal-tittle"><a href="<%= voltar %>"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Olá,
-          <%= usuario.nome %>
-        </h2>
-      </div>
 
 
-      <!-- BARRA DE PESQUISA -->
+          <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
+
+            <p class="texto"
+              style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 50px;"><strong>vaga
+                disponivel, tente novamente mais tarde!</strong></p>
+
+            <% } %>
 
 
-
-      <form action="" method="post" class="barra-pesquisa">
-        <div class="input-group" id="pesquisa-aluno">
-          <input type="text" class="form-control" placeholder="Procurar vaga.." aria-label="Input group example"
-            name="pesquisa" aria-describedby="btnGroupAddon">
-          <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
-        </div>
-      </form>
-
-      <div class="container-fluid" id="vagas">
-
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-
-        <% vagas.forEach(vagas => { %>
-  <!-- Card da vaga -->
-<div class="col">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= vagas.titulo_vaga %></h5>
-      <p><%= vagas.empresa %></p>
-      <p class="card-text">
-        <%= vagas.descricao.length > 100 ? vagas.descricao.substring(0, 100) + '...' : vagas.descricao %>
-      </p>
-
-      <!-- Botão para abrir o modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVaga<%= vagas.id %>">
-        Ver mais
-      </button>
-    </div>
-    <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
-      <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Scrollável da vaga -->
-<div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1" aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>"><%= vagas.titulo_vaga %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Descrição da vaga: </strong></p>
-        <p><%= vagas.descricao %> </p>
-        <hr>
-        <p><strong>Requisitos: </strong></p>
-        <p><%= vagas.requisitos || "Não informado." %></p>
-        <hr>
-        <p><strong>Situação: </strong></p>
-        <p><%= vagas.situacao || "Não informado." %></p>
-        <hr>
-        <p><strong>Tipo de contrato: </strong></p>
-        <p><%= vagas.tipo_contrato || "Não informado." %></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <a href="/candidatar/<%= usuario.id %>" class="btn btn-primary">Candidatar-se</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% }) %>
-     </div>
-      </div>
-    
-    
-    <% if(typeof vagas === undefined || vagas === 'NULL' || vagas.length === 0) { %>   
-
-      <p class="texto" style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 50px;"><strong>vaga disponivel, tente novamente mais tarde!</strong></p>
-
-    <% } %>
-
-    
-    </main>
+        </main>
 
 
 
 
 
 
-    <%- include('partials/footer') %>
+        <%- include('partials/footer') %>
 
 </body>
 

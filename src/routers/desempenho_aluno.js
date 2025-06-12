@@ -29,7 +29,7 @@ db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliac
     console.log(avaliacoes);
 
     if (avaliacoes.length === 0) {
-        res.render('loginAvaliacao', { usuario: req.session.usuario, error: `Nenhuma nota registrada para você (${req.session.usuario.nome}), volte mais tarde!`, avaliacoes });
+        res.render('loginAvaliacao', { usuario: req.session.usuario, error: `Nenhuma nota registrada no momento ou matricula não existe, tente novamente mais tarde!`, avaliacoes });
         return;
     }
 
