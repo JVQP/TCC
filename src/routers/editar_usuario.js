@@ -49,7 +49,7 @@ router.post('/:id/editar_usuario', middleware, permisao('Professor'), (req, res)
     senha = ?, 
     confirmar_senha = ?,
     tipo = ?
-    WHERE id = ? `, [inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputId], (err) => {
+    WHERE id = ? `, [inputNome, inputEmail, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputId], (err) => {
         if(err){
             console.log('Erro ao editar usuário: ' + err.message);
             return res.status(500).send('Erro ao editar usuário, consulte ao desenvolvedor!' + err.message);

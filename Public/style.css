@@ -25,7 +25,10 @@ main {
 } */
 
 
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
     cursor: pointer;
     border-color: rgba(255, 255, 255, .1);
 }
@@ -64,7 +67,7 @@ main {
     text-align: center;
 }
 
-#file{
+#file {
     margin-top: 20px;
 }
 
@@ -200,6 +203,14 @@ td {
     margin-top: 30px;
 }
 
+.btn-filter {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
 
 /* ESTILIZANDO PÁGINA DESEMPENHO */
 
@@ -215,7 +226,7 @@ td {
 
 /* ESTILIZANDO PÁGINA PAINEL DE EMPRESA */
 
-#conteudo-empresa{
+#conteudo-empresa {
     margin-top: 50px;
 }
 
@@ -239,22 +250,22 @@ td {
         font-size: 30px;
     }
 
-.text-center {
-    font-size: 50px;
-    text-align: center !important;
-}
+    .text-center {
+        font-size: 50px;
+        text-align: center !important;
+    }
 
-.text-center {
-    text-align: center !important;
-    font-size: 16px;
-}
+    .text-center {
+        text-align: center !important;
+        font-size: 16px;
+    }
 
-#container-home{
-    margin-top: 500px;
-}
+    #container-home {
+        margin-top: 500px;
+    }
 
-#text-center{
-    font-size: 30px;
-}
+    #text-center {
+        font-size: 30px;
+    }
 
 }

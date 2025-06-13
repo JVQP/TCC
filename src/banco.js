@@ -188,6 +188,19 @@ db.run(query, (err) => {
 
 }
 
+function update(){
+    let query = `UPDATE usuarios SET nome = 'JOAO VITOR QUIRINO PROCOPIO', email = 'jaumvit0r222@gmail.com' WHERE id = 1`;
+
+    db.run(query, (err) => {
+        if(!err){
+            console.log('Usuário alterado com sucesso!');
+        } else {
+            console.log(err);
+        }
+    });
+}
+
+
 
 
 module.exports = db;
