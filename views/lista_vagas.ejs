@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENAI EMPREGA</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <script src="/index.js" defer></script>
+
+
+
+</head>
+
+
+<body class="bg-light">
+
+  <%- include('partials/navbar') %>
+
+
+
+
+
+
+    <!-- Filtragem de aluno -->
+
+    <form action="" method="post" class="barra-pesquisa">
+      <div class="input-group" id="pesquisa-aluno">
+        <input type="text" class="form-control" placeholder="Procurar por vagas." aria-label="Input group example"
+          name="pesquisa" aria-describedby="btnGroupAddon">
+        <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
+      </div>
+    </form>
+
+
+
+
+    <main>
+
+
+      <div class="container-fluid" id="vagas">
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+          <% vagas.forEach(vagas=> { %>
+            <!-- Card da vaga -->
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= vagas.titulo_vaga %>
+                  </h5>
+                  <p>
+                    <%= vagas.empresa %>
+                  </p>
+                  <p class="card-text">
+                    <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
+                      vagas.descricao %>
+                  </p>
+
+                  <!-- Botão para abrir o modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalVaga<%= vagas.id %>">
+                    Ver mais
+                  </button>
+                </div>
+                <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
+                  <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Scrollável da vaga -->
+            <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
+              aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
+                      <%= vagas.titulo_vaga %>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Descrição da vaga: </strong></p>
+                    <p>
+                      <%= vagas.descricao %>
+                    </p>
+                    <hr>
+                    <p><strong>Requisitos: </strong></p>
+                    <p>
+                      <%= vagas.requisitos || "Não informado." %>
+                    </p>
+                    <hr>
+                    <p><strong>Situação: </strong></p>
+                    <p>
+                      <%= vagas.situacao || "Não informado." %>
+                    </p>
+                    <hr>
+                    <p><strong>Tipo de contrato: </strong></p>
+                    <p>
+                      <%= vagas.tipo_contrato || "Não informado." %>
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Editar</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% }) %>
+        </div>
+      </div>
+
+
+      <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
+
+        <p class="texto" style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 50px;">
+          <strong>Você não publicou nenhuma vaga no momento!</strong>
+        </p>
+
+        <% } %>
+
+
+
+
+
+          <div class="back-button">
+            <a href="/painel-empresa"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
+                <i class="bi bi-box-arrow-left"></i>
+              </button> </a>
+          </div>
+    </main>
+
+
+    <%- include('partials/footer') %>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,24 +1,20 @@
 const express = require('express');
 const db = require('../banco.js');
-const fileUpload = require('express-fileupload');
 const middleware = require('./middleware.js');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 
-const app = express();
-app.use(fileUpload());
 
 router.get('/:id/:imagem', middleware, (req, res) => {
     const id = req.params.id;
-
-    let tipo = req.session.usuario.tipo;
+    const tipo = req.session.usuario.tipo;
 
     let rota = {
         Aluno: '/painel-aluno',
         Professor: '/adm',
         Empresa: '/painel-empresa'
-    }
+    };
 
     let voltar = rota[tipo] || '/';
 
@@ -57,7 +53,7 @@ router.post('/:id/:imagem', middleware, (req, res) => {
             if (err) {
                 console.log('Mensagem: ' + err.message);
                 return res.status(500).render('editar_foto', {
-                    error: 'Erro ao editar a imagem, consulte o desenvolvedor.',
+                    error: 'Erro ao editar a imagem, consulte ao desenvolvedor.',
                     usuario: req.session.usuario,
                     usuarios: usuario,
                     voltar
@@ -75,23 +71,33 @@ router.post('/:id/:imagem', middleware, (req, res) => {
         return;
     }
 
+
     const imagemNova = req.files.imagemNova.name;
+
+ 
+    const uploadDir = path.join(__dirname, '..', '..', 'Public', 'imagem');
+
+    
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const uploadPath = path.join(uploadDir, imagemNova);
 
     db.run('UPDATE usuarios SET imagem = ? WHERE id = ?', [imagemNova, id], (err) => {
         if (err) {
             console.log('Mensagem: ' + err.message);
             return res.status(500).render('editar_foto', {
-                error: 'Erro ao editar a imagem, consulte o desenvolvedor.',
+                error: 'Erro ao editar a imagem, consulte ao desenvolvedor.',
                 usuario: req.session.usuario,
                 voltar
             });
         }
 
-        const uploadPath = path.join(__dirname, '..', '..', 'Public', 'imagem', imagemNova);
-
+      
         req.files.imagemNova.mv(uploadPath, (err) => {
             if (err) {
-                console.log('Mensagem: ' + err.message);
+                console.error('Erro ao mover imagem:', err);
                 return res.status(500).render('editar_foto', {
                     error: 'Erro ao mover a imagem, consulte o desenvolvedor.',
                     usuario: req.session.usuario,
@@ -99,37 +105,22 @@ router.post('/:id/:imagem', middleware, (req, res) => {
                 });
             }
 
+          
             const imagemAntiga = req.params.imagem;
-
             if (imagemAntiga !== 'user.png') {
-                const RemoverImagem = path.join(__dirname, '..', '..', 'Public', 'imagem', imagemAntiga);
-                fs.unlink(RemoverImagem, (err) => {
+                const removerPath = path.join(uploadDir, imagemAntiga);
+                fs.unlink(removerPath, (err) => {
                     if (err) {
                         console.log('Erro ao apagar imagem antiga:', err.message);
                     }
                 });
             }
 
-            let destino;
-            switch (req.session.usuario.tipo) {
-                case 'Aluno':
-                    destino = '/painel-aluno';
-                    break;
-                case 'Professor':
-                    destino = '/adm';
-                    break;
-                case 'Empresa':
-                    destino = '/painel-empresa';
-                    break;
-                default:
-                    destino = '/';
-            }
-
+           
+            let destino = rota[tipo] || '/';
             return res.redirect(destino);
         });
     });
 });
-
-
 
 module.exports = router;
