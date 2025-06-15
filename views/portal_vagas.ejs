@@ -69,74 +69,56 @@
       </form>
 
 
-        
+        <hr>
       <!-- Botões de interação -->
 
 
-      <div class="container">
+     <div class="container-fluid">
+      <div class="row">
+        <div class="col-3" style="margin-top: 30px;">
+           <h4 style="font-style: initial;">Filtrar</h4>
 
         <div class="btn-filter">
-          <form action="/procurar-vagas" class="" method="post">
-            <input type="hidden" name="informatica-TI-Dev">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Informática-TI-Dev">
-          </form>
-
-          <form action="/procurar-vagas" method="post">
-           <input type="hidden" name="Mecânica">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Mecânica">
-          </form>
-          
-          <form action="/procurar-vagas" method="post">
-             <input type="hidden" name="Elétrica/Elétrica Mecânica">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Elétrica/Elétrica mecânica">
-          </form>
-        
-          <form action="/procurar-vagas" method="post">
-            <input type="hidden" name="Administração">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Administração">
-          </form>
-        
-          <form action="/procurar-vagas" method="post">
-            <input type="hidden" name="Soldador">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Soldador">
-          </form>
-        
-          <form action="/procurar-vagas" method="post">
-            <input type="hidden" name="Caldeiro">
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="Caldeiro">
-          </form>
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- MENSAGEM DE ERRO -->
-
-
-      <% if (typeof mensagem !=='undefined' && mensagem) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>
-            <%= mensagem %>
-          </strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% } %>
-          <% if (typeof mensagem_email !=='undefined' && mensagem_email) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>
-                <%= mensagem_email %>
-              </strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <form id="formBuscar" action="/procurar-vagas" class="" method="post">
+            <label for="" class="form-label">Empresa: </label>
+            <select name="inputSelectEmpresa"class="form-select" id="">
+                <option selected>Selecione a empresa...</option>
+                <% vagas.forEach(vagas => { %>
+                  <option value=""><%= vagas.empresa %></option>
+               <% }) %>
+            </select>
+            <br>
+            <label for="" class="form-label">Oportunidades: </label>
+            <select name="inputSelectOptn"class="form-select" id="">
+                <option selected>Selecione...</option>
+                <option value="TI - Tecnologia da Informação">TI - Tecnologia da Informação</option> 
+                <option value="Mecânica">Mecânica</option> 
+                <option value="Elétrica">Elétrica</option> 
+                <option value="Elétromecânica">Elétromecânica</option> 
+                <option value="Soldado">Soldador</option> 
+                <option value="Caldeiro">Caldeiro</option> 
+                <option value="Administração">Administração</option> 
+            </select>
+            <br>
+            <label for="" class="form-label">Tipo de contrato: </label>
+            <select name="inputSelectContrato"class="form-select" id="">
+                <option selected>Selecione...</option>
+                <option value="CLT">CLT</option> 
+                <option value="Estagio">Estagio</option> 
+                <option value="Freelancer">Freelancer</option> 
+                <option value="Trainer">Trainer</option> 
+            </select>
+            <br>
+            <div class="btn-filtro">
+              <input type="submit" value="Pesquisar" class="btn btn-primary w-100">
             </div>
-            <% } %>
-
-              <div class="container-fluid" id="vagas">
-
-                <div class="row row-cols-1 row-cols-md-2 g-4">
-
-                  <% vagas.forEach(vagas=> { %>
+          </form>
+        </div>
+        </div>
+        <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
+           <% vagas.forEach(vagas=> { %>
                     <!-- Card da vaga -->
-                    <div class="col">
+                    <div class="col" style="margin-top: 10px;">
                       <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">
@@ -214,16 +196,38 @@
                     </div>
 
                     <% }) %>
-                </div>
-              </div>
+        </div>
+      </div>
+     </div>
+
+      <!-- MENSAGEM DE ERRO -->
 
 
+      <% if (typeof mensagem !=='undefined' && mensagem) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>
+            <%= mensagem %>
+          </strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+          <% if (typeof mensagem_email !=='undefined' && mensagem_email) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>
+                <%= mensagem_email %>
+              </strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+
+            
               <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
 
                 <p class="texto"
                   style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 50px;">
                   <strong>vaga
-                    disponivel, tente novamente mais tarde!</strong></p>
+                    disponivel, tente novamente mais tarde!</strong>
+                </p>
 
                 <% } %>
 

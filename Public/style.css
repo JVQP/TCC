@@ -4,6 +4,7 @@ body,
 html {
     height: 100%;
     margin: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 main {
@@ -203,14 +204,6 @@ td {
     margin-top: 30px;
 }
 
-.btn-filter {
-    display: flex;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    margin-top: 20px;
-}
 
 /* ESTILIZANDO PÁGINA DESEMPENHO */
 
