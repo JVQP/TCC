@@ -67,6 +67,7 @@ const PublicarVagasRouter = require('./routers/vagas.js');
 const CandidatarRouter = require('./routers/candidatar.js');
 const ListaVagasRouter = require('./routers/lista_vagas.js');
 const editarVagasRouter = require('./routers/editar_vagas.js');
+const removerVagaRouter = require('./routers/remover_vaga.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -94,7 +95,7 @@ app.use('/publicar-vagas', PublicarVagasRouter);
 app.use('/candidatar', CandidatarRouter);
 app.use('/listar-vagas', ListaVagasRouter);
 app.use('/editar-vagas', editarVagasRouter);
-
+app.use('/excluir-vaga', removerVagaRouter);
 
 
 module.exports = app;

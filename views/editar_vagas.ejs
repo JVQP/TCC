@@ -57,11 +57,11 @@
             <% } %>
 
 
-              <form action="" method="POST" enctype="multipart/form-data">
+              <form action="/editar-vagas/<%= vagas.id %>" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3">
                   <label for="inputEmpresa" class="form-label">Empresa: </label>
-                  <input type="email" class="form-control" name="inputEmpresa" id="inputEmpresa"
+                  <input type="email" class="form-control" name="inputEmpresa" id="i/vaga-edidatanputEmpresa"
                     value="<%= usuario.nome %>" readonly required>
                 </div>
 
@@ -106,7 +106,7 @@
                 </div>
 
                 <br>
-                <input type="hidden" name="id" value="<%= vagas.id %>">
+        
                 <input type="submit"  class="btn btn-warning w-100" value="Editar Vaga">
 
               </form>

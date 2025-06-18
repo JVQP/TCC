@@ -44,6 +44,17 @@
 
       <div class="container-fluid" id="vagas">
 
+        <!-- Mensagem de remoção de vaga -->
+
+        <% if (typeof mensagem !=='undefined' && mensagem) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>
+                        <%= mensagem %>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+
         <div class="row row-cols-1 row-cols-md-2 g-4">
 
           <% vagas.forEach(vagas=> { %>

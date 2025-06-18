@@ -29,7 +29,7 @@ db.all('SELECT* FROM usuarios WHERE id = ?', [req.session.usuario.id], (err, usu
         usuario: req.session.usuario,
         usuarios: usuarios,
         total_vagas: total
-    })
+    });
 
    });
     
