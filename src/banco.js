@@ -59,7 +59,6 @@ function drop() {
     })
 }
 
-
 function aluno() {
 
     let query = `CREATE TABLE alunos (
@@ -140,6 +139,7 @@ function vagas(){
     let query = `CREATE TABLE vagas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     empresa VARCHAR(100),
+    email VARCHAR(100),
     titulo_vaga VARCHAR(100),
     descricao VARCHAR(1000),
     requisitos VARCHAR(1000),
@@ -167,9 +167,11 @@ CREATE TABLE candidatos(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 candidatos_id INTEGER,
 vagas_id INTEGER,
+empresa VARCHAR(100),
 nome VARCHAR(100),
 email VARCHAR(100),
 status VARCHAR(20),
+data DATE,
 
 FOREIGN KEY (candidatos_id) REFERENCES usuarios(id) ON DELETE CASCADE,
 FOREIGN KEY (vagas_id) REFERENCES vagas(id) ON DELETE CASCADE

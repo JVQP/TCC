@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <script src="/index.js" defer></script>
 </head>
 
 <body>
@@ -69,136 +71,8 @@
       </form>
 
 
-        <hr>
+      <hr>
       <!-- Botões de interação -->
-
-
-     <div class="container-fluid">
-      <div class="row">
-        <div class="col-3" style="margin-top: 30px;">
-           <h4 style="font-style: initial;">Filtrar</h4>
-
-        <div class="btn-filter">
-          <form id="formBuscar" action="/procurar-vagas" class="" method="post">
-            <label for="" class="form-label">Empresa: </label>
-            <select name="inputSelectEmpresa"class="form-select" id="">
-                <option selected>Selecione a empresa...</option>
-                <% vagas.forEach(vagas => { %>
-                  <option value=""><%= vagas.empresa %></option>
-               <% }) %>
-            </select>
-            <br>
-            <label for="" class="form-label">Oportunidades: </label>
-            <select name="inputSelectOptn"class="form-select" id="">
-                <option selected>Selecione...</option>
-                <option value="TI - Tecnologia da Informação">TI - Tecnologia da Informação</option> 
-                <option value="Mecânica">Mecânica</option> 
-                <option value="Elétrica">Elétrica</option> 
-                <option value="Elétromecânica">Elétromecânica</option> 
-                <option value="Soldado">Soldador</option> 
-                <option value="Caldeiro">Caldeiro</option> 
-                <option value="Administração">Administração</option> 
-            </select>
-            <br>
-            <label for="" class="form-label">Tipo de contrato: </label>
-            <select name="inputSelectContrato"class="form-select" id="">
-                <option selected>Selecione...</option>
-                <option value="CLT">CLT</option> 
-                <option value="Estagio">Estagio</option> 
-                <option value="Freelancer">Freelancer</option> 
-                <option value="Trainer">Trainer</option> 
-            </select>
-            <br>
-            <div class="btn-filtro">
-              <input type="submit" value="Pesquisar" class="btn btn-primary w-100">
-            </div>
-          </form>
-        </div>
-        </div>
-        <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
-           <% vagas.forEach(vagas=> { %>
-                    <!-- Card da vaga -->
-                    <div class="col" style="margin-top: 10px;">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            <%= vagas.titulo_vaga %>
-                          </h5>
-                          <p>
-                            <%= vagas.empresa %>
-                          </p>
-                          <p class="card-text">
-                            <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
-                              vagas.descricao %>
-                          </p>
-
-                          <!-- Botão para abrir o modal -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalVaga<%= vagas.id %>">
-                            Ver mais
-                          </button>
-                        </div>
-                        <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
-                          <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Modal Scrollável da vaga -->
-                    <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
-                      aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
-                              <%= vagas.titulo_vaga %>
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                              aria-label="Fechar"></button>
-                          </div>
-                          <div class="modal-body">
-                            <p><strong>Descrição da vaga: </strong></p>
-                            <p>
-                              <%= vagas.descricao %>
-                            </p>
-                            <hr>
-                            <p><strong>Requisitos: </strong></p>
-                            <p>
-                              <%= vagas.requisitos || "Não informado." %>
-                            </p>
-                            <hr>
-                            <p><strong>Situação: </strong></p>
-                            <p>
-                              <%= vagas.situacao || "Não informado." %>
-                            </p>
-                            <hr>
-                            <p><strong>Tipo de contrato: </strong></p>
-                            <p>
-                              <%= vagas.tipo_contrato || "Não informado." %>
-                            </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <form action="/candidatar" method="post">
-                              <input type="hidden" name="inputEmpresa" value="<%= vagas.empresa %>" id="">
-                              <input type="hidden" name="inputData" value="<%= vagas.data %>" id="">
-                              <input type="hidden" name="inputTitulo" value="<%= vagas.titulo_vaga %>" id="">
-                              <input type="hidden" name="inputVagaId" value="<%= vagas.id %>" readonly>
-                              <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>" readonly>
-                              <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
-                              <input type="hidden" name="inputEmail" value="<%= usuario.email %>" readonly>
-                              <input type="hidden" name="inputStatus" value="Pendente" readonly>
-                              <input type="submit" class="btn btn-primary" value="Candidatar">
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <% }) %>
-        </div>
-      </div>
-     </div>
 
       <!-- MENSAGEM DE ERRO -->
 
@@ -220,16 +94,153 @@
             </div>
             <% } %>
 
-            
-              <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3" style="margin-top: 30px;">
+                    <h4 style="font-style: initial;">Filtrar</h4>
 
-                <p class="texto"
-                  style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 50px;">
-                  <strong>vaga
-                    disponivel, tente novamente mais tarde!</strong>
-                </p>
+                    <div class="btn-filter">
+                      <form id="formBuscar" action="/procurar-vagas" class="" method="post">
+                        <label for="" class="form-label">Empresa: </label>
+                        <select name="inputSelectEmpresa" class="form-select" id="">
+                          <option selected>Selecione a empresa...</option>
+                          <% vagas.forEach(vagas=> { %>
+                            <option value="">
+                              <%= vagas.empresa %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <br>
+                        <label for="" class="form-label">Oportunidades: </label>
+                        <select name="inputSelectOptn" class="form-select" id="">
+                          <option selected>Selecione...</option>
+                          <option value="TI - Tecnologia da Informação">TI - Tecnologia da Informação</option>
+                          <option value="Mecânica">Mecânica</option>
+                          <option value="Elétrica">Elétrica</option>
+                          <option value="Elétromecânica">Elétromecânica</option>
+                          <option value="Soldado">Soldador</option>
+                          <option value="Caldeiro">Caldeiro</option>
+                          <option value="Administração">Administração</option>
+                        </select>
+                        <br>
+                        <label for="" class="form-label">Tipo de contrato: </label>
+                        <select name="inputSelectContrato" class="form-select" id="">
+                          <option selected>Selecione...</option>
+                          <option value="CLT">CLT</option>
+                          <option value="Estagio">Estagio</option>
+                          <option value="Freelancer">Freelancer</option>
+                          <option value="Trainer">Trainer</option>
+                        </select>
+                        <br>
+                        <div class="btn-filtro">
+                          <input type="submit" value="Pesquisar" class="btn btn-primary w-100">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
 
-                <% } %>
+
+                  <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
+                  
+                    <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
+
+                          <p class="texto" style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
+                            <strong>Nenhuma vaga encontrada, volte mais tarde!</strong>
+                          </p>
+
+                          <% } %>
+
+                    <% vagas.forEach(vagas=> { %>
+                      <!-- Card da vaga -->
+                      <div class="col" style="margin-top: 10px;">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">
+                              <%= vagas.titulo_vaga %>
+                            </h5>
+                            <p>
+                              <%= vagas.empresa %>
+                            </p>
+                            <p class="card-text">
+                              <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
+                                vagas.descricao %>
+                            </p>
+
+                            <!-- Botão para abrir o modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                              data-bs-target="#modalVaga<%= vagas.id %>">
+                              Ver mais
+                            </button>
+                          </div>
+                          <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
+                            <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
+                          </div>
+                        </div>
+
+                            <!-- Modal Scrollável da vaga -->
+                            <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
+                              aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
+                                      <%= vagas.titulo_vaga %>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Fechar"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p><strong>Descrição da vaga: </strong></p>
+                                    <p>
+                                      <%= vagas.descricao %>
+                                    </p>
+                                    <hr>
+                                    <p><strong>Requisitos: </strong></p>
+                                    <p>
+                                      <%= vagas.requisitos || "Não informado." %>
+                                    </p>
+                                    <hr>
+                                    <p><strong>Situação: </strong></p>
+                                    <p class="situacaoVaga" data-id=" <%= vagas.id %>">
+                                      <%= vagas.situacao || "Não informado." %>
+                                    </p>
+                                    <hr>
+                                    <p><strong>Tipo de contrato: </strong></p>
+                                    <p>
+                                      <%= vagas.tipo_contrato || "Não informado." %>
+                                    </p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                      data-bs-dismiss="modal">Fechar</button>
+                                    <form action="/candidatar" method="post">
+                                      <input type="hidden" name="inputEmpresa" value="<%= vagas.empresa %>" id="">
+                                      <input type="hidden" name="inputData" value="<%= vagas.data %>" id="">
+                                      <input type="hidden" name="inputTitulo" value="<%= vagas.titulo_vaga %>" id="">
+                                      <input type="hidden" name="inputVagaId" value="<%= vagas.id %>" readonly>
+                                      <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>" readonly>
+                                      <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
+                                      <input type="hidden" name="inputEmail" value="<%= usuario.email %>" readonly>
+                                      <input type="hidden" name="inputStatus" value="Pendente" readonly>
+                                      <% if (vagas.situacao==='Encerrada' ) { %>
+                                        <input type="submit" class="btn btn-primary" value="Vaga Encerrada" disabled>
+                                        <% } else { %>
+                                          <input type="submit" class="btn btn-primary candidatar-btn"
+                                            data-id="<%= vagas.id %>" value="Candidatar">
+                                          <% } %>
+
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <% }) %>
+                      </div>
+                  </div>
+                </div>
+
+
 
 
     </main>

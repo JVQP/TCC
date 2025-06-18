@@ -16,7 +16,7 @@ let rotas = {
 
 let voltar = rotas[tipo] || '/';
 
-db.all('SELECT * FROM vagas', (err, vagas) => {
+db.all(`SELECT * FROM vagas WHERE situacao = 'Ativa'`,(err, vagas) => {
 
     if(err){
         console.log('Erro de consultar vagas ' + err.message);

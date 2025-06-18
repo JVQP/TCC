@@ -14,6 +14,7 @@ router.get('/', middleware, permisao('Empresa'), (req, res) => {
             return;
         } else {
             let total = candidato.length
+          
             res.render('lista_candidatos', {
                 usuario: req.session.usuario,
                 candidatos: candidato,

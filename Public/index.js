@@ -140,55 +140,5 @@ if(path.startsWith('/editar-usuario/')){
 
 }
 
-
-// Scritp da página de publicação de vagas
-
-  if (path === '/publicar-vagas' || path === '/publicar-vagas/vaga-publicada') {
-  let btn = document.getElementById('publicar');
-
-  if (!btn) {
-    console.error('Botão #publicar não encontrado!');
-    return;
-  }
-
-  btn.addEventListener('click', function (e) {
-    btn.innerHTML = 'Publicando...';
-  //   let existente = document.getElementById('modalAviso');
-  //   if (!existente) {
-  //     let nova_div = document.createElement('div');
-
-  //     nova_div.innerHTML = `
-  //       <div class="modal fade" id="modalAviso" tabindex="-1">
-  //         <div class="modal-dialog">
-  //           <div class="modal-content">
-  //             <div class="modal-header">
-  //               <h5 class="modal-title success">AVISO</h5>
-  //               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-  //             </div>
-  //             <div class="modal-body">
-  //               <p>Vaga publicada com sucesso!</p>
-  //             </div>
-  //             <div class="modal-footer">
-  //               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>`;
-
-  //     document.body.appendChild(nova_div);
-  //   }
-
-    
-  //   setTimeout(() => {
-  //     const el = document.getElementById('modalAviso');
-  //     if (el) {
-  //       const modal = new bootstrap.Modal(el);
-  //       modal.show();
-  //     }
-  //   }, 50);
-  // });
-  // }
-  });
-}
 });
 

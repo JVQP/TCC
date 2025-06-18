@@ -65,15 +65,17 @@
               <thead class="table-dark">
                 <tr>
                   <th style="text-align: center;">#</th>
+                  <th style="text-align: center;">Empresa</th>
                   <th style="text-align: center;">Nome</th>
                   <th style="text-align: center;">E-Mail</th>
+                  <th style="text-align: center;">Data</th>
                   <th style="text-align: center;">Status</th>
                   
                   <th style="width: 70px; text-align: center;">Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <% candidatos.forEach(aluno=> { %>
+                <% candidatos.forEach(candidato=> { %>
                   <tr>
                     <td>
                       <%= candidato.id %>
@@ -82,7 +84,13 @@
                       <%= candidato.nome %>
                     </td>
                     <td>
+                      <%= candidato.empresa %>
+                    </td>
+                    <td>
                       <%= candidato.email %>
+                    </td>
+                    <td>
+                      <%= candidato.data %>
                     </td>
                     <td>
                       <%= candidato.status %>
@@ -90,17 +98,17 @@
 
                     <td style="width: 70px;">
                       <div class="d-flex justify-content-center align-items-center gap-1">
-                        <a href="/editar/<%=aluno.id  %>"><button class="btn btn-outline-primary btn-sm px-1 py-0"
+                        <a href=""><button class="btn btn-outline-primary btn-sm px-1 py-0"
                             style="width: 28px; height: 28px;" title="Editar">
                             <i class="bi bi-pencil"></i>
                           </button></a>
 
-                             <a href="/excluir/<%= aluno.id %>"><button class="btn btn-outline-danger btn-sm px-1 py-0"
+                             <a href=""><button class="btn btn-outline-danger btn-sm px-1 py-0"
                             style="width: 28px; height: 28px;" onclick="excluir(event)" title="Excluir aluno, esse evento não pode ser desfeito. Tenha certeza!">
                             <i class="bi bi-trash"></i>
                           </button></a>
                           
-                        <a href="/visualizar/<%= aluno.matricula %>"><button
+                        <a href=""><button
                             class="btn btn-outline-warning btn-sm px-1 py-0" style="width: 28px; height: 28px;"
                             title="Visualizar nota">
                             <i class="bi bi-clipboard-data"></i>
