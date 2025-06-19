@@ -221,6 +221,7 @@
                                       <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>" readonly>
                                       <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
                                       <input type="hidden" name="inputEmail" value="<%= usuario.email %>" readonly>
+                                      <input type="hidden" name="inputEmailVagas" value="<%= vagas.email %>" readonly>
                                       <input type="hidden" name="inputStatus" value="Pendente" readonly>
                                       <% if (vagas.situacao==='Encerrada' ) { %>
                                         <input type="submit" class="btn btn-primary" value="Vaga Encerrada" disabled>
