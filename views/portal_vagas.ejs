@@ -38,7 +38,7 @@
             <img src="/imagem/banner3.png" class="d-block w-100" alt="...">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" ;;
           data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -62,7 +62,7 @@
 
 
 
-      <form action="" method="post" class="barra-pesquisa" style="margin-top: 50px;">
+      <form action="/filtrar-vagas" method="post" class="barra-pesquisa" style="margin-top: 50px;">
         <div class="input-group" id="pesquisa-aluno">
           <input type="text" class="form-control" placeholder="Procurar vaga.." aria-label="Input group example"
             name="pesquisa" aria-describedby="btnGroupAddon">
@@ -100,7 +100,7 @@
                     <h4 style="font-style: initial;">Filtrar</h4>
 
                     <div class="btn-filter">
-                      <form id="formBuscar" action="/procurar-vagas" class="" method="post">
+                      <form id="formBuscar" action="/filtrar-vagas" class="" method="post">
                         <label for="" class="form-label">Empresa: </label>
                         <select name="inputSelectEmpresa" class="form-select" id="">
                           <option selected>Selecione a empresa...</option>
@@ -114,13 +114,25 @@
                         <label for="" class="form-label">Oportunidades: </label>
                         <select name="inputSelectOptn" class="form-select" id="">
                           <option selected>Selecione...</option>
-                          <option value="TI - Tecnologia da Informação">TI - Tecnologia da Informação</option>
-                          <option value="Mecânica">Mecânica</option>
-                          <option value="Elétrica">Elétrica</option>
-                          <option value="Elétromecânica">Elétromecânica</option>
-                          <option value="Soldado">Soldador</option>
+                          <option value="TI">Tecnologia da Informação (TI)</option>
+                          <option value="Logistica">Logística</option>
+                          <option value="Administracao">Administração</option>
+                          <option value="Financeiro">Financeiro</option>
+                          <option value="RecursosHumanos">Recursos Humanos (RH)</option>
+                          <option value="Marketing">Marketing</option>
+                          <option value="Vendas">Vendas</option>
+                          <option value="Engenharia">Engenharia</option>
+                          <option value="Juridico">Jurídico</option>
+                          <option value="Saude">Saúde</option>
+                          <option value="Educação">Educação</option>
+                          <option value="Industrial">Setor Industrial</option>
+                          <option value="Comercio">Comércio</option>
+                          <option value="ConstruçaoCivil">Construção Civil</option>
+                          <option value="Eletrica">Eletricista</option>
+                          <option value="Mecanico(a)">Mecânico(a)</option>
+                          <option value="Soldagem">Soldador</option>
                           <option value="Caldeiro">Caldeiro</option>
-                          <option value="Administração">Administração</option>
+                        </select>
                         </select>
                         <br>
                         <label for="" class="form-label">Tipo de contrato: </label>
@@ -141,41 +153,43 @@
 
 
                   <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
-                  
+
                     <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
 
-                          <p class="texto" style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
-                            <strong>Nenhuma vaga encontrada, volte mais tarde!</strong>
-                          </p>
+                      <p class="texto"
+                        style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
+                        <strong>Nenhuma vaga encontrada, volte mais tarde!</strong>
+                      </p>
 
-                          <% } %>
+                      <% } %>
 
-                    <% vagas.forEach(vagas=> { %>
-                      <!-- Card da vaga -->
-                      <div class="col" style="margin-top: 10px;">
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">
-                              <%= vagas.titulo_vaga %>
-                            </h5>
-                            <p>
-                              <%= vagas.empresa %>
-                            </p>
-                            <p class="card-text">
-                              <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
-                                vagas.descricao %>
-                            </p>
+                        <% vagas.forEach(vagas=> { %>
+                          <!-- Card da vaga -->
+                          <div class="col" style="margin-top: 10px;">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">
+                                  <%= vagas.titulo_vaga %>
+                                </h5>
+                                <p>
+                                  <%= vagas.empresa %>
+                                </p>
+                                <p class="card-text">
+                                  <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
+                                    vagas.descricao %>
+                                </p>
 
-                            <!-- Botão para abrir o modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                              data-bs-target="#modalVaga<%= vagas.id %>">
-                              Ver mais
-                            </button>
-                          </div>
-                          <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
-                            <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %></small>
-                          </div>
-                        </div>
+                                <!-- Botão para abrir o modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                  data-bs-target="#modalVaga<%= vagas.id %>">
+                                  Ver mais
+                                </button>
+                              </div>
+                              <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
+                                <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %>
+                                    </small>
+                              </div>
+                            </div>
 
                             <!-- Modal Scrollável da vaga -->
                             <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
@@ -237,7 +251,7 @@
                             </div>
 
                             <% }) %>
-                      </div>
+                          </div>
                   </div>
                 </div>
 

@@ -26,7 +26,7 @@
 
     <main>
 
-      <form action="/filtro" method="post" style="margin-top: 30px;" class="barra-pesquisa">
+      <form action="/filtro-candidatos" method="post" style="margin-top: 30px;" class="barra-pesquisa">
         <div class="input-group" id="pesquisa-aluno">
           <input type="text" class="form-control" placeholder="Procurar por candidatos.."
             aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
@@ -41,154 +41,189 @@
     flex-direction: row;
     justify-content: center; margin-top: 20px; gap: 20px;">
         <div class="form-check">
-          <form action="/filtro" id="form" method="post">
-          <input class="form-check-input" type="checkbox" onchange="document.getElementById('form').submit()" name="aprovado" value="Aprovado" id="checkDefault">
-          <label class="form-check-label" for="checkDefault">
-            Aprovados
-          </label>
+          <form action="/filtro-candidatos" id="form-aprovado" method="post">
+            <input class="form-check-input" type="checkbox" onchange="document.getElementById('form-aprovado').submit()"
+              name="aprovado" value="Aprovado">
+            <label class="form-check-label" for="checkDefault">
+              Aprovados
+            </label>
           </form>
         </div>
         <div class="form-check">
-          <form action="/filtro" id="form" method="post">
-          <input class="form-check-input" type="checkbox" onchange="document.getElementById('form').submit()" name="EmAnalise" value="Em analise" id="checkDefault">
-          <label class="form-check-label" for="checkDefault">
-           Em análise
-          </label>
+          <form action="/filtro-candidatos" id="form-EmAnalise" method="post">
+            <input class="form-check-input" type="checkbox"
+              onchange="document.getElementById('form-EmAnalise').submit()" name="EmAnalise" value="Em analise">
+            <label class="form-check-label" for="checkDefault">
+              Em análise
+            </label>
           </form>
         </div>
         <div class="form-check">
-          <form action="/filtro" id="form" method="post">
-          <input class="form-check-input" type="checkbox" onchange="document.getElementById('form').submit()" name="reprovado" value="Reprovado" id="checkDefault">
-          <label class="form-check-label" for="checkDefault">
-            Reprovados
-          </label>
+          <form action="/filtro-candidatos" id="form-reprovado" method="post">
+            <input class="form-check-input" type="checkbox"
+              onchange="document.getElementById('form-reprovado').submit()" name="reprovado" value="Reprovado">
+            <label class="form-check-label" for="checkDefault">
+              Reprovados
+            </label>
           </form>
         </div>
       </div>
 
-      <!-- MENSGAEM  -->
+            <!-- MENSGAEM  -->
 
-      <% if(typeof mensagem_email !=='undefined' && mensagem_email) { %>
+            <% if(typeof mensagem_email !=='undefined' && mensagem_email) { %>
 
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Sucesso!</strong>
-          <%= mensagem_email %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-            <% } %>
-
-              <div style="margin-top: 50px;" class="table-responsive" id="table">
-                <table class="table table-striped table-hover table-sm" id="tabelaCandidatos">
-                  <thead class="table-dark">
-                    <tr>
-                      <th style="text-align: center;">#</th>
-                      <th style="text-align: center;">Empresa</th>
-                      <th style="text-align: center;">Nome</th>
-                      <th style="text-align: center;">E-Mail</th>
-                      <th style="text-align: center;">Data</th>
-                      <th style="text-align: center;">Status</th>
-
-                      <th style="width: 70px; text-align: center;">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% candidatos.forEach(candidato=> { %>
-                      <tr>
-                        <td>
-                          <%= candidato.id %>
-                        </td>
-                        <td>
-                          <%= candidato.empresa %>
-                        </td>
-                        <td>
-                          <%= candidato.nome %>
-                        </td>
-                        <td>
-                          <%= candidato.email %>
-                        </td>
-                        <td>
-                          <%= candidato.data %>
-                        </td>
-                        <td>
-                          <%= candidato.status %>
-                        </td>
-
-                        <td style="width: 70px;">
-                          <div class="d-flex justify-content-center align-items-center gap-1">
-                            <form action="/aprovar" method="post">
-                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
-                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
-                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                              <input type="hidden" name="Aprovado" value="Aprovado">
-                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                              <input type="hidden" name="Email" value="<%= candidato.email %>">
-                              <input type="hidden" name="id" value="<%= candidato.id %>">
-
-                              <button type="submit" class="btn btn-outline-primary btn-sm px-1 py-0"
-                                style="width: 28px; height: 28px;" id="aprovar" title="Aprovar candidato!">
-                                <i class="bi bi-person-fill-check"></i>
-                              </button>
-                            </form>
-
-                            <a href="/desempenho-candidato/<%= candidato.nome %>"><button
-                                class="btn btn-outline-success btn-sm px-1 py-0" style="width: 28px; height: 28px;"
-                                title="Visualizar desempenho do candidato!">
-                                <i class="bi bi-clipboard-data"></i>
-                              </button></a>
-
-                            <form action="/analisar-candidato" method="post">
-                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
-                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
-                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                              <input type="hidden" name="Aprovado" value="Em analise">
-                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                              <input type="hidden" name="Email" value="<%= candidato.email %>">
-                              <input type="hidden" name="id" value="<%= candidato.id %>">
-                              <button type="submit" class="btn btn-outline-warning btn-sm px-1 py-0"
-                                style="width: 28px; height: 28px;" title="Analisar candidato!">
-                                <i class="bi bi-person-lines-fill"></i>
-                              </button>
-                            </form>
-
-
-                            <form action="/reprovar-candidato" method="post">
-                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
-                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
-                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                              <input type="hidden" name="Aprovado" value="Reprovado">
-                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                              <input type="hidden" name="Email" value="<%= candidato.email %>">
-                              <input type="hidden" name="id" value="<%= candidato.id %>">
-                              <button type="submit" class="btn btn-outline-danger btn-sm px-1 py-0"
-                                style="width: 28px; height: 28px;" onclick="excluir(event)" title="Reprovar candidato!">
-                                <i class="bi bi-hand-thumbs-down-fill"></i>
-                              </button>
-                            </form>
-
-                          </div>
-                        </td>
-                      </tr>
-                      <% }); %>
-                  </tbody>
-                </table>
-
-                <%if (typeof candidatos==='undefined' || candidatos.length===0) { %>
-
-                  <p colspan="6" class="text-center">Nenhum candidato encontrado.</p>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sucesso!</strong>
+                <%= mensagem_email %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
                   <% } %>
+                    <% if(typeof mensagem_error !=='undefined' && mensagem_error) { %>
 
-              </div>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Sucesso!</strong>
+                        <%= mensagem_error %>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-              <p class="container"><strong>TOTAL:</strong>
-                <%= total %>
-              </p>
+                          <% } %>
+                            <% if(typeof mensagem !=='undefined' && mensagem) { %>
 
-              <div class="back-button">
-                <a href="/painel-empresa"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
-                    <i class="bi bi-box-arrow-left"></i>
-                  </button> </a>
-              </div>
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Sucesso!</strong>
+                                <%= mensagem %>
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+
+                                  <% } %>
+
+
+
+                                    <div style="margin-top: 50px;" class="table-responsive" id="table">
+                                      <table class="table table-striped table-hover table-sm" id="tabelaCandidatos">
+                                        <thead class="table-dark">
+                                          <tr>
+                                            <th style="text-align: center;">#</th>
+                                            <th style="text-align: center;">Empresa</th>
+                                            <th style="text-align: center;">Nome</th>
+                                            <th style="text-align: center;">E-Mail</th>
+                                            <th style="text-align: center;">Data</th>
+                                            <th style="text-align: center;">Status</th>
+
+                                            <th style="width: 70px; text-align: center;">Ações</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <% candidatos.forEach(candidato=> { %>
+                                            <tr>
+                                              <td>
+                                                <%= candidato.id %>
+                                              </td>
+                                              <td>
+                                                <%= candidato.empresa %>
+                                              </td>
+                                              <td>
+                                                <%= candidato.nome %>
+                                              </td>
+                                              <td>
+                                                <%= candidato.email %>
+                                              </td>
+                                              <td>
+                                                <%= candidato.data %>
+                                              </td>
+                                              <td>
+                                                <%= candidato.status %>
+                                              </td>
+
+                                              <td style="width: 70px;">
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <form action="/aprovar" method="post">
+                                                    <input type="hidden" name="email_usuario"
+                                                      value="<%= usuario.email %>">
+                                                    <input type="hidden" name="empresa"
+                                                      value="<%= candidato.empresa %>">
+                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                                    <input type="hidden" name="Aprovado" value="Aprovado">
+                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
+
+                                                    <button type="submit"
+                                                      class="btn btn-outline-primary btn-sm px-1 py-0"
+                                                      style="width: 28px; height: 28px;" id="aprovar"
+                                                      title="Aprovar candidato!">
+                                                      <i class="bi bi-person-fill-check"></i>
+                                                    </button>
+                                                  </form>
+
+                                                  <a href="/desempenho-candidato/<%= candidato.nome %>"><button
+                                                      class="btn btn-outline-success btn-sm px-1 py-0"
+                                                      style="width: 28px; height: 28px;"
+                                                      title="Visualizar desempenho do candidato!">
+                                                      <i class="bi bi-clipboard-data"></i>
+                                                    </button></a>
+
+                                                  <form action="/analisar-candidato" method="post">
+                                                    <input type="hidden" name="email_usuario"
+                                                      value="<%= usuario.email %>">
+                                                    <input type="hidden" name="empresa"
+                                                      value="<%= candidato.empresa %>">
+                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                                    <input type="hidden" name="Aprovado" value="Em analise">
+                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
+                                                    <button type="submit"
+                                                      class="btn btn-outline-warning btn-sm px-1 py-0"
+                                                      style="width: 28px; height: 28px;" title="Analisar candidato!">
+                                                      <i class="bi bi-person-lines-fill"></i>
+                                                    </button>
+                                                  </form>
+
+
+                                                  <form action="/reprovar-candidato" method="post">
+                                                    <input type="hidden" name="email_usuario"
+                                                      value="<%= usuario.email %>">
+                                                    <input type="hidden" name="empresa"
+                                                      value="<%= candidato.empresa %>">
+                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                                    <input type="hidden" name="Aprovado" value="Reprovado">
+                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
+                                                    <button type="submit"
+                                                      class="btn btn-outline-danger btn-sm px-1 py-0"
+                                                      style="width: 28px; height: 28px;" onclick="excluir(event)"
+                                                      title="Reprovar candidato!">
+                                                      <i class="bi bi-hand-thumbs-down-fill"></i>
+                                                    </button>
+                                                  </form>
+
+                                                </div>
+                                              </td>
+                                            </tr>
+                                            <% }); %>
+                                        </tbody>
+                                      </table>
+
+                                      <%if (typeof candidatos==='undefined' || candidatos.length===0) { %>
+
+                                        <p colspan="6" class="text-center">Nenhum candidato encontrado.</p>
+
+                                        <% } %>
+
+                                    </div>
+
+                                    <p class="container"><strong>TOTAL:</strong>
+                                      <%= total %>
+                                    </p>
+
+                                    <div class="back-button">
+                                      <a href="/painel-empresa"> <button type="button" class="btn btn-danger"
+                                          id="logout-btn"> Voltar
+                                          <i class="bi bi-box-arrow-left"></i>
+                                        </button> </a>
+                                    </div>
     </main>
 
 

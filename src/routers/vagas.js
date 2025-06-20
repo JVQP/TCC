@@ -14,10 +14,10 @@ router.get('/', middleware, permisao('Empresa'), (req, res) => {
 
 router.post('/vaga-publicada', middleware, permisao('Empresa'), (req, res) => {
 
-    const { inputEmpresa, inputEmail, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo } = req.body;
+    const { inputEmpresa, inputEmail, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputRamo, inputTipo } = req.body;
 
 
-    db.run('INSERT INTO vagas (empresa, email, titulo_vaga, descricao, requisitos, data, situacao, tipo_contrato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [inputEmpresa, inputEmail, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputTipo], (err) => {
+    db.run('INSERT INTO vagas (empresa, email, titulo_vaga, descricao, requisitos, data, situacao, ramo_empresarial, tipo_contrato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [inputEmpresa, inputEmail, inputTitulo, inputDescricao, inputRequisito, inputData, inputSituacao, inputRamo, inputTipo], (err) => {
 
         if (!err) {
             console.log('Vaga publicada com sucesso!');

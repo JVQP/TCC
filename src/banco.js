@@ -143,6 +143,7 @@ function vagas(){
     titulo_vaga VARCHAR(100),
     descricao VARCHAR(1000),
     requisitos VARCHAR(1000),
+    ramo_empresarial VARCHAR(100),
     data DATA,
     situacao VARCHAR(100),
     tipo_contrato VARCHAR(100)

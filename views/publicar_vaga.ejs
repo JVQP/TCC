@@ -47,75 +47,101 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <% } %>
-          <% if (typeof error !=='undefined' && error) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>
-                <%= error %>
-              </strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <% } %>
-
-
-              <form action="/publicar-vagas/vaga-publicada" method="POST" enctype="multipart/form-data">
-
-                <div class="mb-3">
-                  <label for="inputEmpresa" class="form-label">Empresa: </label>
-                  <input type="email" class="form-control" name="inputEmpresa" id="inputEmpresa"
-                    value="<%= usuario.nome %>" readonly required>
+              <% if (typeof error !=='undefined' && error) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>
+                    <%= error %>
+                  </strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              
-                <div class="mb-3">
-                  <label for="inputEmpresa" class="form-label">E-Mail: </label>
-                  <input type="email" class="form-control" name="inputEmail" id="inputEmail"
-                    value="<%= usuario.email %>" readonly required>
-                </div>
+                <% } %>
 
-                <div class="mb-3">
-                  <label for="inputTitulo" class="form-label">Título: </label>
-                  <input type="text" class="form-control" id="inputTitulo" name="inputTitulo"
-                    placeholder="Título da vaga..." required>
-                </div>
 
-                <div class="mb-3">
-                  <label for="inputDescricao" class="form-label">Descrição: </label>
-                  <textarea class="form-control" name="inputDescricao" id="inputDescricao" rows="4"></textarea>
-                </div>
+                  <form action="/publicar-vagas/vaga-publicada" method="POST" enctype="multipart/form-data">
 
-                <div class="mb-3">
-                  <label for="inputRequisito" class="form-label">Requisitos: </label>
-                  <textarea class="form-control" name="inputRequisito" id="inputRequisito" rows="4"></textarea>
-                </div>
+                    <div class="mb-3">
+                      <label for="inputEmpresa" class="form-label">Empresa: </label>
+                      <input type="email" class="form-control" name="inputEmpresa" id="inputEmpresa"
+                        value="<%= usuario.nome %>" readonly required>
+                    </div>
 
-                <div class="mb-3">
-                  <label for="inputData" class="form-label">Data: </label>
-                  <input type="date" class="form-control" name="inputData" id="inputData" required>
-                </div>
+                    <div class="mb-3">
+                      <label for="inputEmpresa" class="form-label">E-Mail: </label>
+                      <input type="email" class="form-control" name="inputEmail" id="inputEmail"
+                        value="<%= usuario.email %>" readonly required>
+                    </div>
 
-                <div class="mb-3">
-                  <label for="inputSituacao" class="form-label">Situação:</label>
-                  <select class="form-select" id="inputSituacao" name="inputSituacao" required>
-                    <option selected>Selecione a Situação...</option>
-                    <option value="Ativa">Ativa</option>
-                    <option value="Encerrada">Encerrada</option>
-                  </select>
-                </div>
+                    <div class="mb-3">
+                      <label for="inputTitulo" class="form-label">Título: </label>
+                      <input type="text" class="form-control" id="inputTitulo" name="inputTitulo"
+                        placeholder="Título da vaga..." required>
+                    </div>
 
-                <div class="mb-3">
-                  <label for="inputTipo" class="form-label">Tipo:</label>
-                  <select class="form-select" id="inputTipo" name="inputTipo" required>
-                    <option selected>Selecione o tipo...</option>
-                    <option value="CLT">CLT</option>
-                    <option value="Freelancer">Freelancer</option>
-                    <option value="Estágio">Estágio</option>
-                    <option value="Trainer">Trainer</option>
-                  </select>
-                </div>
+                    <div class="mb-3">
+                      <label for="inputDescricao" class="form-label">Descrição: </label>
+                      <textarea class="form-control" name="inputDescricao" id="inputDescricao" rows="4"></textarea>
+                    </div>
 
-                <br>
-                <input type="submit" id="publicar" class="btn btn-primary w-100" value="Publicar">
+                    <div class="mb-3">
+                      <label for="inputRequisito" class="form-label">Requisitos: </label>
+                      <textarea class="form-control" name="inputRequisito" id="inputRequisito" rows="4"></textarea>
+                    </div>
 
-              </form>
+                    <div class="mb-3">
+                      <label for="inputData" class="form-label">Data: </label>
+                      <input type="date" class="form-control" name="inputData" id="inputData" required>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="inputSituacao" class="form-label">Situação:</label>
+                      <select class="form-select" id="inputSituacao" name="inputSituacao" required>
+                        <option selected>Selecione a Situação...</option>
+                        <option value="Ativa">Ativa</option>
+                        <option value="Encerrada">Encerrada</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="inputRamo" class="form-label">Ramo Empresarial:</label>
+                      <select class="form-select" id="inputRamo" name="inputRamo" required>
+                        <option selected disabled>Selecione o Ramo Empresarial...</option>
+                        <option value="TI">Tecnologia da Informação (TI)</option>
+                        <option value="Logistica">Logística</option>
+                        <option value="Administracao">Administração</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="RecursosHumanos">Recursos Humanos (RH)</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Vendas">Vendas</option>
+                        <option value="Engenharia">Engenharia</option>
+                        <option value="Juridico">Jurídico</option>
+                        <option value="Saude">Saúde</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Industrial">Setor Industrial</option>
+                        <option value="Comercio">Comércio</option>
+                        <option value="ConstruçaoCivil">Construção Civil</option>
+                        <option value="Eletrica">Eletricista</option>
+                        <option value="Mecanico(a)">Mecânico(a)</option>
+                        <option value="Soldagem">Soldador</option>
+                        <option value="Caldeiro">Caldeiro</option>
+                      </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                      <label for="inputTipo" class="form-label">Tipo:</label>
+                      <select class="form-select" id="inputTipo" name="inputTipo" required>
+                        <option selected>Selecione o tipo...</option>
+                        <option value="CLT">CLT</option>
+                        <option value="Freelancer">Freelancer</option>
+                        <option value="Estágio">Estágio</option>
+                        <option value="Trainer">Trainer</option>
+                      </select>
+                    </div>
+
+                    <br>
+                    <input type="submit" id="publicar" class="btn btn-primary w-100" value="Publicar">
+
+                  </form>
         </div>
       </div>
     </main>

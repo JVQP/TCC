@@ -11,7 +11,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <script src="/index.js" defer></script>
- 
+
 
 
 </head>
@@ -23,9 +23,9 @@
 
     <!-- Filtragem de aluno -->
 
-   <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
+    <form action="/lista_alunos/pesquisa" method="post" class="barra-pesquisa">
       <div class="input-group" id="pesquisa-aluno">
-        <input type="text" class="form-control" placeholder="Ex: Matrícula.. Ex: Nome.. Ex: Curso.. Ex: Turno"
+        <input type="text" class="form-control" placeholder="Informe a matricula do aluno" id="pesquisa"
           aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
         <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
       </div>
@@ -47,7 +47,7 @@
             </tr>
           </thead>
           <tbody>
-            <% alunos.forEach(aluno => { %>
+            <% alunos.forEach(aluno=> { %>
               <tr>
                 <td>
                   <%= aluno.id %>
@@ -68,17 +68,17 @@
                 <td style="width: 70px;">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <a href="/editar/<%=aluno.id  %>"><button class="btn btn-outline-primary btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;"title="Editar">
+                        style="width: 28px; height: 28px;" title="Editar">
                         <i class="bi bi-pencil"></i>
                       </button></a>
                     <a href="/excluir/<%= aluno.id %>"><button class="btn btn-outline-danger btn-sm px-1 py-0"
                         style="width: 28px; height: 28px;" onclick="excluir(event)" title="Excluir">
                         <i class="bi bi-trash"></i>
-                    </button></a>
-                     <a href="/"><button class="btn btn-outline-warning btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;"  title="Visualizar nota">
+                      </button></a>
+                    <a href="/"><button class="btn btn-outline-warning btn-sm px-1 py-0"
+                        style="width: 28px; height: 28px;" title="Visualizar nota">
                         <i class="bi bi-clipboard-data"></i>
-                    </button></a>
+                      </button></a>
                   </div>
                 </td>
 
@@ -88,10 +88,18 @@
               <% }); %>
           </tbody>
         </table>
+
+        <%if (typeof alunos==='undefined' || alunos.length===0) { %>
+
+          <p colspan="6" class="text-center">Nenhum aluno encontrado.</p>
+
+          <% } %>
+
+
       </div>
 
       <div class="back-button">
-        <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
+        <a href="/lista_alunos"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
             <i class="bi bi-box-arrow-left"></i>
           </button> </a>
       </div>
@@ -104,5 +112,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-</body> 
+</body>
+
 </html>
