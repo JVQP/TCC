@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', middleware, permisao('Empresa'), (req, res) => {
 
-    db.all('SELECT * FROM candidatos', (err, candidato) => {
+    db.all(`SELECT * FROM candidatos WHERE empresa = ?`, [req.session.usuario.nome], (err, candidato) => {
         if(err){
             console.log('Erro ao consultar candidatos: ' + err.message);
             res.status(500).send('Erro ao consultar candidatos: ' + err.message);

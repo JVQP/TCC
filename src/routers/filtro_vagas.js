@@ -4,8 +4,6 @@ const middleware = require('./middleware.js');
 const db = require('../banco.js');
 
 
-const filtro = (valor) => valor ? `%${valor}%` : '%%';
-
 router.post('/', middleware, (req, res) => {
     const tipo = req.session.usuario.tipo;
 
@@ -13,6 +11,8 @@ router.post('/', middleware, (req, res) => {
     const empresa = req.body.inputSelectEmpresa || '';
     const optn = req.body.inputSelectOptn || '';
     const contrato = req.body.inputSelectContrato || '';
+
+    console.log(optn)
 
     const rotas = {
         Aluno: '/painel-aluno',
@@ -22,30 +22,38 @@ router.post('/', middleware, (req, res) => {
 
     const voltar = rotas[tipo] || '/';
 
-    console.log('Pesquisa:', pesquisa);
-    console.log('Empresa:', empresa);
-    console.log('Opção: ', optn);
-    console.log('Contrato:', contrato);
+    const where = [];
+    const params = [];
 
-    const params = [
-        filtro(pesquisa),
-        filtro(empresa),
-        filtro(optn),
-        filtro(contrato)
-    ];
+    if (pesquisa.trim()) {
+        where.push("titulo_vaga LIKE ?");
+        params.push(`%${pesquisa}%`);
+    }
 
-    const query = `
-        SELECT * FROM vagas 
-        WHERE titulo_vaga LIKE ? 
-        AND empresa LIKE ? 
-        AND ramo_empresarial LIKE ? 
-        AND tipo_contrato LIKE ?
-    `;
+    if (empresa.trim() && empresa !== "Selecione a empresa...") {
+        where.push("empresa LIKE ?");
+        params.push(`%${empresa}%`);
+    }
+
+    if (optn.trim() && optn !== "Selecione...") {
+        where.push("ramo_empresarial LIKE ?");
+        params.push(`%${optn}%`);
+    }
+
+    if (contrato.trim() && contrato !== "Selecione...") {
+        where.push("tipo_contrato LIKE ?");
+        params.push(`%${contrato}%`);
+    }
+
+    let query = "SELECT * FROM vagas";
+    if (where.length > 0) {
+        query += " WHERE " + where.join(" AND ");
+    }
 
     db.all(query, params, (err, vagas) => {
         if (err) {
             console.error('Erro ao buscar vagas:', err);
-            return res.render('portal_vagas', {
+            return res.render('filtro_vagas', {
                 usuario: req.session.usuario,
                 voltar,
                 mensagem: 'Erro ao buscar vagas',
@@ -57,16 +65,43 @@ router.post('/', middleware, (req, res) => {
             });
         }
 
-        res.render('portal_vagas', {
-            usuario: req.session.usuario,
-            voltar,
-            vagas,
-            pesquisa,
-            empresa,
-            optn,
-            contrato
-        });
+        if(vagas.length === 0) {
+
+            console.log('Nenhuma vaga encontrada com os critérios de pesquisa.' + vagas.length);
+              res.render('filtro_vagas', {
+                usuario: req.session.usuario,
+                vagas: [],
+                mensagem_vagas: 'Nenhuma vaga encontrada com os critérios de pesquisa.',
+                voltar,
+                vagas,
+                pesquisa,
+                empresa,
+                optn,
+                contrato
+            });
+
+            return;
+
+        } else {
+          
+            // Se houver vagas, renderiza a página com as vagas filtradas
+            console.log('Vagas encontradas:', vagas.length);
+            res.render('filtro_vagas', {
+                usuario: req.session.usuario,
+                vagas: [],
+                voltar,
+                vagas,
+                pesquisa,
+                empresa,
+                optn,
+                contrato
+            });
+
+            return;
+        }
+
     });
 });
+
 
 module.exports = router;

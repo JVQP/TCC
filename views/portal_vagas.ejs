@@ -103,7 +103,7 @@
                       <form id="formBuscar" action="/filtrar-vagas" class="" method="post">
                         <label for="" class="form-label">Empresa: </label>
                         <select name="inputSelectEmpresa" class="form-select" id="">
-                          <option selected>Selecione a empresa...</option>
+                          <option selected>Selecione...</option>
                           <% vagas.forEach(vagas=> { %>
                             <option value="">
                               <%= vagas.empresa %>
@@ -115,7 +115,7 @@
                         <select name="inputSelectOptn" class="form-select" id="">
                           <option selected>Selecione...</option>
                           <option value="TI">Tecnologia da Informação (TI)</option>
-                          <option value="Logistica">Logística</option>
+                          <option value="Logistica">Logistica</option>
                           <option value="Administracao">Administração</option>
                           <option value="Financeiro">Financeiro</option>
                           <option value="RecursosHumanos">Recursos Humanos (RH)</option>
@@ -158,7 +158,7 @@
 
                       <p class="texto"
                         style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
-                        <strong>Nenhuma vaga encontrada, volte mais tarde!</strong>
+                        <strong>mensagem_vagas</strong>
                       </p>
 
                       <% } %>
