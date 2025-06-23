@@ -48,7 +48,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop() {
-    let query = `DROP TABLE IF EXISTS vagas;`
+    let query = `DROP TABLE IF EXISTS candidatos;`
 
     db.run(query, (err) => {
         if (err) {
@@ -168,6 +168,7 @@ CREATE TABLE candidatos(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 candidatos_id INTEGER,
 vagas_id INTEGER,
+vaga VARCHAR(100),
 empresa VARCHAR(100),
 nome VARCHAR(100),
 email VARCHAR(100),
@@ -202,7 +203,6 @@ function update(){
         }
     });
 }
-
 
 
 

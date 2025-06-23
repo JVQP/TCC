@@ -46,8 +46,8 @@ router.post('/', middleware, (req, res) => {
                     return res.render('portal_vagas', { usuario: req.session.usuario, vagas: vagas, voltar });
                 }
 
-                db.run('INSERT INTO candidatos (candidatos_id, vagas_id, empresa, nome, email, status, data) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                    [usuario, vagasId, empresa, nome, email, status, data],
+                db.run('INSERT INTO candidatos (candidatos_id, vagas_id, vaga, empresa, nome, email, status, data) VALUES (?, ?, ?, ?, ?, ?, ?,?)',
+                    [usuario, vagasId, titulo, empresa, nome, email, status, data],
                     (err) => {
                         if (err) {
                             console.log('Erro ao cadastrar candidato:', err);
