@@ -14,11 +14,20 @@ db.all(`SELECT * FROM avaliacao WHERE aluno = ?`, [req.params.nome], (err, avali
             return res.status(500).send('Erro ao buscar avaliações');
         }
 
-        res.render('desempenho_candidato', {
+      db.get(`SELECT * FROM alunos WHERE nome = ?`, [req.params.nome], (err, alunos) => {
+
+        if(err){
+            console.log('Erro ao fazer consulta de alunos: ' + err.message);
+           return res.status(500).send('Erro ao fazer consulta de alunos: ' + err.message);
+        }
+             res.render('desempenho_candidato', {
             usuario: req.session.usuario,
-            avaliacoes: avaliacoes
+            avaliacoes: avaliacoes,
+            alunos: alunos
         });
                 return;
+
+      });
 }); 
 });
 

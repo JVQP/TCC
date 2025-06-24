@@ -43,9 +43,9 @@
             </div>
 
 
-            <div class="accordion mt-4" style="padding: 10px;" id="accordionExample">
+            <div class="accordion mt-4"  id="accordionExample">
                 <% avaliacoes.forEach((avaliacao, index)=> { %>
-                    <div class="accordion-item">
+                    <div class="accordion-item" style="margin-bottom: 20px;">
                         <h2 class="accordion-header" id="heading<%= index %>">
                             <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>"
@@ -58,7 +58,8 @@
                             class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
                             aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <h6><%= avaliacao.aluno %></h6>
+                                <h6><%= avaliacao.aluno %></h6>  
+                                <p><strong>Curso: </strong> <%= alunos.curso %></p>
                                 <canvas id="grafico<%= index %>"></canvas>
                                 <p class="mt-3"><strong>Observação:</strong>
                                     <%= avaliacao.observacao %>

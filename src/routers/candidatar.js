@@ -6,8 +6,14 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 router.post('/', middleware, (req, res) => {
+    
+        const pesquisa = req.body.pesquisa || '';
+    const empresa = req.body.inputSelectEmpresa || '';
+    const optn = req.body.inputSelectOptn || '';
+    const contrato = req.body.inputSelectContrato || '';
+    
     const {
-        inputEmpresa: empresa,
+        inputEmpresa: empresa1,
         inputData: data,
         inputTitulo: titulo,
         inputVagaId: vagasId,
@@ -53,7 +59,7 @@ router.post('/', middleware, (req, res) => {
             return res.status(500).send('Erro de consulta de vagas');
         }
 
-        db.get('SELECT * FROM usuarios WHERE nome = ?', [empresa], (err, usuarios) => {
+        db.get('SELECT * FROM usuarios WHERE nome = ?', [empresa1], (err, usuarios) => {
             if (err) {
                 console.log('Erro de consulta de email:', err);
                 return res.status(500).send('Erro de consulta de email');
@@ -89,7 +95,7 @@ router.post('/', middleware, (req, res) => {
                 // Insere o candidato
                 db.run(
                     'INSERT INTO candidatos (candidatos_id, vagas_id, vaga, empresa, nome, email, status, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                    [usuario, vagasId, titulo, empresa, nome, email, status, data],
+                    [usuario, vagasId, titulo, empresa1, nome, email, status, data],
                     (err) => {
                         if (err) {
                             console.log('Erro ao cadastrar candidato:', err);
@@ -120,7 +126,7 @@ router.post('/', middleware, (req, res) => {
                                 <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; border-radius: 8px; border: 1px solid #ddd;">
                                   <h2 style="color: #2c3e50;">✅ Candidatura Recebida</h2>
                                   <p>Olá <strong>${nome}</strong>,</p>
-                                  <p>Agradecemos por se candidatar à vaga de <strong>${titulo}</strong> na empresa <strong>${empresa}</strong>.</p>
+                                  <p>Agradecemos por se candidatar à vaga de <strong>${titulo}</strong> na empresa <strong>${empresa1}</strong>.</p>
                                   <p>📅 Data da candidatura: <strong>${data}</strong></p>
                                   <hr style="margin: 20px 0;">
                                   <p style="font-size: 12px; color: #777;">Este é um e-mail automático. Por favor, não responda diretamente a esta mensagem.</p>
@@ -143,12 +149,7 @@ router.post('/', middleware, (req, res) => {
                             
                             
 
-                            return res.render('portal_vagas', {
-                                usuario: req.session.usuario,
-                                vagas,
-                                mensagem_sucesso: 'Candidatura realizada com sucesso!',
-                                voltar
-                            });
+                            return res.redirect('/portal-vagas');
                         });
                     }
                 );

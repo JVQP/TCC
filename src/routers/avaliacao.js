@@ -61,40 +61,22 @@ router.post('/avaliar-aluno/salvar', middleware, (req, res) => {
         if (!nome || !professor || !periodo || !nota1 || !nota2 || !nota3 || !nota4 || !nota5 || !nota6 || !nota7 || !nota8 || !media) {
             return res.render('avaliacao_aluno', { error: 'Preencha todos os campos obrigatórios.', aluno: alunos });
         }
-
-        if (alunos) {
-            db.all(`SELECT * FROM avaliacao WHERE periodo = ?`, [periodo], (err, avaliacao) => {
-
-                if (err) {
-                    console.error(err);
-                    return res.status(500).send('Erro ao buscar avaliação.');
-                } else if (avaliacao.length > 0) {
-                    return res.render('avaliacao_aluno', { error: 'Já existe uma avaliação do aluno para este período.', aluno: alunos });
-                }
-                else {
-
-                    db.run(`
+        db.run(`
   INSERT INTO avaliacao (
    matricula, aluno, professor, periodo, comunicacao, trabalho_equipe, responsabilidade, pensamento_critico,
     proatividade, lideranca, adaptabilidade, empatia, media, observacao
   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `, [matricula, nome, professor, periodo, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, media, observacao], (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.render('avaliacao_aluno', { error: `Erro ao salvar a avaliação do aluno: ${nome}`, aluno: alunos });
-                        } else {
-                            return res.redirect(`/visualizar/${matricula}`);
-                        }
-
-                    });
-                }
-
-            })
-        }
+            if (err) {
+                console.error(err);
+                return res.render('avaliacao_aluno', { error: `Erro ao salvar a avaliação do aluno: ${nome}`, aluno: alunos });
+            } else {
+                return res.redirect(`/visualizar/${matricula}`);
+            }
+        });
     });
+
 });
 
 
-
-
-module.exports = router;
+    module.exports = router;
