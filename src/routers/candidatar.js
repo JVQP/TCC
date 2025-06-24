@@ -13,7 +13,7 @@ router.post('/', middleware, (req, res) => {
         inputVagaId: vagasId,
         inputUsuarioId: usuario,
         inputNome: nome,
-        inputEmail: email,
+        inputEmail: email,                 
         inputEmailVagas: emailVagas,
         inputStatus: status
     } = req.body;
