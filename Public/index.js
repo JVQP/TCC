@@ -140,5 +140,25 @@ if(path.startsWith('/editar-usuario/')){
 
 }
 
+if(path = '/loginAva/avaliar-aluno/salvar_avaliacao'){
+
+  window.atualizarNota = function () { 
+
+    let nota1 = document.getElementById('avaNota1').value;
+    let nota2 = document.getElementById('avaNota2').value;
+    let nota3 = document.getElementById('avaNota3').value;
+    let nota4 = document.getElementById('avaNota4').value;
+    let nota5 = document.getElementById('avaNota5').value;
+    let nota6 = document.getElementById('avaNota6').value;
+    let nota7 = document.getElementById('avaNota7').value;
+    let nota8 = document.getElementById('avaNota8').value;
+    let mediaDisplay = document.getElementById('media');
+
+    let media = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4) + Number(nota5) + Number(nota6) + Number(nota7) + Number(nota8)) / 8;
+
+    mediaDisplay.value = media.toFixed(2);
+  }
+}
+
 });
 

@@ -48,7 +48,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop() {
-    let query = `DROP TABLE IF EXISTS candidatos;`
+    let query = `DELETE FROM avaliacao WHERE id = 7;`
 
     db.run(query, (err) => {
         if (err) {
@@ -58,6 +58,8 @@ function drop() {
         }
     })
 }
+
+
 
 function aluno() {
 

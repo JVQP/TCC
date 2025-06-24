@@ -34,7 +34,7 @@
         <% } else { %>
         <h6><a href="/lista_alunos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Usuário: <%= usuario.nome %></h6>
             <% avaliacoes.forEach((aluno, index) => { %>
-                <div class="accordion" id="accordionExample<%= index %>">
+                <div class="accordion" style="padding: 10px;" id="accordionExample<%= index %>">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading<%= index %>">
                             <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button"

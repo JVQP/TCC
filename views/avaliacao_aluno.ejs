@@ -33,6 +33,15 @@
                 </div>
                 <% } %>
 
+            <% if (typeof success !=='undefined' && success) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>
+                        <%= success %>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+
                     <a href="/adm"><button class="btn btn-danger center" title="Voltar"><i
                                 class="bi bi-arrow-bar-left"></i></button></a>
 
