@@ -140,6 +140,9 @@ router.post('/', middleware, (req, res) => {
                             }
 
                             console.log('Email enviado:', info.response);
+                            
+                            
+
                             return res.render('portal_vagas', {
                                 usuario: req.session.usuario,
                                 vagas,

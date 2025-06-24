@@ -34,7 +34,14 @@ router.get('/', middleware, permisao('Empresa'), (req, res) => {
 
                 let aprovados = candidatos.filter(candidato => candidato.status === 'Aprovado');
                 let total_candidatos = candidatos.length;
-                let total = vagas.length
+                let total = vagas.length;
+
+                let ip = req.socket.remoteAddress;
+                ip = ip.replace('::ffff:', '');
+                console.log('Usuário logado: ' + usuarios[0].nome);
+                console.log('Tipo de usuário: ' + usuarios[0].tipo);
+                console.log('Ip: ' + ip);
+
                 return res.render('painel_empresa', {
                     usuario: req.session.usuario,
                     usuarios: usuarios,
