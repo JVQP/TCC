@@ -69,161 +69,187 @@
         </div>
       </div>
 
-            <!-- MENSGAEM  -->
+      <!-- MENSGAEM  -->
 
-            <% if(typeof mensagem_email !=='undefined' && mensagem_email) { %>
+      <% if(typeof mensagem_email !=='undefined' && mensagem_email) { %>
 
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Sucesso!</strong>
-                <%= mensagem_email %>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Sucesso!</strong>
+          <%= mensagem_email %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-                  <% } %>
-                    <% if(typeof mensagem_error !=='undefined' && mensagem_error) { %>
+            <% } %>
+              <% if(typeof mensagem_error !=='undefined' && mensagem_error) { %>
 
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Sucesso!</strong>
-                        <%= mensagem_error %>
-                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>Sucesso!</strong>
+                  <%= mensagem_error %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-                          <% } %>
-                            <% if(typeof mensagem !=='undefined' && mensagem) { %>
+                    <% } %>
+                      <% if(typeof mensagem !=='undefined' && mensagem) { %>
 
-                              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Sucesso!</strong>
-                                <%= mensagem %>
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong>Sucesso!</strong>
+                          <%= mensagem %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                            <% } %>
+
+
+
+                              <div style="margin-top: 50px;" class="table-responsive" id="table">
+                                <table class="table table-striped table-hover table-sm" id="tabelaCandidatos">
+                                  <thead class="table-dark">
+                                    <tr>
+                                      <th style="text-align: center;">#</th>
+                                      <th style="text-align: center;">Vaga</th>
+                                      <th style="text-align: center;">Nome</th>
+                                      <th style="text-align: center;">E-Mail</th>
+                                      <th style="text-align: center;">Data</th>
+                                      <th style="text-align: center;">Status</th>
+
+                                      <th style="width: 70px; text-align: center;">Ações</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% candidatos.forEach(candidato=> { %>
+                                      <tr>
+                                        <td>
+                                          <%= candidato.id %>
+                                        </td>
+                                        <td>
+                                          <%= candidato.vaga %>
+                                        </td>
+                                        <td>
+                                          <%= candidato.nome %>
+                                        </td>
+                                        <td>
+                                          <%= candidato.email %>
+                                        </td>
+                                        <td>
+                                          <%= candidato.data %>
+                                        </td>
+                                        <td>
+                                          <%= candidato.status %>
+                                        </td>
+
+                                        <td style="width: 70px;">
+                                          <div class="d-flex justify-content-center align-items-center gap-1">
+
+                                            <a href="/desempenho-candidato/<%= candidato.nome %>"><button
+                                                class="btn btn-outline-success btn-sm px-1 py-0"
+                                                style="width: 28px; height: 28px;"
+                                                title="Visualizar desempenho do candidato!">
+                                                <i class="bi bi-clipboard-data"></i>
+                                              </button></a>
+
+
+                                            <form action="/aprovar" method="post">
+                                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
+                                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
+                                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                              <input type="hidden" name="Aprovado" value="Aprovado">
+                                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                              <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                              <input type="hidden" name="id" value="<%= candidato.id %>">
+
+                                              <button type="submit" class="btn btn-outline-primary btn-sm px-1 py-0"
+                                                style="width: 28px; height: 28px;" id="aprovar"
+                                                title="Aprovar candidato!">
+                                                <i class="bi bi-person-fill-check"></i>
+                                              </button>
+                                            </form>
+
+                                            <form action="/analisar-candidato" method="post">
+                                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
+                                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
+                                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                              <input type="hidden" name="Aprovado" value="Em analise">
+                                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                              <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                              <input type="hidden" name="id" value="<%= candidato.id %>">
+                                              <button type="submit" class="btn btn-outline-warning btn-sm px-1 py-0"
+                                                style="width: 28px; height: 28px;" title="Analisar candidato!">
+                                                <i class="bi bi-person-lines-fill"></i>
+                                              </button>
+                                            </form>
+
+
+                                            <form action="/reprovar-candidato" method="post">
+                                              <input type="hidden" name="email_usuario" value="<%= usuario.email %>">
+                                              <input type="hidden" name="empresa" value="<%= candidato.empresa %>">
+                                              <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
+                                              <input type="hidden" name="Aprovado" value="Reprovado">
+                                              <input type="hidden" name="Nome" value="<%= candidato.nome %>">
+                                              <input type="hidden" name="Email" value="<%= candidato.email %>">
+                                              <input type="hidden" name="id" value="<%= candidato.id %>">
+                                              <button type="submit" class="btn btn-outline-danger btn-sm px-1 py-0"
+                                                style="width: 28px; height: 28px;" onclick="excluir(event)"
+                                                title="Reprovar candidato!">
+                                                <i class="bi bi-hand-thumbs-down-fill"></i>
+                                              </button>
+                                            </form>
+
+                                            
+                                              <button type="submit" class="btn btn-outline-secondary btn-sm px-1 py-0" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" style="width: 28px; height: 28px;">
+                                                <i class="bi bi-trash-fill"></i>
+                                              </button>
+
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">ATENÇÃO <i class="bi bi-exclamation-triangle"></i></h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                     Você realmente deseja excluir este candidato?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Não</button>
+                                                      <form action="/excluir-candidato" method="post">
+                                                        <input type="hidden" name="id" value="<%= candidato.id %>">
+                                                         <button type="submit" class="btn btn-primary">Sim
+                                                        </button>
+                                                        </form>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                      
+
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <% }); %>
+                                  </tbody>
+                                </table>
+
+                                <%if (typeof candidatos==='undefined' || candidatos.length===0) { %>
+
+                                  <p colspan="6" class="text-center">Nenhum candidato encontrado.</p>
 
                                   <% } %>
 
+                              </div>
 
+                              <p class="container"><strong>TOTAL:</strong>
+                                <%= total %>
+                              </p>
 
-                                    <div style="margin-top: 50px;" class="table-responsive" id="table">
-                                      <table class="table table-striped table-hover table-sm" id="tabelaCandidatos">
-                                        <thead class="table-dark">
-                                          <tr>
-                                            <th style="text-align: center;">#</th>
-                                            <th style="text-align: center;">Vaga</th>
-                                            <th style="text-align: center;">Nome</th>
-                                            <th style="text-align: center;">E-Mail</th>
-                                            <th style="text-align: center;">Data</th>
-                                            <th style="text-align: center;">Status</th>
-
-                                            <th style="width: 70px; text-align: center;">Ações</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <% candidatos.forEach(candidato=> { %>
-                                            <tr>
-                                              <td>
-                                                <%= candidato.id %>
-                                              </td>
-                                              <td>
-                                                <%= candidato.vaga %>
-                                              </td>
-                                              <td>
-                                                <%= candidato.nome %>
-                                              </td>
-                                              <td>
-                                                <%= candidato.email %>
-                                              </td>
-                                              <td>
-                                                <%= candidato.data %>
-                                              </td>
-                                              <td>
-                                                <%= candidato.status %>
-                                              </td>
-
-                                              <td style="width: 70px;">
-                                                <div class="d-flex justify-content-center align-items-center gap-1">
-                                                  <form action="/aprovar" method="post">
-                                                    <input type="hidden" name="email_usuario"
-                                                      value="<%= usuario.email %>">
-                                                    <input type="hidden" name="empresa"
-                                                      value="<%= candidato.empresa %>">
-                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                                                    <input type="hidden" name="Aprovado" value="Aprovado">
-                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
-                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
-
-                                                    <button type="submit"
-                                                      class="btn btn-outline-primary btn-sm px-1 py-0"
-                                                      style="width: 28px; height: 28px;" id="aprovar"
-                                                      title="Aprovar candidato!">
-                                                      <i class="bi bi-person-fill-check"></i>
-                                                    </button>
-                                                  </form>
-
-                                                  <a href="/desempenho-candidato/<%= candidato.nome %>"><button
-                                                      class="btn btn-outline-success btn-sm px-1 py-0"
-                                                      style="width: 28px; height: 28px;"
-                                                      title="Visualizar desempenho do candidato!">
-                                                      <i class="bi bi-clipboard-data"></i>
-                                                    </button></a>
-
-                                                  <form action="/analisar-candidato" method="post">
-                                                    <input type="hidden" name="email_usuario"
-                                                      value="<%= usuario.email %>">
-                                                    <input type="hidden" name="empresa"
-                                                      value="<%= candidato.empresa %>">
-                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                                                    <input type="hidden" name="Aprovado" value="Em analise">
-                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
-                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
-                                                    <button type="submit"
-                                                      class="btn btn-outline-warning btn-sm px-1 py-0"
-                                                      style="width: 28px; height: 28px;" title="Analisar candidato!">
-                                                      <i class="bi bi-person-lines-fill"></i>
-                                                    </button>
-                                                  </form>
-
-
-                                                  <form action="/reprovar-candidato" method="post">
-                                                    <input type="hidden" name="email_usuario"
-                                                      value="<%= usuario.email %>">
-                                                    <input type="hidden" name="empresa"
-                                                      value="<%= candidato.empresa %>">
-                                                    <input type="hidden" name="vaga" value="<%= candidato.vagas_id %>">
-                                                    <input type="hidden" name="Aprovado" value="Reprovado">
-                                                    <input type="hidden" name="Nome" value="<%= candidato.nome %>">
-                                                    <input type="hidden" name="Email" value="<%= candidato.email %>">
-                                                    <input type="hidden" name="id" value="<%= candidato.id %>">
-                                                    <button type="submit"
-                                                      class="btn btn-outline-danger btn-sm px-1 py-0"
-                                                      style="width: 28px; height: 28px;" onclick="excluir(event)"
-                                                      title="Reprovar candidato!">
-                                                      <i class="bi bi-hand-thumbs-down-fill"></i>
-                                                    </button>
-                                                  </form>
-
-                                                </div>
-                                              </td>
-                                            </tr>
-                                            <% }); %>
-                                        </tbody>
-                                      </table>
-
-                                      <%if (typeof candidatos==='undefined' || candidatos.length===0) { %>
-
-                                        <p colspan="6" class="text-center">Nenhum candidato encontrado.</p>
-
-                                        <% } %>
-
-                                    </div>
-
-                                    <p class="container"><strong>TOTAL:</strong>
-                                      <%= total %>
-                                    </p>
-
-                                    <div class="back-button">
-                                      <a href="/painel-empresa"> <button type="button" class="btn btn-danger"
-                                          id="logout-btn"> Voltar
-                                          <i class="bi bi-box-arrow-left"></i>
-                                        </button> </a>
-                                    </div>
+                              <div class="back-button">
+                                <a href="/painel-empresa"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                    Voltar
+                                    <i class="bi bi-box-arrow-left"></i>
+                                  </button> </a>
+                              </div>
     </main>
 
 

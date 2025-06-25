@@ -11,7 +11,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <script src="/index.js" defer></script>
- 
+
 
 
 </head>
@@ -25,8 +25,8 @@
 
     <form action="" method="post" class="barra-pesquisa">
       <div class="input-group" id="pesquisa-aluno">
-        <input type="text" class="form-control" placeholder="Pesquisar.."
-          aria-label="Input group example" name="pesquisa" aria-describedby="btnGroupAddon">
+        <input type="text" class="form-control" placeholder="Pesquisar.." aria-label="Input group example"
+          name="pesquisa" aria-describedby="btnGroupAddon">
         <button class="btn btn-outline-primary"><i class="bi bi-search"></i></button>
       </div>
     </form>
@@ -46,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <% usuarios.forEach(usuario => { %>
+            <% usuarios.forEach(usuario=> { %>
               <tr>
                 <td>
                   <%= usuario.id %>
@@ -60,17 +60,46 @@
                 <td>
                   <%= usuario.tipo %>
                 </td>
-               
+
                 <td style="width: 70px;">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <a href="/editar-usuario/<%= usuario.id %>"><button class="btn btn-outline-primary btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;"title="Editar">
+                        style="width: 28px; height: 28px;" title="Editar">
                         <i class="bi bi-pencil"></i>
                       </button></a>
-                    <a href="/lista-usuario/remover/<%= usuario.id %>"><button class="btn btn-outline-danger btn-sm px-1 py-0"
-                        style="width: 28px; height: 28px;" title="Excluir usuario, esse evento não pode ser desfeito. Tenha certeza!">
-                        <i class="bi bi-trash"></i>
-                    </button></a>
+
+                    <button type="button" class="btn btn-outline-danger btn-sm px-1 py-0" data-bs-toggle="modal"
+                      data-bs-target="#modal-<%= usuario.id %>">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal-<%= usuario.id %>" tabindex="-1"
+                      aria-labelledby="exampleModalLabel-<%= usuario.id %>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel-<%= usuario.id %>">
+                              ATENÇÃO <i class="bi bi-exclamation-triangle"></i>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Você tem certeza que deseja excluir o usuário <strong>
+                                <%= usuario.nome %>
+                              </strong>?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                            <a href="/lista-usuario/remover/<%= usuario.id %>">
+                              <button class="btn btn-primary">Sim</button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                   </div>
                 </td>
 
@@ -81,15 +110,17 @@
           </tbody>
         </table>
 
-          <%if (typeof usuarios === 'undefined' || usuarios.length === 0) { %>
-                  
-                      <p colspan="6" class="text-center">Nenhum usuario encontrado.</p>
-                 
-                <% } %>  
+        <%if (typeof usuarios==='undefined' || usuarios.length===0) { %>
+
+          <p colspan="6" class="text-center">Nenhum usuario encontrado.</p>
+
+          <% } %>
 
       </div>
 
-        <p class="container"><strong>TOTAL:</strong> <%= total %></p>
+      <p class="container"><strong>TOTAL:</strong>
+        <%= total %>
+      </p>
 
       <div class="back-button">
         <a href="/adm"> <button type="button" class="btn btn-danger" id="logout-btn"> Voltar
@@ -105,5 +136,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-</body> 
+</body>
+
 </html>

@@ -75,7 +75,7 @@ const analisarCandidatoRouter = require('./routers/analisar_candidato.js');
 const reprovarCandidatoRouter = require('./routers/reprovar_canidato.js');
 const filtroCandidatosRouter = require('./routers/filtro_candidatos.js');
 const filtroVagasRouter = require('./routers/filtro_vagas.js'); 
-
+const excluirCandidatoRouter = require('./routers/excluir_candidato.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -111,7 +111,7 @@ app.use('/analisar-candidato', analisarCandidatoRouter);
 app.use('/reprovar-candidato', reprovarCandidatoRouter);
 app.use('/filtro-candidatos', filtroCandidatosRouter);
 app.use('/filtrar-vagas', filtroVagasRouter);
-
+app.use('/excluir-candidato', excluirCandidatoRouter);
 
 
 module.exports = app;
