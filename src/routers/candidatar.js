@@ -46,7 +46,11 @@ router.post('/', middleware, (req, res) => {
                 usuario: req.session.usuario,
                 vagas: vagas,
                 mensagem: 'Você não é aluno para se candidatar!',
-                voltar
+                voltar,
+                pesquisa,
+                optn,
+                empresa,
+                contrato
             });
         });
         return; // impede execução do restante
@@ -78,7 +82,12 @@ router.post('/', middleware, (req, res) => {
                         usuario: req.session.usuario,
                         mensagem_erro: 'Erro ao verificar candidatura!',
                         vagas,
-                        voltar
+                        voltar,
+                        empresa,
+                        contrato,
+                        optn,
+                        pesquisa
+
                     });
                 }
 
@@ -103,6 +112,10 @@ router.post('/', middleware, (req, res) => {
                                 usuario: req.session.usuario,
                                 mensagem_erro: 'Erro ao se candidatar!',
                                 vagas,
+                                pesquisa,
+                                empresa,
+                                optn,
+                                contrato,
                                 voltar
                             });
                         }
@@ -141,6 +154,10 @@ router.post('/', middleware, (req, res) => {
                                     usuario: req.session.usuario,
                                     mensagem_email: 'Falha ao enviar e-mail.',
                                     vagas,
+                                    pesquisa,
+                                    empresa,
+                                    optn,
+                                    contrato,
                                     voltar
                                 });
                             }
