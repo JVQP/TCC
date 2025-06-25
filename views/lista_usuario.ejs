@@ -23,7 +23,7 @@
 
     <!-- Filtragem de usuário -->
 
-    <form action="" method="post" class="barra-pesquisa">
+    <form action="/filtro-usuario" method="post" class="barra-pesquisa">
       <div class="input-group" id="pesquisa-aluno">
         <input type="text" class="form-control" placeholder="Pesquisar.." aria-label="Input group example"
           name="pesquisa" aria-describedby="btnGroupAddon">
@@ -31,10 +31,51 @@
       </div>
     </form>
 
+
+
+      <div style="display: flex; display: flex;
+    flex-direction: row;
+    justify-content: center; margin-top: 20px; gap: 20px;">
+                <div class="form-check">
+                    <form action="/filtro-usuario" id="form-aluno" method="post">
+                        <input class="form-check-input" type="checkbox"
+                            onchange="document.getElementById('form-aluno').submit()" name="aluno"
+                            value="Aluno" <% if (typeof aluno !=='undefined' ) { %> checked <% } %> >
+
+                            <label class="form-check-label" for="checkDefault">
+                                Alunos
+                            </label>
+                    </form>
+                </div>
+
+                <div class="form-check">
+                    <form action="/filtro-usuario" id="form-Professor" method="post">
+                        <input class="form-check-input" type="checkbox"
+                            onchange="document.getElementById('form-Professor').submit()" name="professor"
+                            value="Professor" <% if (typeof professor !=='undefined' ) { %> checked <% } %> >
+                            <label class="form-check-label" for="checkDefault">
+                               Professores
+                            </label>
+                    </form>
+                </div>
+
+                <div class="form-check">
+                    <form action="/filtro-usuario" id="form-empresa" method="post">
+                        <input class="form-check-input" type="checkbox"
+                            onchange="document.getElementById('form-empresa').submit()" name="empresa"
+                            value="Empresa" <% if (typeof empresa !=='undefined' ) { %> checked <% } %> >
+                            <label class="form-check-label" for="checkDefault">
+                                Empresas
+                            </label>
+                    </form>
+                </div>
+            </div>
+
+
     <!-- Tabela responsiva -->
     <main>
       <div class="table-responsive" id="table">
-        <table class="table table-striped table-hover table-sm" id="tabelaAlunos">
+        <table class="table table-striped table-hover table-sm" id="tabelaAlunos" style="overflow-y: auto;">
           <thead class="table-dark">
             <tr>
               <th style="text-align: center;">#</th>

@@ -13,7 +13,7 @@ router.get('/', middleware, permisao('Professor'), (req, res) => {
         } else {
 
 
-            db.all('SELECT * FROM alunos', (err, alunos) => {
+            db.all('SELECT * FROM alunos ORDER BY nome ASC', (err, alunos) => {
                 if (err) {
                     console.error(err);
                     return res.status(500).send('Erro ao acessar o banco de dados.');

@@ -7,7 +7,7 @@ const permisao = require('./permisao.js');
 
 router.get('/', middleware, permisao('Professor'), (req, res) => {
 
-    db.all(`SELECT * FROM usuarios`, (err, usuario) => {
+    db.all(`SELECT * FROM usuarios ORDER BY nome ASC`, (err, usuario) => {
         if (err) {
             return res.status(500).send('Erro interno no servidor, por favor verificar!');
         } else {

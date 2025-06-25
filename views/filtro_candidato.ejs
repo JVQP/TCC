@@ -124,6 +124,15 @@
 
                                                 <td style="width: 70px;">
                                                     <div class="d-flex justify-content-center align-items-center gap-1">
+
+                                                        <a href="/desempenho-candidato/<%= candidato.nome %>"><button
+                                                                class="btn btn-outline-success btn-sm px-1 py-0"
+                                                                style="width: 28px; height: 28px;"
+                                                                title="Visualizar desempenho do candidato!">
+                                                                <i class="bi bi-clipboard-data"></i>
+                                                            </button></a>
+
+
                                                         <form action="/aprovar" method="post">
                                                             <input type="hidden" name="email_usuario"
                                                                 value="<%= usuario.email %>">
@@ -145,13 +154,6 @@
                                                                 <i class="bi bi-person-fill-check"></i>
                                                             </button>
                                                         </form>
-
-                                                        <a href="/desempenho-candidato/<%= candidato.nome %>"><button
-                                                                class="btn btn-outline-success btn-sm px-1 py-0"
-                                                                style="width: 28px; height: 28px;"
-                                                                title="Visualizar desempenho do candidato!">
-                                                                <i class="bi bi-clipboard-data"></i>
-                                                            </button></a>
 
                                                         <form action="/analisar-candidato" method="post">
                                                             <input type="hidden" name="email_usuario"
@@ -195,7 +197,44 @@
                                                                 <i class="bi bi-hand-thumbs-down-fill"></i>
                                                             </button>
                                                         </form>
+                                                        <button type="submit"
+                                                            class="btn btn-outline-secondary btn-sm px-1 py-0"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                            style="width: 28px; height: 28px;">
+                                                            <i class="bi bi-trash-fill"></i>
+                                                        </button>
 
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            ATENÇÃO <i
+                                                                                class="bi bi-exclamation-triangle"></i>
+                                                                        </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Você realmente deseja excluir este candidato?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Não</button>
+                                                                        <form action="/excluir-candidato" method="post">
+                                                                            <input type="hidden" name="id"
+                                                                                value="<%= candidato.id %>">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Sim
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -216,7 +255,8 @@
                             </p>
 
                             <div class="back-button">
-                                <a href="/listar-candidatos"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                <a href="/listar-candidatos"> <button type="button" class="btn btn-danger"
+                                        id="logout-btn">
                                         Voltar
                                         <i class="bi bi-box-arrow-left"></i>
                                     </button> </a>

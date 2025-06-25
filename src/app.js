@@ -76,6 +76,10 @@ const reprovarCandidatoRouter = require('./routers/reprovar_canidato.js');
 const filtroCandidatosRouter = require('./routers/filtro_candidatos.js');
 const filtroVagasRouter = require('./routers/filtro_vagas.js'); 
 const excluirCandidatoRouter = require('./routers/excluir_candidato.js');
+const filtroUsuarioRouter = require('./routers/filtro_usuario.js');
+const filtroAlunoRouter = require('./routers/filtro_aluno.js');
+const candidatosAprovadosRouter = require('./routers/candidatos_aprovados.js');
+const filtrarVagasRouter = require('./routers/filtrar_vaga.js');
 
 app.use('/adm', admRouter);
 app.use('/', homeRouter);
@@ -112,6 +116,10 @@ app.use('/reprovar-candidato', reprovarCandidatoRouter);
 app.use('/filtro-candidatos', filtroCandidatosRouter);
 app.use('/filtrar-vagas', filtroVagasRouter);
 app.use('/excluir-candidato', excluirCandidatoRouter);
+app.use('/filtro-usuario', filtroUsuarioRouter);
+app.use('/filtrar-aluno', filtroAlunoRouter);
+app.use('/candidatos-aprovados', candidatosAprovadosRouter);
+app.use('/filtrar-vaga', filtrarVagasRouter);
 
 
 module.exports = app;

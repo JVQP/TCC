@@ -4,27 +4,22 @@ const db = require('../banco.js');
 const permisao = require('./permisao.js');
 const router = express.Router();
 
-
 router.get('/', middleware, permisao('Empresa'), (req, res) => {
 
-    db.all(`SELECT * FROM candidatos WHERE empresa = ?`, [req.session.usuario.nome], (err, candidato) => {
-        if(err){
+    db.all(`SELECT * FROM candidatos WHERE empresa = ?`, [req.session.usuario.nome], (err, candidatos) => {
+        if (err) {
             console.log('Erro ao consultar candidatos: ' + err.message);
-            res.status(500).send('Erro ao consultar candidatos: ' + err.message);
-            return;
-        } else {
-            let total = candidato.length
-          
-            res.render('lista_candidatos', {
-                usuario: req.session.usuario,
-                candidatos: candidato,
-                total: total
-            });
-            return;
+            return res.status(500).send('Erro ao consultar candidatos: ' + err.message);
         }
+
+        console.log('Candidatos encontrados:', candidatos);
+
+        res.render('lista_candidatos', {
+            usuario: req.session.usuario,
+            candidatos: candidatos,
+            total: candidatos.length
+        });
     });
-
 });
-
 
 module.exports = router;
