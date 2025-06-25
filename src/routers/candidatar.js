@@ -45,7 +45,7 @@ router.post('/', middleware, (req, res) => {
             return res.render('portal_vagas', {
                 usuario: req.session.usuario,
                 vagas: vagas,
-                mensagem: 'Você não é aluno para se candidatar!',
+                mensagem_error: 'Você não é aluno para se candidatar!',
                 voltar,
                 pesquisa,
                 optn,
@@ -95,7 +95,7 @@ router.post('/', middleware, (req, res) => {
                     console.log('Você já se candidatou a esta vaga!');
                     return res.render('portal_vagas', {
                         usuario: req.session.usuario,
-                        mensagem_erro: 'Você já se candidatou a esta vaga!',
+                        mensagem_candidatura: 'Você já se candidatou a esta vaga!',
                         vagas,
                         voltar,
                         empresa,

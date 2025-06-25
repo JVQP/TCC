@@ -77,14 +77,25 @@
       <!-- MENSAGEM DE ERRO -->
 
 
-      <% if (typeof mensagem !=='undefined' && mensagem) { %>
+    
+      <% if (typeof mensagem_erro !=='undefined' && mensagem_erro) { %>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>
-            <%= mensagem %>
+            <%= mensagem_erro %>
           </strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <% } %>
+
+      <% if (typeof mensagem_candidatura !=='undefined' && mensagem_candidatura) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>
+            <%= mensagem_candidatura %>
+          </strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+
           <% if (typeof mensagem_email !=='undefined' && mensagem_email) { %>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
               <strong>
@@ -92,6 +103,7 @@
               </strong>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            
             <% } %>
               <% if (typeof mensagem_sucesso !=='undefined' && mensagem_sucesso) { %>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
