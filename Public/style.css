@@ -1,60 +1,32 @@
-/* Estilizando página dos administradores */
+/* ----------------------------- */
+/* ESTILO GERAL - ADMIN PAGE     */
+/* ----------------------------- */
 
-body,
-html {
+html, body {
     height: 100%;
     margin: 0;
     font-family: 'Times New Roman', Times, serif;
+    background-color: #f8f9fa;
 }
 
 main {
     min-height: calc(100vh - 140px);
-    /* Tamanho da tela - navbar e footer */
     display: flex;
     flex-direction: column;
 }
 
 #navbar {
-    /* Estilizando a barra de navegação */
     background-color: #045782 !important;
 }
 
-/* #container {
-    flex: 1;
-    display: flex;
-    margin-top: 100px;
-} */
+/* ----------------------------- */
+/* COMPONENTES DE PERFIL         */
+/* ----------------------------- */
 
-
-[type=button]:not(:disabled),
-[type=reset]:not(:disabled),
-[type=submit]:not(:disabled),
-button:not(:disabled) {
-    cursor: pointer;
-    border-color: rgba(255, 255, 255, .1);
-}
-
-.row>* {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    /* padding-left: calc(var(--bs-gutter-x) * .5); */
-    margin-top: var(--bs-gutter-y);
-}
-
-.editar {
-    margin-top: 10px;
-}
-
-.icon-profile {
-    margin-right: 20px;
-}
-
-.img-profile {
+.img-profile, .img-user {
     width: 100px;
     height: 100px;
-    border-radius: 50px;
+    border-radius: 50%;
     margin-top: 10px;
     border: 2px solid black;
     transition: transform 0.3s ease;
@@ -65,26 +37,37 @@ button:not(:disabled) {
     cursor: pointer;
 }
 
-.img-user {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    margin-top: 10px;
-    text-align: center;
-}
-
-#file {
+#file, #add-imagem {
     margin-top: 20px;
 }
 
 #add-imagem {
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: center;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.editar {
+    margin-top: 10px;
+}
 
+.icon-profile {
+    margin-right: 20px;
+}
+
+.nomes {
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.nome, .frase {
+    margin: 0 0 1rem;
+    width: 300px;
+}
+
+/* ----------------------------- */
+/* LAYOUTS E BOTÕES              */
+/* ----------------------------- */
 
 #col1 {
     display: flex;
@@ -95,43 +78,19 @@ button:not(:disabled) {
     margin-top: 20px;
 }
 
-.nome {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    width: 300px;
-    text-align: center;
-}
-
-.nomes {
-    border-bottom: 1px solid #ccc;
-}
-
-#menu {
-    font-size: 30px;
-}
-
-.frase {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    width: 300px;
-    text-align: center;
-}
-
 .conteudo {
     background-color: #fff;
     padding: 15px;
     max-width: 100%;
 }
 
-
-
 .btn-interacao {
-    text-align: left;
-    padding: 8px 0;
     background-color: white;
+    padding: 8px 0;
     margin-bottom: 20px;
-    transition: trasforme 0.2s;
-    border: none
+    text-align: left;
+    border: none;
+    transition: transform 0.2s ease;
 }
 
 .btn-interacao:hover {
@@ -141,7 +100,7 @@ button:not(:disabled) {
 .btn-danger {
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545;
+    border: none;
     width: 200px;
     margin-top: 20px;
 }
@@ -153,24 +112,21 @@ button:not(:disabled) {
     text-align: center;
 }
 
+/* ----------------------------- */
+/* PÁGINAS ESPECÍFICAS           */
+/* ----------------------------- */
+
 #col2 {
     border: 1px solid rgba(0, 0, 0, 0.527);
     padding: 10px;
     text-align: center;
-    height: auto;
     width: 880px;
+    height: auto;
 }
 
-#registro {
+#registro, #form-cadastro, #desempenho, #aluno-desempenho, #conteudo-empresa {
     margin-top: 20px;
 }
-
-#form-cadastro {
-    margin-top: 20px;
-}
-
-
-/* ESTILIZANDO PÁGINA DE LISTAGEM DE ALUNOS */
 
 #table {
     margin: 20px;
@@ -179,7 +135,6 @@ button:not(:disabled) {
 td {
     text-align: center;
 }
-
 
 .back-button {
     text-align: center;
@@ -191,72 +146,27 @@ td {
 }
 
 .barra-pesquisa {
-
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 }
 
-
-/* ESTILIZANDO PÁGINA DE PORTAL DE VAGAS */
-
 .portal-tittle {
-    font-family: 'Times New Roman', Times, serif;
     margin-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #vagas {
     margin-top: 30px;
 }
 
+/* ----------------------------- */
+/* RESPONSIVIDADE - MOBILE FIRST*/
+/* ----------------------------- */
 
-/* ESTILIZANDO PÁGINA DESEMPENHO */
-
-
-#desempenho {
-    margin-top: 20px;
-}
-
-#aluno-desempenho {
-    margin-top: 20px;
-}
-
-
-/* ESTILIZANDO PÁGINA PAINEL DE EMPRESA */
-
-#conteudo-empresa {
-    margin-top: 50px;
-}
-
-
-
-
-/* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
     #col1 {
         width: 88%;
-    }
-
-    .text-center {
-        text-align: left;
-        font-size: 9px;
-    }
-
-    .list-unstyled {
-        padding-left: 0;
-        list-style: none;
-        font-size: 30px;
-    }
-
-    .text-center {
-        font-size: 50px;
-        text-align: center !important;
-    }
-
-    .text-center {
-        text-align: center !important;
-        font-size: 16px;
     }
 
     #container-home {
@@ -267,4 +177,22 @@ td {
         font-size: 30px;
     }
 
+    /* Rodapé responsivo */
+    footer h5 {
+        font-size: 1rem !important;
+    }
+
+    footer a,
+    footer p {
+        font-size: 0.9rem !important;
+    }
+
+    footer img {
+        height: 32px !important;
+    }
+
+    footer ul.list-unstyled {
+        font-size: 0.9rem !important;
+        padding-left: 0;
+    }
 }
