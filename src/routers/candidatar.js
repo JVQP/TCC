@@ -7,7 +7,7 @@ require('dotenv').config();
 
 router.post('/', middleware, (req, res) => {
     
-        const pesquisa = req.body.pesquisa || '';
+    const pesquisa = req.body.pesquisa || '';
     const empresa = req.body.inputSelectEmpresa || '';
     const optn = req.body.inputSelectOptn || '';
     const contrato = req.body.inputSelectContrato || '';
@@ -97,7 +97,11 @@ router.post('/', middleware, (req, res) => {
                         usuario: req.session.usuario,
                         mensagem_erro: 'Você já se candidatou a esta vaga!',
                         vagas,
-                        voltar
+                        voltar,
+                        empresa,
+                        contrato,
+                        optn,
+                        pesquisa
                     });
                 }
 
