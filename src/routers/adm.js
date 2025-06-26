@@ -32,7 +32,7 @@ router.get('/', middleware, permisao('Professor'), (req, res) => {
 
         console.log('Candidatos: ', candidatos);
 
-        res.render('painel_aluno', {
+        res.render('adm', {
           usuario: req.session.usuario,
           usuarios: usuario,
           id: req.session.usuario.id,

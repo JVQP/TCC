@@ -2,10 +2,11 @@ const express = require('express');
 const db = require('../banco.js');
 const router = express.Router();
 const middleware = require('./middleware.js');
+const permisao = require('./permisao.js')
 
 
 
-router.get('/', middleware, (req, res) => {
+router.get('/', middleware, permisao('Aluno'), (req, res) => {
 
     db.all(`SELECT * FROM usuarios WHERE id = ? `, [req.session.usuario.id], (err, usuario) => {
         if (err) {
