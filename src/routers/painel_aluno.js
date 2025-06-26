@@ -12,13 +12,39 @@ router.get('/', middleware, (req, res) => {
             console.error(err.message);
             return res.redirect('/login');
         }
+        db.all(`SELECT * FROM candidatos WHERE  status = 'Aprovado'`,(err, candidatos) => {
 
-        let ip = req.socket.remoteAddress;
-        ip = ip.replace('::ffff:', '');
-        console.log('Usuário logado: ' + usuario[0].nome);
-        console.log('Tipo de usuário: ' + usuario[0].tipo);
-        console.log('Ip: ' + ip);
-        res.render('painel_aluno', { usuario: req.session.usuario, usuarios: usuario, id: req.session.usuario.id });
+            if (err) {
+                console.log('Erro ao consultar candidatos ' + err.message);
+                res.status(500).send('Erro ao consultar candidatos ' + err.message);
+                return;
+            }
+
+            db.all(`SELECT * FROM usuarios`, (err, usuarios_completo) => {
+                if(err){
+                    console.log('Erro ao consultar tabela de usuários ', err.message);
+                    res.status(500).send('Erro ao consultar tabela de usuários ', err.message);
+                    return;
+                }
+                
+            let ip = req.socket.remoteAddress;
+            ip = ip.replace('::ffff:', '');
+            console.log('Usuário logado: ' + usuario[0].nome);
+            console.log('Tipo de usuário: ' + usuario[0].tipo);
+            console.log('Ip: ' + ip);
+
+            console.log('Candidatos: ', candidatos);
+            res.render('painel_aluno', {
+                usuario: req.session.usuario,
+                usuarios: usuario,
+                id: req.session.usuario.id,
+                candidatos: candidatos,
+                todosUsuarios: usuarios_completo
+            });
+            return;
+            });
+
+        });
     });
 
 });

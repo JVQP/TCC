@@ -73,7 +73,7 @@
                                 <br>
                                 <a href="/loginAva"><button type="button" class="btn-interacao"><i
                                             class="bi bi-person-check"></i> Avaliar aluno.</button></a>
-                             
+
                                 <br>
                                 <a href="/lista_alunos"><button type="button" class="btn-interacao"><i
                                             class="bi bi-person-lines-fill"></i> Listar alunos.</button></a>
@@ -163,25 +163,43 @@
             <div class="container">
                 <div class="alunos-destaque overflow-auto" style="max-height: 90vh;">
 
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start" alt="..." loading="lazy">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                            ago</small></p>
+                    <% candidatos.forEach(function(candidato) { %>
+
+                        <% usuarioCorrespondente=todosUsuarios.find(function(u) { return u.nome===candidato.nome; }); %>
+
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <% if (usuarioCorrespondente && usuarioCorrespondente.imagem) { %>
+                                            <img src="/imagem/<%= usuarioCorrespondente.imagem %>" alt="Foto de perfil"
+                                                class="img-fluid rounded-start" loading="lazy">
+                                            <% } else { %>
+                                                <img src="/imagem/user.png" alt="Foto padrão"
+                                                    class="img-fluid rounded-start" loading="lazy">
+                                                <% } %>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= candidato.nome %>
+                                            </h5>
+                                            <p class="card-text">Eu fui contratado através da plataforma SENAIEMPREGA e
+                                                mudou a minha vida.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
+                            <% }); %>
                 </div>
             </div>
+
+            <% if(typeof candidatos==undefined || candidatos=='NULL' || candidatos.length===0) { %>
+
+                <p class="text-center" style="margin-top: 50px;"><strong>Nenguma aluno contratado no momento!</strong>
+                </p>
+
+                <% } %>
+
         </section>
 
 

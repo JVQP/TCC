@@ -16,9 +16,9 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
             console.log('Erro ao listar vagas: ' + err.message);
         } 
 
-        if(vagas){
+        if(!vagas){
          
-           let total = vagas.length
+           let total = vagas.length;  
             res.render('FiltroLista_vagas', {
                 usuario: req.session.usuario,
                 mensagem_error: 'Vaga não encontrada!',
@@ -26,17 +26,18 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
                 total: total
                 
             });
-        
-        } else {
-           let total = vagas.length
-            res.render('lista_vagas', {
+                return;
+        } 
+           
+            let total = vagas.length
+            res.render('FiltroLista_vagas', {
                 usuario: req.session.usuario,
                 vagas: vagas,
                 total: total
                 
             });
-        }
-
+        
+            return;
     });
 
 });
