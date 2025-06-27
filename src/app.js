@@ -6,6 +6,7 @@ const session = require('express-session');
 const PORT = process.env.PORT || 8080; 
 const db = require('./banco.js');
 const fs = require('fs');
+const SQLiteStore = require('connect-sqlite3')(session);
 
 
 // Configurando o servidor
@@ -21,9 +22,13 @@ app.use(fileUpload());
 app.use(session({
     secret: 'chave-secreta',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: new SQLiteStore({
+        db: 'sessao.sqlite',
+        dir: path.join(__dirname, 'sessions'),
+    }),
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24,
+        maxAge: 1000 * 60 * 60 * 24, // 1 dia
     }
 }));
 

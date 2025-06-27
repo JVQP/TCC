@@ -14,7 +14,7 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
     if (req.body.EmAnalise) statusFiltros.push(req.body.EmAnalise);
     if (req.body.reprovado) statusFiltros.push(req.body.reprovado);
 
-    let sql = `SELECT * FROM candidatos WHERE nome LIKE ?`;
+    let sql = `SELECT * FROM candidatos WHERE  nome LIKE ?`;
     let params = [`%${pesquisa}%`];
 
 
