@@ -34,7 +34,7 @@ router.get('/', middleware, permisao('Aluno'), (req, res) => {
             console.log('Tipo de usuário: ' + usuario[0].tipo);
             console.log('Ip: ' + ip);
 
-            console.log('Candidatos: ', candidatos);
+                
             res.render('painel_aluno', {
                 usuario: req.session.usuario,
                 usuarios: usuario,
