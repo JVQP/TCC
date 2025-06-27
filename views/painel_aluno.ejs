@@ -150,7 +150,7 @@
                 Alunos Contratados ⭐</h1>
         </div>
 
-                   <% if (typeof error !=='undefined' && error) { %>
+        <% if (typeof error !=='undefined' && error) { %>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>
                     <%= error %>
@@ -160,48 +160,42 @@
             <% } %>
 
                 <section class="mt-5">
-                    <div class="container">
-                        <div class="alunos-destaque overflow-auto" style="max-height: 90vh;">
 
-                            <% candidatos.forEach(function(candidato) { %>
+                 <div class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Foto</th>
+          <th>Empresa</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% candidatos.forEach(candidato => {
+             const usuario = todosUsuarios.find(u => u.nome === candidato.nome);
+        %>
+          <tr>
+            <td>
+              <% if (usuario && usuario.imagem) { %>
+                <img src="/imagem/<%= usuario.imagem %>" alt="Foto" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
+              <% } else { %>
+                <img src="/imagem/user.png" alt="Padrão" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
+              <% } %>
+            </td>
+            <td><%= candidato.empresa %></td>
+            <td><%= candidato.nome %></td>
+            <td><%= candidato.email || 'Não informado' %></td>
+            <td><%= candidato.status %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                                <% usuarioCorrespondente=todosUsuarios.find(function(u) { return  u.nome===candidato.nome; }); %>
-                                   
-                                    <div class="card mb-3" style="max-width: 540px;">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <% if (usuarioCorrespondente && usuarioCorrespondente.imagem) { %>
-                                                    <img src="/imagem/<%= usuarioCorrespondente.imagem %>"
-                                                        alt="Foto de perfil" class="img-fluid rounded-start"
-                                                        loading="lazy">
-                                                    <% } else { %>
-                                                        <img src="/imagem/user.png" alt="Foto padrão"
-                                                            class="img-fluid rounded-start" loading="lazy">
-                                                        <% } %>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">
-                                                        <%= candidato.nome %>
-                                                    </h5>
-                                                    <p class="card-text">Eu fui contratado através da plataforma
-                                                        SENAIEMPREGA e
-                                                        mudou a minha vida.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% }); %>
-                        </div>
-                    </div>
-
-                    <% if(typeof candidatos==undefined || candidatos=='NULL' || candidatos.length===0) { %>
-
-                        <p class="text-center" style="margin-top: 50px;"><strong>Nenguma aluno contratado no
-                                momento!</strong>
-                        </p>
-
-                        <% } %>
 
                 </section>
 
