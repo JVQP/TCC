@@ -138,7 +138,7 @@
                                           <div class="d-flex justify-content-center align-items-center gap-1">
 
                                             <a href="/desempenho-candidato/<%= candidato.nome %>"><button
-                                                class="btn btn-outline-success btn-sm px-1 py-0"
+                                                class="btn btn-outline-primary btn-sm px-1 py-0"
                                                 style="width: 28px; height: 28px;"
                                                 title="Visualizar desempenho do candidato!">
                                                 <i class="bi bi-clipboard-data"></i>
@@ -154,7 +154,7 @@
                                               <input type="hidden" name="Email" value="<%= candidato.email %>">
                                               <input type="hidden" name="id" value="<%= candidato.id %>">
 
-                                              <button type="submit" class="btn btn-outline-primary btn-sm px-1 py-0"
+                                              <button type="submit" class="btn btn-outline-success btn-sm px-1 py-0"
                                                 style="width: 28px; height: 28px;" id="aprovar"
                                                 title="Aprovar candidato!">
                                                 <i class="bi bi-person-fill-check"></i>
@@ -208,7 +208,7 @@
                                                         aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                     Você realmente deseja excluir este candidato?
+                                                     Você realmente deseja excluir este candidato <strong><%= candidato.nome %></strong> ?
                                                     </div>
                                                     <div class="modal-footer">
                                                       <button type="button" class="btn btn-secondary"

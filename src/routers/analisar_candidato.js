@@ -31,7 +31,13 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
 
         console.log(`Candidato ${Nome} está sendo analisado!.`);
 
-        // Enviar e-mail de aprovação
+        db.all(`SELECT * FROM candidatos`, (err, candidatos) => {
+            if(err){
+                console.log('Erro ao consultar candidatos: ' + err.message);
+                res.status(500).send('Erro interno no servidor: ' + err.message);
+            }
+            
+               // Enviar e-mail de aprovação
 
         db.get('SELECT * FROM vagas WHERE id = ?', [vaga], (err, vagas) => {
             if (err) {
@@ -93,7 +99,7 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
                         usuario: req.session.usuario,
                         mensagem_email: 'Falha ao enviar e-mail de aprovação.',
                         vagas: vagas,
-                        candidatos: candidato,
+                        candidatos: candidatos,
                         total: total
                     });
                     return;
@@ -107,6 +113,10 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
 
             });
         });
+     
+        });
+
+     
     });
 });
 
