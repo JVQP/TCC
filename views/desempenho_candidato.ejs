@@ -34,51 +34,59 @@
             </div>
 
             <div class="aluno">
-               
-                       <h6><a href="/listar-candidatos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Usuário: <strong>
+
+                <h6><a href="/listar-candidatos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Usuário:
+                    <strong>
                         <%= usuario.nome %>
                     </strong></h6>
-                             <p class="text-center mb-4">0 = Não demonstrado, 1 = Muito fraco, 2 = Fraco, 3 = Regular, 4 = Bom, 5
-                = Excelente.</p>
+                <p class="text-center mb-4">0 = Não demonstrado, 1 = Muito fraco, 2 = Fraco, 3 = Regular, 4 = Bom, 5
+                    = Excelente.</p>
             </div>
 
 
-            <div class="accordion mt-4"  id="accordionExample">
-                <% avaliacoes.forEach((avaliacao, index)=> { %>
-                    <div class="accordion-item" style="margin-bottom: 20px;">
-                        <h2 class="accordion-header" id="heading<%= index %>">
-                            <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>"
-                                aria-expanded="<%= index === 0 ? 'true' : 'false' %>"
-                                aria-controls="collapse<%= index %>">
-                                <%= avaliacao.periodo %>
-                            </button>
-                        </h2>
-                        <div id="collapse<%= index %>"
-                            class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
-                            aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <h6><%= avaliacao.aluno %></h6>  
-                                <p><strong>Curso: </strong> <%= alunos.curso %></p>
-                                <canvas id="grafico<%= index %>"></canvas>
-                                <p class="mt-3"><strong>Observação:</strong>
-                                    <%= avaliacao.observacao %>
-                                </p>
-                            </div>
+            <% if (mensagem_error) { %>
+                <p class="text-center"><strong>
+                        <%= mensagem_error %>
+                    </strong></p>
+                <% } else if (!avaliacoes || avaliacoes.length===0) { %>
+                    <p class="text-center"><strong>Nenhuma nota registrada para o candidato no momento!</strong></p>
+                    <% } else { %>
+                        <!-- Mostrar avaliações -->
+                        <div class="accordion mt-4" id="accordionExample">
+                            <% avaliacoes.forEach((avaliacao, index)=> { %>
+                                <div class="accordion-item" style="margin-bottom: 20px;">
+                                    <h2 class="accordion-header" id="heading<%= index %>">
+                                        <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse<%= index %>"
+                                            aria-expanded="<%= index === 0 ? 'true' : 'false' %>"
+                                            aria-controls="collapse<%= index %>">
+                                            <%= avaliacao.periodo %>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse<%= index %>"
+                                        class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>"
+                                        aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <h6>
+                                                <%= avaliacao.aluno %>
+                                            </h6>
+                                            <% if (alunos) { %>
+                                                <p><strong>Curso: </strong>
+                                                    <%= alunos.curso %>
+                                                </p>
+                                                <% } %>
+                                                    <canvas id="grafico<%= index %>"></canvas>
+                                                    <p class="mt-3"><strong>Observação:</strong>
+                                                        <%= avaliacao.observacao %>
+                                                    </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
                         </div>
-                    </div>
-                    <% }) %>
-            </div>
+                        <% } %>
 
-        </div> 
-
-                    <!-- MENSAGEM DE ERRO -->
-
-                     <%if (typeof avaliacoes==='undefined' || avaliacoes.length === 0) { %>
-
-              <p colspan="6" class="text-center"><strong>Nenhuma nota registrada para o candidato no momento!.</strong></p>
-
-              <% } %>
         </main>
 
         <%- include('partials/footer') %>
@@ -87,11 +95,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const avaliacoes = <%- JSON.stringify(avaliacoes) %>;
+        const avaliacoes = <% - JSON.stringify(avaliacoes) %>;
 
         avaliacoes.forEach((avaliacao, index) => {
             const canvas = document.getElementById('grafico' + index);
-            if (!canvas) return; 
+            if (!canvas) return;
 
             const ctx = canvas.getContext('2d');
 
