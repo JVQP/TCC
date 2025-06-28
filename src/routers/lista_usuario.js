@@ -5,7 +5,7 @@ const middleware = require('./middleware.js');
 const permisao = require('./permisao.js');
 
 
-router.get('/', middleware, permisao('Professor'), (req, res) => {
+router.get('/', middleware, permisao('Administrador'), (req, res) => {
 
     db.all(`SELECT * FROM usuarios ORDER BY nome ASC`, (err, usuario) => {
         if (err) {
@@ -17,7 +17,7 @@ router.get('/', middleware, permisao('Professor'), (req, res) => {
 
 });
 
-router.get('/remover/:id', middleware, permisao('Professor'), (req, res) => {
+router.get('/remover/:id', middleware, permisao('Administrador'), (req, res) => {
     const id = req.params.id;
 
     db.run(`DELETE FROM usuarios WHERE id = ?`, [id], (err) => {

@@ -10,13 +10,13 @@ let app = express();
 app.use(fileUpload());
 
 
-router.get('/', middleware, permisao('Professor'), (req, res) => {
+router.get('/', middleware, permisao('Administrador'), (req, res) => {
     res.render('cadastro_usuarios');
 });
 
 
 
-router.post('/cadastro', middleware, permisao('Professor'), (req, res) => {
+router.post('/cadastro', middleware, permisao('Administrador'), (req, res) => {
     const { inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario } = req.body;
 
     if (!inputEmail || !inputNome || !inputData || !inputSenha || !inputConfirmar) {

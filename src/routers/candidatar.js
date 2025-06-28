@@ -3,9 +3,10 @@ const middleware = require('./middleware');
 const db = require('../banco.js');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const permisao = require('./permisao.js');
 require('dotenv').config();
 
-router.post('/', middleware, (req, res) => {
+router.post('/', middleware,  (req, res) => {
     
     const pesquisa = req.body.pesquisa || '';
     const empresa = req.body.inputSelectEmpresa || '';
@@ -28,7 +29,8 @@ router.post('/', middleware, (req, res) => {
 
     const rotas = {
         Aluno: '/painel-aluno',
-        Professor: '/adm',
+        Professor: '/painel-educador',
+        Administrador: '/adm',
         Empresa: '/painel-empresa'
     };
 
@@ -53,7 +55,7 @@ router.post('/', middleware, (req, res) => {
                 contrato
             });
         });
-        return; // impede execução do restante
+        return; 
     }
 
     // Se for aluno, continua o processo

@@ -6,6 +6,7 @@ const session = require('express-session');
 const PORT = process.env.PORT || 8080; 
 const db = require('./banco.js');
 const fs = require('fs');
+const SQLiteStore = require('connect-sqlite3')(session);
 
 
 // Configurando o servidor
@@ -21,9 +22,13 @@ app.use(fileUpload());
 app.use(session({
     secret: 'chave-secreta',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: new SQLiteStore({
+        db: 'sessao.sqlite',
+        dir: path.join(__dirname, 'sessions'),
+    }),
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24,
+        maxAge: 1000 * 60 * 60 * 24, // 1 dia
     }
 }));
 
@@ -41,7 +46,8 @@ app.get('/logout', (req, res) => {
 
 
 // Configurando Rotas
-const admRouter = require('./routers/adm.js');
+const Painel_educador = require('./routers/painel_educador.js');
+const adm = require('./routers/adm.js');
 const loginRouter = require('./routers/login.js');
 const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
@@ -81,8 +87,9 @@ const filtroAlunoRouter = require('./routers/filtro_aluno.js');
 const candidatosAprovadosRouter = require('./routers/candidatos_aprovados.js');
 const filtrarVagasRouter = require('./routers/filtrar_vaga.js');
 
-app.use('/adm', admRouter);
+app.use('/painel-educador', Painel_educador);
 app.use('/', homeRouter);
+app.use('/adm', adm);
 app.use('/login', loginRouter);;
 app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);

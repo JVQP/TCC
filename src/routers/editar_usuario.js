@@ -5,7 +5,7 @@ const permisao = require('./permisao.js');
 const router = express.Router();
 
 
-router.get('/:id', middleware, permisao('Professor'), (req, res) => {
+router.get('/:id', middleware, permisao('Administrador'), (req, res) => {
 
 
     db.get('SELECT * FROM usuarios WHERE id = ?', [req.params.id], (err, usuario) => {
@@ -24,7 +24,7 @@ router.get('/:id', middleware, permisao('Professor'), (req, res) => {
     });
 });
 
-router.post('/:id/editar_usuario', middleware, permisao('Professor'), (req, res) => {
+router.post('/:id/editar_usuario', middleware, permisao('Administrador'), (req, res) => {
 
 
   const { inputEmail, inputNome, inputData, inputSenha, inputConfirmar, inputTipoUsuario, inputId } = req.body;

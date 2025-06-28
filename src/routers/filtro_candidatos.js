@@ -6,7 +6,6 @@ const permisao = require('./permisao.js');
 
 
 router.post('/', middleware, permisao('Empresa'), (req, res) => {
-
     let pesquisa = req.body.pesquisa || '';
     let statusFiltros = [];
 
@@ -14,9 +13,9 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
     if (req.body.EmAnalise) statusFiltros.push(req.body.EmAnalise);
     if (req.body.reprovado) statusFiltros.push(req.body.reprovado);
 
-    let sql = `SELECT * FROM candidatos WHERE nome LIKE ?`;
-    let params = [`%${pesquisa}%`];
-
+  
+    let sql = `SELECT * FROM candidatos WHERE nome LIKE ? AND empresa = ?`;
+    let params = [`%${pesquisa}%`, req.session.usuario.nome];
 
     if (statusFiltros.length > 0) {
         let placeholders = statusFiltros.map(() => '?').join(', ');
@@ -35,6 +34,7 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
             });
         }
 
+     
         if (candidatos.length === 0) {
             return res.render('filtro_candidato', {
                 usuario: req.session.usuario,
@@ -48,22 +48,16 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
             });
         }
 
-
-        if (!statusFiltros.length > 0) {
-          res.redirect('/listar-candidatos');
-        return;
-        }
-
+        
         res.render('filtro_candidato', {
             usuario: req.session.usuario,
-            candidatos: candidatos,
+            candidatos,
             total: candidatos.length,
             aprovado: req.body.aprovado,
             EmAnalise: req.body.EmAnalise,
             reprovado: req.body.reprovado,
             pesquisa
         });
-        return;
     });
 });
 

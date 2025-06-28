@@ -8,7 +8,8 @@ router.get('/', middleware, (req, res) => {
 
     const rotas = {
         Aluno: '/painel-aluno',
-        Professor: '/adm',
+        Administrador: '/adm',
+        Professor: '/painel-educador',
         Empresa: '/painel-empresa'
     };
 

@@ -76,12 +76,10 @@
 
       <!-- MENSAGEM DE ERRO -->
 
-
-    
-      <% if (typeof mensagem_erro !=='undefined' && mensagem_erro) { %>
+      <% if (typeof mensagem_error !=='undefined' && mensagem_error) { %>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>
-            <%= mensagem_erro %>
+            <%= mensagem_error %>
           </strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -122,7 +120,7 @@
                         <div class="btn-filter">
                           <form id="formBuscar" action="/filtrar-vagas" class="" method="post">
                           
-                            <label for="" class="form-label">Empresa: </label>
+                            
                             <label for="inputSelectEmpresa" class="form-label">Empresa: </label>
                             <select name="inputSelectEmpresa" id="inputSelectEmpresa" onchange="this.form.submit()"
                               class="form-select">
