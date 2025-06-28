@@ -4,7 +4,7 @@ const permisao = require('./permisao.js');
 const db = require('../banco.js');
 const router = express.Router();
 
-router.get('/', middleware, permisao('Administrador'), (req, res) => {
+router.get('/', middleware, permisao('Professor'), (req, res) => {
   db.all('SELECT * FROM usuarios WHERE id = ? ', [req.session.usuario.id], (err, usuario) => {
     if (err) {
       console.log('Mensagem: ' + err.message);
@@ -32,7 +32,7 @@ router.get('/', middleware, permisao('Administrador'), (req, res) => {
 
         console.log('Candidatos: ', candidatos);
 
-        res.render('adm', {
+        res.render('painel_educador', {
           usuario: req.session.usuario,
           usuarios: usuario,
           id: req.session.usuario.id,

@@ -12,7 +12,8 @@ router.get('/:id/:imagem', middleware, (req, res) => {
 
     let rota = {
         Aluno: '/painel-aluno',
-        Professor: '/adm',
+        Professor: '/painel-educador',
+        Adm: '/adm',
         Empresa: '/painel-empresa'
     };
 

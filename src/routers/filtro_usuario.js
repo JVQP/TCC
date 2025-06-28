@@ -5,7 +5,7 @@ const middleware = require('./middleware.js');
 const permisao = require('./permisao.js');
 
 
-router.post('/', middleware, permisao('Professor'), (req, res) => {
+router.post('/', middleware, permisao('Administrador'), (req, res) => {
 
   let pesquisa = req.body.pesquisa || '';
   let statusFiltros = [];

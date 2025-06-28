@@ -46,7 +46,8 @@ app.get('/logout', (req, res) => {
 
 
 // Configurando Rotas
-const admRouter = require('./routers/adm.js');
+const Painel_educador = require('./routers/painel_educador.js');
+const adm = require('./routers/adm.js');
 const loginRouter = require('./routers/login.js');
 const homeRouter = require('./routers/home.js');
 const contatoRouter = require('./routers/contato.js');
@@ -86,8 +87,9 @@ const filtroAlunoRouter = require('./routers/filtro_aluno.js');
 const candidatosAprovadosRouter = require('./routers/candidatos_aprovados.js');
 const filtrarVagasRouter = require('./routers/filtrar_vaga.js');
 
-app.use('/adm', admRouter);
+app.use('/painel-educador', Painel_educador);
 app.use('/', homeRouter);
+app.use('/adm', adm);
 app.use('/login', loginRouter);;
 app.use('/contato', contatoRouter);
 app.use('/obrigado', obrigadoRouter);

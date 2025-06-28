@@ -76,12 +76,10 @@
 
       <!-- MENSAGEM DE ERRO -->
 
-
-    
-      <% if (typeof mensagem_erro !=='undefined' && mensagem_erro) { %>
+      <% if (typeof mensagem_error !=='undefined' && mensagem_error) { %>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>
-            <%= mensagem_erro %>
+            <%= mensagem_error %>
           </strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

@@ -62,12 +62,18 @@
 
                             </div>
                             <div class="conteudo">
-                                <a href="/usuario"><button type="button" class="btn-interacao"><i class="bi bi-person"
-                                            id="icons"></i> Cadastrar usuário.</button></a>
+                
+                                <a href="/aluno"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-badge"></i> Registrar aluno.</button></a>
                                 <br>
-                                <a href="/lista-usuario"><button type="button" class="btn-interacao"><i
-                                            class="bi bi-clipboard2-check"></i> Listar usuarios.</button></a>
+                                <a href="/loginAva"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-check"></i> Avaliar aluno.</button></a>
+
                                 <br>
+                                <a href="/lista_alunos"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-person-lines-fill"></i> Listar alunos.</button></a>
+                                <br>
+
                                 <a href="/portal-vagas"><button type="button" class="btn-interacao"><i
                                             class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
                                 <br>
@@ -157,7 +163,7 @@
           <th>Foto</th>
           <th>Empresa</th>
           <th>Nome</th>
-         
+          
         </tr>
       </thead>
       <tbody>
@@ -174,7 +180,7 @@
             </td>
             <td><%= candidato.empresa %></td>
             <td><%= candidato.nome %></td>
-          
+            
           </tr>
         <% }) %>
       </tbody>

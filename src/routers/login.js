@@ -23,13 +23,17 @@ const router = express.Router();
       
         if(usuario && usuario.tipo === 'Professor') {
                 req.session.usuario = usuario;
-                return res.redirect('/adm');
+                return res.redirect('/painel-educador');
             } else if(usuario && usuario.tipo === 'Aluno') {
                 req.session.usuario = usuario;
                 return res.redirect('/painel-aluno');
             } else if(usuario && usuario.tipo === 'Empresa') {
                 req.session.usuario = usuario;
                 return res.redirect('/painel-empresa');
+            }
+             else if(usuario && usuario.tipo === 'Administrador') {
+                req.session.usuario = usuario;
+                return res.redirect('/adm');
             }
 
              else {
