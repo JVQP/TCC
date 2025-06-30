@@ -49,7 +49,7 @@ let user = req.session.usuario.nome;
           return;
         }
 
-        return res.render('desempenho_aluno', {
+        return res.render('grafico', {
           usuario: req.session.usuario,
           avaliacoes
         });
