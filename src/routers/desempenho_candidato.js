@@ -20,7 +20,7 @@ router.get('/:nome', middleware, permisao('Empresa'), (req, res) => {
             if (!aluno) {
                 return res.render('desempenho_candidato', {
                     usuario: req.session.usuario,
-                    mensagem_error: 'Esse aluno não faz mais parte do sistema',
+                    mensagem_error: 'Nota não registrada para esse aluno(a)',
                     avaliacoes: avaliacoes,
                     alunos: null
                 });

@@ -3,7 +3,7 @@ const router = express.Router();
 const middleware = require('./middleware.js');
 
 
-    router.get('/', middleware, (req, res) => {
+    router.get('/', (req, res) => {
         res.render('home');
     })
 
