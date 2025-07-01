@@ -16,7 +16,7 @@ let user = req.session.usuario.nome;
       return;
     }
 
-    db.all(`SELECT * FROM usuarios`, (err, usuario) => {
+    db.all(`SELECT * FROM usuarios WHERE nome = ?`, [user], (err, usuario) => {
       if (err) {
         console.log('Erro interno no servidor: ' + err.message);
         return res.status(500).send('Erro interno no servidor: ' + err.message);
@@ -35,7 +35,7 @@ let user = req.session.usuario.nome;
           return res.status(500).send('Erro interno no servidor: ' + err.message);
         }
 
-        console.log(avaliacoes);
+ 
 
         if (avaliacoes.length === 0) {
           res.render('painel_aluno', {
