@@ -23,7 +23,14 @@ router.get('/', middleware, permisao('Administrador'), (req, res) => {
           return res.status(500).send('Erro ao consultar tabela de usuários ', err.message);
         }
 
-        let ip = req.socket.remoteAddress;
+              db.all(`SELECT * FROM mensagens`, (err, mensagens) => {
+        if(err){
+            console.log('Erro ao exibir mensagem ' + err);
+            res.status(500).send('Erro interno no servidor: ' + err);
+            return;
+        }
+
+          let ip = req.socket.remoteAddress;
         ip = ip.replace('::ffff:', '');
 
         console.log('Usuário logado: ' + usuario[0].nome);
@@ -37,8 +44,12 @@ router.get('/', middleware, permisao('Administrador'), (req, res) => {
           usuarios: usuario,
           id: req.session.usuario.id,
           candidatos: candidatos,
-          todosUsuarios: usuarios_completo
+          todosUsuarios: usuarios_completo,
+          mensagens: mensagens,
+          total: mensagens.length
         });
+     
+      });
       });
     });
   });

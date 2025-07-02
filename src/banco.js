@@ -48,7 +48,7 @@ function usuario() {
 
 // SCRIPT PARA DELETAR TABELAS
 function drop() {
-    let query = `DELETE FROM candidatos;`
+    let query = `DROP TABLE mensagens;`
 
     db.run(query, (err) => {
         if (err) {
@@ -83,11 +83,13 @@ function aluno() {
 function mensagem() {
 
     let query = `CREATE TABLE mensagens (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    mensagem TEXT NOT NULL
-);`
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  mensagem TEXT NOT NULL,
+  status TEXT CHECK(status IN ('Pendente', 'Concluída')) DEFAULT 'Pendente'
+);
+`
 
     db.run(query, (err) => {
         if (err) {

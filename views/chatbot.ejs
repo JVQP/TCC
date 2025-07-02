@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="/index.js" defer></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+
+
+            <!-- MENU DE OPÇÕES -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-list"
+                    id="menu"></i></button>
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Painel de controle</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="container-fluid" id="container">
+                        <div class="row">
+
+                            <div class="col-4" id="col1">
+                                <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
+                                    <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil"
+                                        class="img-profile" loading="lazy">
+                                    <% } else { %>
+                                        <img src="/imagem/user.png" alt="Foto padrão" class="img-profile"
+                                            loading="lazy">
+                                        <% } %>
+                            </div>
+
+
+                            <div class="editar">
+                                <a href="/editar-foto/<%= usuario.id %>/<%= usuarios[0].imagem || '' %>"
+                                    style="text-decoration: none; margin-right: 20px;" class="icon-profile"
+                                    title="Editar"><i class="bi bi-pencil-square"></i></a>
+                            </div>
+
+
+
+
+                            <div class="nomes">
+                                <p class="nome">
+                                    <%= usuario.nome %>
+                                </p>
+                                <p class="frase">"Pelo futuro do trabalho."</p>
+
+                            </div>
+                            <div class="conteudo">
+                                <a href="/usuario"><button type="button" class="btn-interacao"><i class="bi bi-person"
+                                            id="icons"></i> Cadastrar usuário.</button></a>
+                                <br>
+                                <a href="/lista-usuario"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-clipboard2-check"></i> Listar usuarios.</button></a>
+                                <br>
+                               
+                                 <a href="/mensagem"><button type="button" class="btn-interacao">
+                                        <i class="bi bi-chat"></i> Mensagem
+                                        <span class="badge rounded-pill bg-danger ms-2">
+                                            <%= total %>
+                                                <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    </button></a>
+
+                                <br>
+
+                                <a href="/chatbot"><button type="button" class="btn-interacao">
+                                      <i class="bi bi-robot"></i>   Central de ajuda
+
+                                    </button></a>
+                                    <br>
+                               
+                                <a href="/portal-vagas"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
+                                <br>
+
+                                <button type="button" class="btn-interacao"><i class="bi bi-link-45deg"></i>
+                                    Links.</button>
+                                <br>
+
+
+                                <div class="logout">
+                                    <a href="/logout"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                            Sair
+                                            <i class="bi bi-box-arrow-left"></i>
+                                        </button> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGO -->
+
+            <img src="/imagem/Logo.png" alt="SenaiEmprega" style="height: 100px; align-items: center;">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+
+        <div class="container mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+
+                    
+                       
+                    <h5 class="mb-0">Central de Suporte</h5>
+
+              
+                </div>
+                <div class="card-body" style="height: 400px; overflow-y: auto;">
+
+            <div class="d-flex mb-3">
+          <div class="me-2">
+            <i class="bi bi-robot fs-4 text-success"></i>
+          </div>
+          <div class="bg-light p-2 rounded w-75">
+            <small class="text-muted">Bot</small>
+            <p class="mb-0">Olá, como posso ajudá-lo(a)</p>
+          </div>
+        </div>
+
+
+                    <!-- <div class="d-flex justify-content-end mb-3">
+        <div class="bg-primary text-white p-2 rounded w-75 text-end">
+          <small class="text-light">Você • 10:17</small>
+          <p class="mb-0">Estou com dificuldades para acessar minha conta.</p>
+        </div>
+      </div> -->
+
+                    <!-- <div class="d-flex mb-3">
+        <div class="me-2">
+          <i class="bi bi-person-circle fs-4 text-primary"></i>
+        </div>
+        <div class="bg-light p-2 rounded w-75">
+          <small class="text-muted">Suporte • 10:18</small>
+          <p class="mb-0">Verificamos aqui, você pode tentar redefinir sua senha no link "Esqueci minha senha".</p>
+        </div>
+      </div> -->
+                </div>
+                <div class="card-footer">
+                    <form id="formMensagem">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Digite sua mensagem..." required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+                  <div class="text-center">
+                                    <a href="<%= voltar %>"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                            Voltar
+                                            <i class="bi bi-box-arrow-left"></i>
+                                        </button> </a>
+                                </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <script>
+
+            const form = document.getElementById('formMensagem');
+            const input = form.querySelector('input');
+            const cardBody = document.querySelector('.card-body');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const msg = input.value.trim();
+                if (!msg) return;
+
+
+                const msgUsuario = `
+      <div class="d-flex justify-content-end mb-3">
+        <div class="bg-primary text-white p-2 rounded w-75 text-end">
+          <small class="text-light">Você • ${horaAtual()}</small>
+          <p class="mb-0">${msg}</p>
+        </div>
+      </div>`;
+                cardBody.innerHTML += msgUsuario;
+
+                input.value = '';
+                cardBody.scrollTop = cardBody.scrollHeight;
+
+
+                setTimeout(() => {
+                    const resposta = gerarRespostaBot(msg.toLowerCase());
+                    const msgBot = `
+        <div class="d-flex mb-3">
+          <div class="me-2">
+            <i class="bi bi-robot fs-4 text-success"></i>
+          </div>
+          <div class="bg-light p-2 rounded w-75">
+            <small class="text-muted">Bot • ${horaAtual()}</small>
+            <p class="mb-0">${resposta}</p>
+          </div>
+        </div>`;
+                    cardBody.innerHTML += msgBot;
+                    cardBody.scrollTop = cardBody.scrollHeight;
+                }, 1000);
+            });
+
+            function gerarRespostaBot(msg) {
+                
+                if (msg.includes('senha')) return 'Envie uma mensagem na página CONTATO, se você esqueceu a sua senha, para os administradores redefinerem a sua senha.';
+                if (msg.includes('conta')) return 'Qual é o seu tipo de usuário: Administrador, Aluno, Professor ou Empresa.';
+                if (msg.includes('administrador')) return 'Para acessar a sua conta de administrador, vai para página inicial e procura por ADMINISTRADOR localizado na barra de navegação e acessa com o seu E-Mail cadastrado e senha. Se não tiver uma conta registrada, por favor enviar uma mensagem no menu contato.';
+                if (msg.includes('aluno')) return 'Para acessar a sua conta de Aluno, vai para página inicial e procura por Aluno localizado nos botões da página inicial e acesse com o seu E-Mail e a sua senha, caso não tiver uma conta enviar uma mensagem para o SENAI na página CONTATO.';
+                if (msg.includes('professor')) return 'Para acessar a sua conta de Professor, vai para página inicial e procura por Professor localizado nos botões da página inicial e acesse com o seu E-Mail e a sua senha, caso não tiver uma conta enviar uma mensagem para o SENAI na página CONTATO.'
+                if (msg.includes('empresa')) return 'Para acessar a sua conta de Empresa, vai para página inicial e procura por Empresa localizado nos botões da página inicial e acesse com o seu E-Mail e a sua senha, caso não tiver uma conta enviar uma mensagem para o SENAI na página CONTATO.'
+                if (msg.includes('certificado')) return 'Os certificados somente com a cordenação do SENAI.';
+                if (msg.includes('candidatar')) return 'Se você está com problema para se candidatar, pode ser por dois motivos: Sistema com falha ou Você não é ALUNO para se candidatar. Mas, se você for aluno e mesmo assim não consegue se candidatar, por favor entrar contato com o SENAI através da página CONTATO para os adiministradores informarem aos desenvolvedores o problema e os mesmmos resolverem'
+                if (msg.includes('obrigado') ||  msg.includes('ok') || msg.includes('valeu'))  return 'Fico feliz ajuda-lo(a), até a próxima!'
+                if (msg.includes()) return 'Informe sua dúvida'
+                if (msg.includes('portal de vagas')) return 'Portal de vagas é uma página onde é exibido todas as vagas que as empresas publicam, para se candidatar basta ser ALUNO e clicar no botão de VER MAIS na vaga que se interessou e se candidatar. Assim que você se candidatar chegará no seu E-Mail a confirmação da candidatura. Boa sorte!'
+                if (msg.includes('plataforma')) return 'SenaiEmprega é uma plataforma do SENAI que destaca o potencial dos alunos com base em avaliações de soft skills feitas pelos professores. As empresas acessam uma base confiável de talentos técnicos, enquanto os estudantes acompanham sua evolução e se preparam para o mercado de trabalho.'
+                if(msg.includes('candidatura')) return 'Funciona da seguinta forma: o aluno(a) se candidata alguma vaga, no seu E-Mail chega a sua confirmação também. A empresa irá visualizar o seu desempenho com base na avaliação do seu professor e entrarão em contato através do E-Mail para participar do processo seletivo e enviar alguns documentos ex: Currículo.. Se você for aprovado ou reprovado, você será notificado!'
+                
+                return 'Desculpe, ainda estou aprendendo. Pode reformular sua pergunta.';
+            }
+
+            function horaAtual() {
+                const agora = new Date();
+                return agora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        </script>
+
+
+
+</body>
+
+</html>

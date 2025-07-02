@@ -69,6 +69,12 @@
                                             class="bi bi-clipboard-data"></i> Desempenho.</button></a>
                                 <br>
 
+                                <a href="/chatbot"><button type="button" class="btn-interacao">
+                                        <i class="bi bi-robot"></i> Central de ajuda
+
+                                    </button></a>
+                                <br>
+
                                 <a href="/portal-vagas"><button type="button" class="btn-interacao"><i
                                             class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
                                 <br>
@@ -161,38 +167,44 @@
 
                 <section class="mt-5">
 
-                 <div class="container mt-5">
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped align-middle text-center">
-      <thead class="table-dark">
-        <tr>
-          <th>Foto</th>
-          <th>Empresa</th>
-          <th>Nome</th>
-       
-        </tr>
-      </thead>
-      <tbody>
-        <% candidatos.forEach(candidato => {
-             const usuario = todosUsuarios.find(u => u.nome === candidato.nome);
-        %>
-          <tr>
-            <td>
-              <% if (usuario && usuario.imagem) { %>
-                <img src="/imagem/<%= usuario.imagem %>" alt="Foto" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
-              <% } else { %>
-                <img src="/imagem/user.png" alt="Padrão" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
-              <% } %>
-            </td>
-            <td><%= candidato.empresa %></td>
-            <td><%= candidato.nome %></td>
-            
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
-</div>
+                    <div class="container mt-5">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Empresa</th>
+                                        <th>Nome</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% candidatos.forEach(candidato=> {
+                                        const usuario = todosUsuarios.find(u => u.nome === candidato.nome);
+                                        %>
+                                        <tr>
+                                            <td>
+                                                <% if (usuario && usuario.imagem) { %>
+                                                    <img src="/imagem/<%= usuario.imagem %>" alt="Foto" width="60"
+                                                        height="60" style="object-fit: cover; border-radius: 50%;">
+                                                    <% } else { %>
+                                                        <img src="/imagem/user.png" alt="Padrão" width="60" height="60"
+                                                            style="object-fit: cover; border-radius: 50%;">
+                                                        <% } %>
+                                            </td>
+                                            <td>
+                                                <%= candidato.empresa %>
+                                            </td>
+                                            <td>
+                                                <%= candidato.nome %>
+                                            </td>
+
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
 
                 </section>
