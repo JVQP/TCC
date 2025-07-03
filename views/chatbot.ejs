@@ -269,10 +269,10 @@
                 if (msg.includes('avaliação'))
                     return 'A avaliação é realizada pelo professor durante o curso, com base no seu desempenho e comportamento profissional. Ela ajuda a identificar se você está preparado para o mercado de trabalho.';
 
-                if (msg.includes('cadastrar'))
+                if (msg.includes('cadastrar') || msg.includes('acesso'))
                     return 'Para se cadastrar, é necessário ser aluno do SENAI. Com o cadastro, você terá acesso ao portal de vagas e poderá acompanhar sua avaliação profissional.';
 
-                if (msg.includes('Olá') || msg.includes('oi') || msg.includes('opa'))
+                if (msg.includes('olá') || msg.includes('oi') || msg.includes('opa'))
                     return 'Olá! Qual é a sua dúvida? Posso te ajudar com informações sobre conta, senha, candidatura, portal de vagas ou avaliações.';
 
                 if (msg.includes('bom dia') || msg.includes('boa tarde') || msg.includes('boa noite'))
