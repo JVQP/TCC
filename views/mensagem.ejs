@@ -146,7 +146,9 @@
         <small class="text-muted"><%= mensagem.nome %> • <%= mensagem.email %></small>
         
         <form action="/mensagem/<%= mensagem.id %>/concluir" method="POST" class="m-0">
-          <button type="submit" class="btn btn-sm btn-outline-success">
+            <input type="hidden" name="email" value="<%= mensagem.email %>">
+            <input type="hidden" name="nome" value="<%= mensagem.nome %>">
+            <button type="submit" class="btn btn-sm btn-outline-success">
             <i class="bi bi-check-circle"></i> Concluir
           </button>
         </form>
