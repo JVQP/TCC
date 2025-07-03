@@ -16,7 +16,8 @@
   <%- include('partials/navbar') %>
 
     <main>
-      <div id="carouselExampleIndicators" class="carousel slide carousel-limit" data-bs-ride="carousel" data-bs-interval="3000">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-limit" data-bs-ride="carousel"
+        data-bs-interval="3000">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
             aria-current="true" aria-label="Slide 1"></button>
@@ -77,6 +78,54 @@
       </div>
     </main>
 
+
+    <button type="button" class="btn btn-primary " id="chatbot" data-bs-toggle="modal" title="Central de ajuda"
+      data-bs-target="#meuModal">
+      <i class="bi bi-robot"></i>
+    </button>
+
+    <div class="modal fade" id="meuModal" tabindex="-1" aria-labelledby="meuModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="meuModalLabel">ChatBot </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+
+          <div class="container mt-4">
+            <div class="card shadow" style="margin-bottom: 20px;">
+              <div class="card-body" style="height: 400px; overflow-y: auto;">
+
+                <div class="d-flex mb-3">
+                  <div class="me-2">
+                    <i class="bi bi-robot fs-4 text-success"></i>
+                  </div>
+                  <div class="bg-light p-2 rounded w-75">
+                    <small class="text-muted">Bot</small>
+                    <p class="mb-0">Olá, como posso ajudá-lo(a)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <form id="formMensagem">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Digite sua mensagem..." required>
+                    <button class="btn btn-primary" type="submit">
+                      <i class="bi bi-send"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
     <%- include('partials/footer') %>
 
       <!-- Scripts Bootstrap -->
@@ -84,6 +133,110 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+      <script>
+
+        const form = document.getElementById('formMensagem');
+        const input = form.querySelector('input');
+        const cardBody = document.querySelector('.card-body');
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const msg = input.value.trim();
+          if (!msg) return;
+
+
+          const msgUsuario = `
+      <div class="d-flex justify-content-end mb-3">
+        <div class="bg-primary text-white p-2 rounded w-75 text-end">
+          <small class="text-light">Você • ${horaAtual()}</small>
+          <p class="mb-0">${msg}</p>
+        </div>
+      </div>`;
+          cardBody.innerHTML += msgUsuario;
+
+          input.value = '';
+          cardBody.scrollTop = cardBody.scrollHeight;
+
+
+          setTimeout(() => {
+            const resposta = gerarRespostaBot(msg.toLowerCase());
+            const msgBot = `
+        <div class="d-flex mb-3">
+          <div class="me-2">
+            <i class="bi bi-robot fs-4 text-success"></i>
+          </div>
+          <div class="bg-light p-2 rounded w-75">
+            <small class="text-muted">Bot • ${horaAtual()}</small>
+            <p class="mb-0">${resposta}</p>
+          </div>
+        </div>`;
+            cardBody.innerHTML += msgBot;
+            cardBody.scrollTop = cardBody.scrollHeight;
+          }, 1000);
+        });
+
+        function gerarRespostaBot(msg) {
+
+          if (msg.includes('senha'))
+            return 'Se você esqueceu sua senha, envie uma mensagem através da página CONTATO para que os administradores possam redefini-la.';
+
+          if (msg.includes('conta'))
+            return 'Informe, por favor, qual é o seu tipo de usuário: Administrador, Aluno, Professor ou Empresa.';
+
+          if (msg.includes('administrador'))
+            return 'Para acessar sua conta de Administrador, vá até a página inicial, clique em "ADMINISTRADOR" na barra de navegação e entre com seu e-mail e senha cadastrados. Caso ainda não tenha uma conta, envie uma solicitação pela página CONTATO.';
+
+          if (msg.includes('aluno'))
+            return 'Para acessar sua conta de Aluno, vá até a página inicial e clique no botão "Aluno". Faça login com seu e-mail e senha. Se ainda não possui uma conta, envie uma mensagem para o SENAI pela página CONTATO.';
+
+          if (msg.includes('professor'))
+            return 'Para acessar sua conta de Professor, vá até a página inicial, clique no botão "Professor" e faça login com seu e-mail e senha. Caso não tenha uma conta, entre em contato com o SENAI pela página CONTATO.';
+
+          if (msg.includes('empresa'))
+            return 'Para acessar sua conta de Empresa, vá até a página inicial, clique no botão "Empresa" e faça login com seu e-mail e senha. Caso ainda não tenha uma conta, envie uma mensagem para o SENAI através da página CONTATO.';
+
+          if (msg.includes('certificado'))
+            return 'A emissão de certificados é feita exclusivamente pela coordenação do SENAI.';
+
+          if (msg.includes('candidatar'))
+            return 'Se você está enfrentando dificuldades para se candidatar, isso pode ocorrer por dois motivos: uma falha no sistema ou o fato de você não ser um aluno registrado. Se for aluno e o problema persistir, entre em contato com o SENAI pela página CONTATO para que os administradores comuniquem os desenvolvedores.';
+
+          if (msg.includes('obrigado') || msg.includes('ok') || msg.includes('valeu'))
+            return 'Fico feliz em ter ajudado! Até a próxima.';
+
+          if (msg.includes('avaliação'))
+            return 'A avaliação é realizada pelo professor durante o curso, com base no seu desempenho e comportamento profissional. Ela ajuda a identificar se você está preparado para o mercado de trabalho.';
+
+
+          if (msg.includes('cadastrar') || msg.includes('acesso'))
+            return 'Para se cadastrar, é necessário ser aluno do SENAI. Com o cadastro, você terá acesso ao portal de vagas e poderá acompanhar sua avaliação profissional.';
+
+          if (msg.includes('olá') || msg.includes('oi') || msg.includes('opa'))
+            return 'Olá! Qual é a sua dúvida? Posso te ajudar com informações sobre conta, senha, candidatura, portal de vagas ou avaliações.';
+
+          if (msg.includes('bom dia') || msg.includes('boa tarde') || msg.includes('boa noite'))
+            return 'Olá! Como posso te ajudar? Deseja saber mais sobre conta, senha, candidatura, avaliações ou o portal de vagas?';
+
+          if (msg.includes('portal de vagas'))
+            return 'O portal de vagas é uma página onde você encontra todas as oportunidades publicadas pelas empresas. Se você for aluno, basta clicar em "Ver mais" na vaga desejada e se candidatar. Após a candidatura, uma confirmação será enviada para seu e-mail. Boa sorte!';
+
+          if (msg.includes('plataforma'))
+            return 'A plataforma SenaiEmprega foi criada para valorizar o potencial dos alunos do SENAI, com base nas avaliações de soft skills realizadas pelos professores. Empresas têm acesso a essa base confiável de talentos, enquanto os alunos acompanham seu desenvolvimento e se preparam para o mercado de trabalho.';
+
+          if (msg.includes('candidatura'))
+            return 'Ao se candidatar a uma vaga, você receberá um e-mail de confirmação. A empresa poderá visualizar suas avaliações feitas pelos professores e, caso tenha interesse, entrará em contato por e-mail solicitando documentos como o currículo. Você será notificado por e-mail sobre sua aprovação ou reprovação.';
+
+          return 'Desculpe, ainda estou aprendendo. Poderia reformular sua pergunta, por favor?';
+
+        }
+
+        function horaAtual() {
+          const agora = new Date();
+          return agora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+      </script>
+
 
 </body>
 

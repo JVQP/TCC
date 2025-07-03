@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="/index.js" defer></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+
+
+            <!-- MENU DE OPÇÕES -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-list"
+                    id="menu"></i></button>
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Painel de controle</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="container-fluid" id="container">
+                        <div class="row">
+
+                            <div class="col-4" id="col1">
+                                <% if (usuarios && usuarios.length && usuarios[0].imagem) { %>
+                                    <img src="/imagem/<%= usuarios[0].imagem %>" alt="Foto de perfil"
+                                        class="img-profile" loading="lazy">
+                                    <% } else { %>
+                                        <img src="/imagem/user.png" alt="Foto padrão" class="img-profile"
+                                            loading="lazy">
+                                        <% } %>
+                            </div>
+
+
+                            <div class="editar">
+                                <a href="/editar-foto/<%= usuario.id %>/<%= usuarios[0].imagem || '' %>"
+                                    style="text-decoration: none; margin-right: 20px;" class="icon-profile"
+                                    title="Editar"><i class="bi bi-pencil-square"></i></a>
+                            </div>
+
+
+
+
+                            <div class="nomes">
+                                <p class="nome">
+                                    <%= usuario.nome %>
+                                </p>
+                                <p class="frase">"Pelo futuro do trabalho."</p>
+
+                            </div>
+                            <div class="conteudo">
+                                <a href="/usuario"><button type="button" class="btn-interacao"><i class="bi bi-person"
+                                            id="icons"></i> Cadastrar usuário.</button></a>
+                                <br>
+                                <a href="/lista-usuario"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-clipboard2-check"></i> Listar usuarios.</button></a>
+                                <br>
+
+                                <a href="/mensagem"><button type="button" class="btn-interacao">
+                                        <i class="bi bi-chat"></i> Mensagem
+                                        <span class="badge rounded-pill bg-danger ms-2">
+                                            <%= total %>
+                                                <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    </button></a>
+
+                                <br>
+
+                                <a href="/chatbot"><button type="button" class="btn-interacao">
+                                        <i class="bi bi-robot"></i> Central de ajuda
+
+                                    </button></a>
+                                <br>
+
+                                <a href="/portal-vagas"><button type="button" class="btn-interacao"><i
+                                            class="bi bi-menu-up"></i> Portal de Vagas.</button></a>
+                                <br>
+
+                                <button type="button" class="btn-interacao"><i class="bi bi-link-45deg"></i>
+                                    Links.</button>
+                                <br>
+
+
+                                <div class="logout">
+                                    <a href="/logout"> <button type="button" class="btn btn-danger" id="logout-btn">
+                                            Sair
+                                            <i class="bi bi-box-arrow-left"></i>
+                                        </button> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGO -->
+
+            <img src="/imagem/Logo.png" alt="SenaiEmprega" style="height: 100px; align-items: center;">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+
+        <div class="container mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+
+
+
+                    <h5 class="mb-0">Central de Suporte</h5>
+
+
+                </div>
+                <div class="card-body" style="height: 400px; overflow-y: auto;">
+
+                    <div class="d-flex mb-3">
+                        <div class="me-2">
+                            <i class="bi bi-robot fs-4 text-success"></i>
+                        </div>
+                        <div class="bg-light p-2 rounded w-75">
+                            <small class="text-muted">Bot</small>
+                            <p class="mb-0">Olá, como posso ajudá-lo(a)</p>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="d-flex justify-content-end mb-3">
+        <div class="bg-primary text-white p-2 rounded w-75 text-end">
+          <small class="text-light">Você • 10:17</small>
+          <p class="mb-0">Estou com dificuldades para acessar minha conta.</p>
+        </div>
+      </div> -->
+
+                    <!-- <div class="d-flex mb-3">
+        <div class="me-2">
+          <i class="bi bi-person-circle fs-4 text-primary"></i>
+        </div>
+        <div class="bg-light p-2 rounded w-75">
+          <small class="text-muted">Suporte • 10:18</small>
+          <p class="mb-0">Verificamos aqui, você pode tentar redefinir sua senha no link "Esqueci minha senha".</p>
+        </div>
+      </div> -->
+                </div>
+                <div class="card-footer">
+                    <form id="formMensagem">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Digite sua mensagem..." required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="<%= voltar %>"> <button type="button" class="btn btn-danger" id="logout-btn">
+                    Voltar
+                    <i class="bi bi-box-arrow-left"></i>
+                </button> </a>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <script>
+
+            const form = document.getElementById('formMensagem');
+            const input = form.querySelector('input');
+            const cardBody = document.querySelector('.card-body');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const msg = input.value.trim();
+                if (!msg) return;
+
+
+                const msgUsuario = `
+      <div class="d-flex justify-content-end mb-3">
+        <div class="bg-primary text-white p-2 rounded w-75 text-end">
+          <small class="text-light">Você • ${horaAtual()}</small>
+          <p class="mb-0">${msg}</p>
+        </div>
+      </div>`;
+                cardBody.innerHTML += msgUsuario;
+
+                input.value = '';
+                cardBody.scrollTop = cardBody.scrollHeight;
+
+
+                setTimeout(() => {
+                    const resposta = gerarRespostaBot(msg.toLowerCase());
+                    const msgBot = `
+        <div class="d-flex mb-3">
+          <div class="me-2">
+            <i class="bi bi-robot fs-4 text-success"></i>
+          </div>
+          <div class="bg-light p-2 rounded w-75">
+            <small class="text-muted">Bot • ${horaAtual()}</small>
+            <p class="mb-0">${resposta}</p>
+          </div>
+        </div>`;
+                    cardBody.innerHTML += msgBot;
+                    cardBody.scrollTop = cardBody.scrollHeight;
+                }, 1000);
+            });
+
+            function gerarRespostaBot(msg) {
+
+                if (msg.includes('senha'))
+                    return 'Se você esqueceu sua senha, envie uma mensagem através da página CONTATO para que os administradores possam redefini-la.';
+
+                if (msg.includes('conta'))
+                    return 'Informe, por favor, qual é o seu tipo de usuário: Administrador, Aluno, Professor ou Empresa.';
+
+                if (msg.includes('administrador'))
+                    return 'Para acessar sua conta de Administrador, vá até a página inicial, clique em "ADMINISTRADOR" na barra de navegação e entre com seu e-mail e senha cadastrados. Caso ainda não tenha uma conta, envie uma solicitação pela página CONTATO.';
+
+                if (msg.includes('aluno'))
+                    return 'Para acessar sua conta de Aluno, vá até a página inicial e clique no botão "Aluno". Faça login com seu e-mail e senha. Se ainda não possui uma conta, envie uma mensagem para o SENAI pela página CONTATO.';
+
+                if (msg.includes('professor'))
+                    return 'Para acessar sua conta de Professor, vá até a página inicial, clique no botão "Professor" e faça login com seu e-mail e senha. Caso não tenha uma conta, entre em contato com o SENAI pela página CONTATO.';
+
+                if (msg.includes('empresa'))
+                    return 'Para acessar sua conta de Empresa, vá até a página inicial, clique no botão "Empresa" e faça login com seu e-mail e senha. Caso ainda não tenha uma conta, envie uma mensagem para o SENAI através da página CONTATO.';
+
+                if (msg.includes('certificado'))
+                    return 'A emissão de certificados é feita exclusivamente pela coordenação do SENAI.';
+
+                if (msg.includes('candidatar'))
+                    return 'Se você está enfrentando dificuldades para se candidatar, isso pode ocorrer por dois motivos: uma falha no sistema ou o fato de você não ser um aluno registrado. Se for aluno e o problema persistir, entre em contato com o SENAI pela página CONTATO para que os administradores comuniquem os desenvolvedores.';
+
+                if (msg.includes('obrigado') || msg.includes('ok') || msg.includes('valeu'))
+                    return 'Fico feliz em ter ajudado! Até a próxima.';
+
+                if (msg.includes('avaliação'))
+                    return 'A avaliação é realizada pelo professor durante o curso, com base no seu desempenho e comportamento profissional. Ela ajuda a identificar se você está preparado para o mercado de trabalho.';
+
+                if (msg.includes('cadastrar') || msg.includes('acesso'))
+                    return 'Para se cadastrar, é necessário ser aluno do SENAI. Com o cadastro, você terá acesso ao portal de vagas e poderá acompanhar sua avaliação profissional.';
+
+                if (msg.includes('olá') || msg.includes('oi') || msg.includes('opa'))
+                    return 'Olá! Qual é a sua dúvida? Posso te ajudar com informações sobre conta, senha, candidatura, portal de vagas ou avaliações.';
+
+                if (msg.includes('bom dia') || msg.includes('boa tarde') || msg.includes('boa noite'))
+                    return 'Olá! Como posso te ajudar? Deseja saber mais sobre conta, senha, candidatura, avaliações ou o portal de vagas?';
+
+                if (msg.includes('portal de vagas'))
+                    return 'O portal de vagas é uma página onde você encontra todas as oportunidades publicadas pelas empresas. Se você for aluno, basta clicar em "Ver mais" na vaga desejada e se candidatar. Após a candidatura, uma confirmação será enviada para seu e-mail. Boa sorte!';
+
+                if (msg.includes('plataforma'))
+                    return 'A plataforma SenaiEmprega foi criada para valorizar o potencial dos alunos do SENAI, com base nas avaliações de soft skills realizadas pelos professores. Empresas têm acesso a essa base confiável de talentos, enquanto os alunos acompanham seu desenvolvimento e se preparam para o mercado de trabalho.';
+
+                if (msg.includes('candidatura'))
+                    return 'Ao se candidatar a uma vaga, você receberá um e-mail de confirmação. A empresa poderá visualizar suas avaliações feitas pelos professores e, caso tenha interesse, entrará em contato por e-mail solicitando documentos como o currículo. Você será notificado por e-mail sobre sua aprovação ou reprovação.';
+
+                return 'Desculpe, ainda estou aprendendo. Poderia reformular sua pergunta, por favor?';
+
+
+
+
+                return 'Desculpe, ainda estou aprendendo. Pode reformular sua pergunta.';
+            }
+
+            function horaAtual() {
+                const agora = new Date();
+                return agora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        </script>
+
+
+
+</body>
+
+</html>

@@ -86,6 +86,8 @@ const filtroUsuarioRouter = require('./routers/filtro_usuario.js');
 const filtroAlunoRouter = require('./routers/filtro_aluno.js');
 const candidatosAprovadosRouter = require('./routers/candidatos_aprovados.js');
 const filtrarVagasRouter = require('./routers/filtrar_vaga.js');
+const MensagemRouter = require('./routers/mensagem.js');
+const chatbotRouter = require('./routers/chatbot.js');
 
 app.use('/painel-educador', Painel_educador);
 app.use('/', homeRouter);
@@ -127,6 +129,8 @@ app.use('/filtro-usuario', filtroUsuarioRouter);
 app.use('/filtrar-aluno', filtroAlunoRouter);
 app.use('/candidatos-aprovados', candidatosAprovadosRouter);
 app.use('/filtrar-vaga', filtrarVagasRouter);
+app.use('/mensagem', MensagemRouter);
+app.use('/chatbot', chatbotRouter);
 
 
 module.exports = app;

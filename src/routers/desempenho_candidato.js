@@ -20,19 +20,20 @@ router.get('/:nome', middleware, permisao('Empresa'), (req, res) => {
                 return res.status(500).send('Erro ao fazer consulta de alunos: ' + err.message);
             }
             console.log(avaliacoes);
-            if (!aluno) {
+            
+            if (!avaliacoes) {
                 return res.render('desempenho_candidato', {
                     usuario: req.session.usuario,
                     mensagem_error: 'Nota não registrada para esse aluno(a)',
                     avaliacoes: avaliacoes,
-                    alunos: null
+                    alunos: aluno
                 });
             }
 
             res.render('desempenho_candidato', {
                 usuario: req.session.usuario,
-                mensagem_error: null,
                 avaliacoes: avaliacoes,
+                mensagem_error: 'Nota não registrada para esse aluno(a)',
                 alunos: aluno
             });
         });

@@ -171,8 +171,17 @@ router.post('/', middleware,  (req, res) => {
                             console.log('Email enviado:', info.response);
                             
                             
-
-                            return res.redirect('/portal-vagas');
+                             return res.render('portal_vagas', {
+                                    usuario: req.session.usuario,
+                                    mensagem_sucesso: 'Sua candidatura foi enviada com sucesso, chegará um E-Mail de confirmação.',
+                                    vagas,
+                                    pesquisa,
+                                    empresa,
+                                    optn,
+                                    contrato,
+                                    voltar
+                                });
+                           
                         });
                     }
                 );

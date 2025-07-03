@@ -76,226 +76,265 @@
 
       <!-- MENSAGEM DE ERRO -->
 
-      <% if (typeof mensagem_error !=='undefined' && mensagem_error) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>
-            <%= mensagem_error %>
-          </strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% } %>
-
-      <% if (typeof mensagem_candidatura !=='undefined' && mensagem_candidatura) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>
-            <%= mensagem_candidatura %>
-          </strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% } %>
-
-          <% if (typeof mensagem_email !=='undefined' && mensagem_email) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>
-                <%= mensagem_email %>
-              </strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       <% if (typeof mensagem_error !=='undefined' && mensagem_error) { %>
+            <div class="toast position-fixed bottom-0 start-0 m-2" id="mensagemToast" role="alert" aria-live="assertive"
+              aria-atomic="true" style="border-color: red; background-color: rgba(255, 0, 0, 0.544);">
+              <div class="toast-header">
+                <strong class="me-auto">SENAI EMPREGA</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                <strong><%= mensagem_error %></strong>
+              </div>
             </div>
-            
             <% } %>
-              <% if (typeof mensagem_sucesso !=='undefined' && mensagem_sucesso) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>
-                    <%= mensagem_sucesso %>
-                  </strong>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <% } %>
 
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-3" style="margin-top: 30px;">
-                        <h4 style="font-style: initial;">Filtrar</h4>
+          <% if (typeof mensagem_sucesso !=='undefined' && mensagem_sucesso) { %>
+            <div class="toast position-fixed bottom-0 start-0 m-2" style="border-color: green; background-color: green;" id="mensagemToast" role="alert" aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <strong class="me-auto">SENAI EMPREGA</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                <strong><%= mensagem_sucesso %></strong>
+              </div>
+            </div>
+            <% } %>
 
-                        <div class="btn-filter">
-                          <form id="formBuscar" action="/filtrar-vagas" class="" method="post">
-                          
-                            
-                            <label for="inputSelectEmpresa" class="form-label">Empresa: </label>
-                            <select name="inputSelectEmpresa" id="inputSelectEmpresa" onchange="this.form.submit()"
-                              class="form-select">
-                              <option value="" <%=(!empresa || empresa==="Selecione..." ) ? "selected" : "" %>
-                                >Selecione...</option>
-                              <% vagas.forEach(vaga=> { %>
-                                <option value="<%= vaga.empresa %>" <%=(empresa===vaga.empresa) ? "selected" : "" %>><%=
-                                    vaga.empresa %>
+
+           <% if (typeof mensagem_candidatura !=='undefined' && mensagem_candidatura) { %>
+            <div class="toast position-fixed bottom-0 start-0 m-2" style="border-color: yellow; background-color: rgba(251, 251, 7, 0.534); color: black;" id="mensagemToast" role="alert" aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <strong class="me-auto">SENAI EMPREGA</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <strong> <%= mensagem_candidatura %></strong>
+              </div>
+            </div>
+            <% } %>
+
+                <% if (typeof mensagem_email !=='undefined' && mensagem_email) { %>
+            <div class="toast position-fixed bottom-0 start-0 m-2" id="mensagemToast" role="alert" aria-live="assertive"
+              aria-atomic="true" style="border-color: red; background-color: rgba(255, 0, 0, 0.544);">
+              <div class="toast-header">
+                <strong class="me-auto">SENAI EMPREGA</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                <strong><%= mensagem_email %></strong>
+              </div>
+            </div>
+            <% } %>
+
+
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-3" style="margin-top: 30px;">
+                          <h4 style="font-style: initial;">Filtrar</h4>
+
+                          <div class="btn-filter">
+                            <form id="formBuscar" action="/filtrar-vagas" class="" method="post">
+
+
+                              <label for="inputSelectEmpresa" class="form-label">Empresa: </label>
+                              <select name="inputSelectEmpresa" id="inputSelectEmpresa" onchange="this.form.submit()"
+                                class="form-select">
+                                <option value="" <%=(!empresa || empresa==="Selecione..." ) ? "selected" : "" %>
+                                  >Selecione...</option>
+                                <% vagas.forEach(vaga=> { %>
+                                  <option value="<%= vaga.empresa %>" <%=(empresa===vaga.empresa) ? "selected" : "" %>
+                                    ><%= vaga.empresa %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                              <br>
+
+                              <label for="inputSelectOptn" class="form-label">Oportunidades: </label>
+                              <select name="inputSelectOptn" id="inputSelectOptn" onchange="this.form.submit()"
+                                class="form-select">
+                                <option value="" <%=(!optn || optn==="Selecione..." ) ? "selected" : "" %>
+                                  >Selecione o
+                                  ramo</option>
+                                <option value="TI" <%=(optn==="TI" ) ? "selected" : "" %>>Tecnologia da Informação
+                                  (TI)
                                 </option>
-                                <% }) %>
-                            </select>
-                            <br>
-                          
-                            <label for="inputSelectOptn" class="form-label">Oportunidades: </label>
-                            <select name="inputSelectOptn" id="inputSelectOptn" onchange="this.form.submit()"
-                              class="form-select">
-                              <option value="" <%=(!optn || optn==="Selecione..." ) ? "selected" : "" %>>Selecione o
-                                ramo</option>
-                              <option value="TI" <%=(optn==="TI" ) ? "selected" : "" %>>Tecnologia da Informação (TI)
-                              </option>
-                              <option value="Logistica" <%=(optn==="Logistica" ) ? "selected" : "" %>>Logistica</option>
-                              <option value="Administracao" <%=(optn==="Administracao" ) ? "selected" : "" %>
-                                >Administração</option>
-                              <option value="Financeiro" <%=(optn==="Financeiro" ) ? "selected" : "" %>>Financeiro
-                              </option>
-                              <option value="RecursosHumanos" <%=(optn==="RecursosHumanos" ) ? "selected" : "" %>
-                                >Recursos Humanos (RH)</option>
-                              <option value="Marketing" <%=(optn==="Marketing" ) ? "selected" : "" %>>Marketing</option>
-                              <option value="Vendas" <%=(optn==="Vendas" ) ? "selected" : "" %>>Vendas</option>
-                              <option value="Engenharia" <%=(optn==="Engenharia" ) ? "selected" : "" %>>Engenharia
-                              </option>
-                              <option value="Juridico" <%=(optn==="Juridico" ) ? "selected" : "" %>>Jurídico</option>
-                              <option value="Saude" <%=(optn==="Saude" ) ? "selected" : "" %>>Saúde</option>
-                              <option value="Educação" <%=(optn==="Educação" ) ? "selected" : "" %>>Educação</option>
-                              <option value="Industrial" <%=(optn==="Industrial" ) ? "selected" : "" %>>Setor Industrial
-                              </option>
-                              <option value="Comercio" <%=(optn==="Comercio" ) ? "selected" : "" %>>Comércio</option>
-                              <option value="ConstruçaoCivil" <%=(optn==="ConstruçaoCivil" ) ? "selected" : "" %>
-                                >Construção Civil</option>
-                              <option value="Eletrica" <%=(optn==="Eletrica" ) ? "selected" : "" %>>Eletricista</option>
-                              <option value="Mecanico(a)" <%=(optn==="Mecanico(a)" ) ? "selected" : "" %>>Mecânico(a)
-                              </option>
-                              <option value="Soldagem" <%=(optn==="Soldagem" ) ? "selected" : "" %>>Soldador</option>
-                              <option value="Caldeiro" <%=(optn==="Caldeiro" ) ? "selected" : "" %>>Caldeiro</option>
-                            </select>
-                            <br>
-                           
-                            <label for="inputSelectContrato" class="form-label">Tipo de contrato: </label>
-                            <select name="inputSelectContrato" id="inputSelectContrato" onchange="this.form.submit()"
-                              class="form-select">
-                              <option value="" <%=(!contrato || contrato==="Selecione..." ) ? "selected" : "" %>
-                                >Selecione contrato...</option>
-                              <option value="CLT" <%=(contrato==="CLT" ) ? "selected" : "" %>>CLT</option>
-                              <option value="Estagio" <%=(contrato==="Estagio" ) ? "selected" : "" %>>Estagio</option>
-                              <option value="Freelancer" <%=(contrato==="Freelancer" ) ? "selected" : "" %>>Freelancer
-                              </option>
-                              <option value="Trainer" <%=(contrato==="Trainer" ) ? "selected" : "" %>>Trainer</option>
-                            </select>
-                            <br>
-                            <!-- <div class="btn-filtro">
+                                <option value="Logistica" <%=(optn==="Logistica" ) ? "selected" : "" %>>Logistica
+                                </option>
+                                <option value="Administracao" <%=(optn==="Administracao" ) ? "selected" : "" %>
+                                  >Administração</option>
+                                <option value="Financeiro" <%=(optn==="Financeiro" ) ? "selected" : "" %>
+                                  >Financeiro
+                                </option>
+                                <option value="RecursosHumanos" <%=(optn==="RecursosHumanos" ) ? "selected" : "" %>
+                                  >Recursos Humanos (RH)</option>
+                                <option value="Marketing" <%=(optn==="Marketing" ) ? "selected" : "" %>>Marketing
+                                </option>
+                                <option value="Vendas" <%=(optn==="Vendas" ) ? "selected" : "" %>>Vendas</option>
+                                <option value="Engenharia" <%=(optn==="Engenharia" ) ? "selected" : "" %>
+                                  >Engenharia
+                                </option>
+                                <option value="Juridico" <%=(optn==="Juridico" ) ? "selected" : "" %>>Jurídico
+                                </option>
+                                <option value="Saude" <%=(optn==="Saude" ) ? "selected" : "" %>>Saúde</option>
+                                <option value="Educação" <%=(optn==="Educação" ) ? "selected" : "" %>>Educação
+                                </option>
+                                <option value="Industrial" <%=(optn==="Industrial" ) ? "selected" : "" %>>Setor
+                                  Industrial
+                                </option>
+                                <option value="Comercio" <%=(optn==="Comercio" ) ? "selected" : "" %>>Comércio
+                                </option>
+                                <option value="ConstruçaoCivil" <%=(optn==="ConstruçaoCivil" ) ? "selected" : "" %>
+                                  >Construção Civil</option>
+                                <option value="Eletrica" <%=(optn==="Eletrica" ) ? "selected" : "" %>>Eletricista
+                                </option>
+                                <option value="Mecanico(a)" <%=(optn==="Mecanico(a)" ) ? "selected" : "" %>
+                                  >Mecânico(a)
+                                </option>
+                                <option value="Soldagem" <%=(optn==="Soldagem" ) ? "selected" : "" %>>Soldador
+                                </option>
+                                <option value="Caldeiro" <%=(optn==="Caldeiro" ) ? "selected" : "" %>>Caldeiro
+                                </option>
+                              </select>
+                              <br>
+
+                              <label for="inputSelectContrato" class="form-label">Tipo de contrato: </label>
+                              <select name="inputSelectContrato" id="inputSelectContrato" onchange="this.form.submit()"
+                                class="form-select">
+                                <option value="" <%=(!contrato || contrato==="Selecione..." ) ? "selected" : "" %>
+                                  >Selecione contrato...</option>
+                                <option value="CLT" <%=(contrato==="CLT" ) ? "selected" : "" %>>CLT</option>
+                                <option value="Estagio" <%=(contrato==="Estagio" ) ? "selected" : "" %>>Estagio
+                                </option>
+                                <option value="Freelancer" <%=(contrato==="Freelancer" ) ? "selected" : "" %>
+                                  >Freelancer
+                                </option>
+                                <option value="Trainer" <%=(contrato==="Trainer" ) ? "selected" : "" %>>Trainer
+                                </option>
+                              </select>
+                              <br>
+                              <!-- <div class="btn-filtro">
                           <input type="submit" value="Pesquisar" class="btn btn-primary w-100">
                         </div> -->
-                          </form>
+                            </form>
+                          </div>
                         </div>
-                      </div>
 
 
 
-                      <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
-                        <!-- Caso não houver vaga -->
-                        <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
+                        <div class="col-8" style="margin-top: 20px; overflow-y: scroll; height: 90vh;">
+                          <!-- Caso não houver vaga -->
+                          <% if(typeof vagas===undefined || vagas==='NULL' || vagas.length===0) { %>
 
-                          <p class="texto"
-                            style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
-                            <strong>
-                              <%= mensagem_vagas %>
-                            </strong>
-                          </p>
+                            <p class="texto"
+                              style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 100px;">
+                              <strong>
+                                <%= mensagem_vagas %>
+                              </strong>
+                            </p>
 
-                          <% } %>
+                            <% } %>
 
-                            <% vagas.forEach(vagas=> { %>
-                              <!-- Card da vaga -->
-                              <div class="col" style="margin-top: 10px;">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <h5 class="card-title">
-                                      <%= vagas.titulo_vaga %>
-                                    </h5>
-                                    <p>
-                                      <%= vagas.empresa %>
-                                    </p>
-                                    <p class="card-text">
-                                      <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) + '...' :
-                                        vagas.descricao %>
-                                    </p>
+                              <% vagas.forEach(vagas=> { %>
+                                <!-- Card da vaga -->
+                                <div class="col" style="margin-top: 10px;">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title">
+                                        <%= vagas.titulo_vaga %>
+                                      </h5>
+                                      <p>
+                                        <%= vagas.empresa %>
+                                      </p>
+                                      <p class="card-text">
+                                        <%= vagas.descricao.length> 100 ? vagas.descricao.substring(0, 100) +
+                                          '...' :
+                                          vagas.descricao %>
+                                      </p>
 
-                                    <!-- Botão para abrir o modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                      data-bs-target="#modalVaga<%= vagas.id %>">
-                                      Ver mais
-                                    </button>
+                                      <!-- Botão para abrir o modal -->
+                                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalVaga<%= vagas.id %>">
+                                        Ver mais
+                                      </button>
+                                    </div>
+                                    <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
+                                      <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada"
+                                          %>
+                                      </small>
+                                    </div>
                                   </div>
-                                  <div class="card-footer" style="border-top: 1px solid rgba(0, 0, 0, .125);">
-                                    <small class="text-muted">Publicado no dia <%= vagas.data || "Data não informada" %>
-                                    </small>
-                                  </div>
-                                </div>
 
-                                <!-- Modal Scrollável da vaga -->
-                                <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
-                                  aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
-                                          <%= vagas.titulo_vaga %>
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                          aria-label="Fechar"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <p><strong>Descrição da vaga: </strong></p>
-                                        <p>
-                                          <%= vagas.descricao %>
-                                        </p>
-                                        <hr>
-                                        <p><strong>Requisitos: </strong></p>
-                                        <p>
-                                          <%= vagas.requisitos || "Não informado." %>
-                                        </p>
-                                        <hr>
-                                        <p><strong>Situação: </strong></p>
-                                        <p class="situacaoVaga" data-id=" <%= vagas.id %>">
-                                          <%= vagas.situacao || "Não informado." %>
-                                        </p>
-                                        <hr>
-                                        <p><strong>Tipo de contrato: </strong></p>
-                                        <p>
-                                          <%= vagas.tipo_contrato || "Não informado." %>
-                                        </p>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                          data-bs-dismiss="modal">Fechar</button>
-                                        <form action="/candidatar" method="post">
-                                          <input type="hidden" name="inputEmpresa" value="<%= vagas.empresa %>" id="">
-                                          <input type="hidden" name="inputData" value="<%= vagas.data %>" id="">
-                                          <input type="hidden" name="inputTitulo" value="<%= vagas.titulo_vaga %>"
-                                            id="">
-                                          <input type="hidden" name="inputVagaId" value="<%= vagas.id %>" readonly>
-                                          <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>" readonly>
-                                          <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
-                                          <input type="hidden" name="inputEmail" value="<%= usuario.email %>" readonly>
-                                          <input type="hidden" name="inputEmailVagas" value="<%= vagas.email %>"
-                                            readonly>
-                                          <input type="hidden" name="inputStatus" value="Pendente" readonly>
-                                          <% if (vagas.situacao==='Encerrada' ) { %>
-                                            <input type="submit" class="btn btn-primary" value="Vaga Encerrada"
-                                              disabled>
-                                            <% } else { %>
-                                              <input type="submit" class="btn btn-primary candidatar-btn"
-                                                data-id="<%= vagas.id %>" value="Candidatar">
-                                              <% } %>
+                                  <!-- Modal Scrollável da vaga -->
+                                  <div class="modal fade" id="modalVaga<%= vagas.id %>" tabindex="-1"
+                                    aria-labelledby="modalVagaLabel<%= vagas.id %>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="modalVagaLabel<%= vagas.id %>">
+                                            <%= vagas.titulo_vaga %>
+                                          </h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p><strong>Descrição da vaga: </strong></p>
+                                          <p>
+                                            <%= vagas.descricao %>
+                                          </p>
+                                          <hr>
+                                          <p><strong>Requisitos: </strong></p>
+                                          <p>
+                                            <%= vagas.requisitos || "Não informado." %>
+                                          </p>
+                                          <hr>
+                                          <p><strong>Situação: </strong></p>
+                                          <p class="situacaoVaga" data-id=" <%= vagas.id %>">
+                                            <%= vagas.situacao || "Não informado." %>
+                                          </p>
+                                          <hr>
+                                          <p><strong>Tipo de contrato: </strong></p>
+                                          <p>
+                                            <%= vagas.tipo_contrato || "Não informado." %>
+                                          </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Fechar</button>
+                                          <form action="/candidatar" method="post">
+                                            <input type="hidden" name="inputEmpresa" value="<%= vagas.empresa %>" id="">
+                                            <input type="hidden" name="inputData" value="<%= vagas.data %>" id="">
+                                            <input type="hidden" name="inputTitulo" value="<%= vagas.titulo_vaga %>"
+                                              id="">
+                                            <input type="hidden" name="inputVagaId" value="<%= vagas.id %>" readonly>
+                                            <input type="hidden" name="inputUsuarioId" value="<%= usuario.id %>"
+                                              readonly>
+                                            <input type="hidden" name="inputNome" value="<%= usuario.nome %>" readonly>
+                                            <input type="hidden" name="inputEmail" value="<%= usuario.email %>"
+                                              readonly>
+                                            <input type="hidden" name="inputEmailVagas" value="<%= vagas.email %>"
+                                              readonly>
+                                            <input type="hidden" name="inputStatus" value="Pendente" readonly>
+                                            <% if (vagas.situacao==='Encerrada' ) { %>
+                                              <input type="submit" class="btn btn-primary" value="Vaga Encerrada"
+                                                disabled>
+                                              <% } else { %>
+                                                <input type="submit" class="btn btn-primary candidatar-btn"
+                                                  data-id="<%= vagas.id %>" value="Candidatar">
+                                                <% } %>
 
-                                        </form>
+                                          </form>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
 
-                                <% }) %>
-                              </div>
+                                  <% }) %>
+                                </div>
+                        </div>
                       </div>
-                    </div>
 
 
 
@@ -313,5 +352,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toastEl = document.getElementById('mensagemToast');
+      if (toastEl) {
+        const toast = new bootstrap.Toast(toastEl, {
+          autohide: true,
+          delay: 2000
+        });
+        toast.show();
+      }
+    });
+
+</script>
 
 </html>
