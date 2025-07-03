@@ -37,7 +37,7 @@
 
             <div class="aluno">
                
-                       <h6><a href="/painel-aluno"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong>
+                       <h6><a href="/listar-candidatos"><i class="bi bi-box-arrow-left" title="Voltar"></i></a> Aluno(a): <strong>
                         <%= usuario.nome %>
                     </strong></h6>
 
@@ -68,6 +68,13 @@
                         </div>
                     </div>
                     <% }) %>
+
+                   <%if (typeof avaliacoes ==='undefined' || avaliacoes.length ===0) { %>
+
+          <p colspan="6" class="text-center" style="margin-top: 200px;"><strong><%= mensagem_error %></strong></p>
+
+          <% } %>
+
             </div>
 
         </main>

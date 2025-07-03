@@ -249,10 +249,14 @@
                 if (msg.includes('candidatar')) return 'Se você está com problema para se candidatar, pode ser por dois motivos: Sistema com falha ou Você não é ALUNO para se candidatar. Mas, se você for aluno e mesmo assim não consegue se candidatar, por favor entrar contato com o SENAI através da página CONTATO para os adiministradores informarem aos desenvolvedores o problema e os mesmmos resolverem'
                 if (msg.includes('obrigado') ||  msg.includes('ok') || msg.includes('valeu'))  return 'Fico feliz ajuda-lo(a), até a próxima!'
                 if (msg.includes()) return 'Informe sua dúvida'
+                if (msg.includes('Olá') || msg.includes('oi') || msg.includes('opa')) return 'Olá, qual é a sua dúvida de hoje? Conta, senha, portal de vagas, como funciona a candidatura?'
+                if (msg.includes('bom dia') || msg.includes('boa tarde!') || msg.includes('boa noite')) return 'Olá, qual é a sua dúvida de hoje? Conta, senha, portal de vagas, como funciona a candidatura?'
                 if (msg.includes('portal de vagas')) return 'Portal de vagas é uma página onde é exibido todas as vagas que as empresas publicam, para se candidatar basta ser ALUNO e clicar no botão de VER MAIS na vaga que se interessou e se candidatar. Assim que você se candidatar chegará no seu E-Mail a confirmação da candidatura. Boa sorte!'
                 if (msg.includes('plataforma')) return 'SenaiEmprega é uma plataforma do SENAI que destaca o potencial dos alunos com base em avaliações de soft skills feitas pelos professores. As empresas acessam uma base confiável de talentos técnicos, enquanto os estudantes acompanham sua evolução e se preparam para o mercado de trabalho.'
                 if(msg.includes('candidatura')) return 'Funciona da seguinta forma: o aluno(a) se candidata alguma vaga, no seu E-Mail chega a sua confirmação também. A empresa irá visualizar o seu desempenho com base na avaliação do seu professor e entrarão em contato através do E-Mail para participar do processo seletivo e enviar alguns documentos ex: Currículo.. Se você for aprovado ou reprovado, você será notificado!'
                 
+                
+
                 return 'Desculpe, ainda estou aprendendo. Pode reformular sua pergunta.';
             }
 

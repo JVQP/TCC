@@ -19,6 +19,13 @@ main {
     background-color: #045782 !important;
 }
 
+  #chatbot {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px;  
+    z-index: 1050; 
+  }
+
 /* ----------------------------- */
 /* COMPONENTES DE PERFIL         */
 /* ----------------------------- */
