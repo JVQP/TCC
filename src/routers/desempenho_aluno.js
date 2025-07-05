@@ -5,6 +5,7 @@ const permisao = require('./permisao.js');
 const middleware = require('./middleware.js');
 
 
+
 router.get('/', middleware, permisao('Aluno'), (req, res) => {
 
   let user = req.session.usuario.nome;
@@ -16,7 +17,7 @@ router.get('/', middleware, permisao('Aluno'), (req, res) => {
       return;
     }
 
-    db.all(`SELECT * FROM usuarios`, (err, usuario) => {
+    db.all(`SELECT * FROM usuarios WHERE nome = ?`, [user], (err, usuario) => {
       if (err) {
         console.log('Erro interno no servidor: ' + err.message);
         return res.status(500).send('Erro interno no servidor: ' + err.message);

@@ -26,8 +26,10 @@ db.all('SELECT * FROM avaliacao WHERE matricula = ?', [matricula], (err, avaliac
     });
 }
 
-
-  return res.render('visualizar_nota', { usuario: req.session.usuario, avaliacoes});
+       return res.render('visualizar_nota', { usuario: req.session.usuario, 
+        avaliacoes,
+       
+ });
 
 });
 });
