@@ -63,7 +63,6 @@ router.post('/:id/concluir', (req, res) => {
       subject: '✅ Sua solicitação foi concluída com sucesso !',
       html: `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #ddd;">
-                <h2 style="color: #27ae60;">🎉 Aprovado para a vaga</h2>
                 <p>Olá <strong>${nome}</strong>,</p>
         
 <p style="margin-top: 20px;">Esta mensagem confirma que sua solicitação foi concluída. Obrigado por utilizar nossa plataforma.</p>
@@ -71,11 +70,6 @@ router.post('/:id/concluir', (req, res) => {
 <hr style="margin: 20px 0;">
 <p style="font-size: 12px; color: #777;">Este é um e-mail automático. Caso tenha dúvidas, entre em contato com o setor responsável da empresa.</p>
 
-        
-                <hr style="margin: 20px 0;">
-        
-                <p style="font-size: 12px; color: #777;">Este é um e-mail automático. Caso tenha dúvidas, entre em contato com o setor responsável da empresa.</p>
-            </div>
             `
     };
 

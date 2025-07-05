@@ -222,20 +222,20 @@
             crossorigin="anonymous"></script>
 
  
-                <script>
-                    function filtrarCandidatos(input){
+                 <script>
 
-                        const valor = input.value.toLowerCasa();
+            function filtrarCandidatos(input) {
+                const valor = input.value.toLowerCase();
 
-                        document.querySelectorAll('.card').forEach(card => {
+                document.querySelectorAll('.card').forEach(card => {
+                    const texto = card.innerText.toLowerCase();
 
-                            const texto = card.innerText.toLowerCase();
 
-                            card.parentElement.style.display = texto.includes(valor) ? '' : 'none';
-                        });
-                    }
-                </script>
-</body>
+                    card.parentElement.style.display = texto.includes(valor) ? '' : 'none';
+                });
+            }
+
+        </script>
 
 
 
