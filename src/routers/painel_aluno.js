@@ -8,7 +8,7 @@ const permisao = require('./permisao.js')
 
 router.get('/', middleware, permisao('Aluno'), (req, res) => {
 
-    db.all(`SELECT * FROM usuarios WHERE id = ? `, [req.session.usuario.id], (err, usuario) => {
+    db.all(`SELECT * FROM usuarios WHERE nome = ? `, [req.session.usuario.nome], (err, usuario) => {
         if (err) {
             console.error(err.message);
             return res.redirect('/login');
