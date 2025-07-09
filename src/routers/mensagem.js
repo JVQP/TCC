@@ -58,8 +58,8 @@ router.post('/:id/concluir', (req, res) => {
     });
 
     const mailOptions = {
-      from: `jaumvit0r222@gmail.com`,
-      to: `${email}, jaumvit0r222@gmail.com`,
+      from: `${process.env.EMAIL_USER}`,
+      to: `${email}, ${process.env.EMAIL_USER}`,
       subject: '✅ Sua solicitação foi concluída com sucesso !',
       html: `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #ddd;">

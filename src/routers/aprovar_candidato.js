@@ -49,7 +49,7 @@ router.post('/', middleware, permisao('Empresa'), (req, res) => {
             });
 
             const mailOptions = {
-                from: `jaumvit0r222@gmail.com, ${email_usuario}`,
+                from: `${process.env.EMAIL_USER}, ${email_usuario}`,
                 to: `${Email}, jaumvit0r222@gmail.com`,
                 subject: '🎉 Você foi aprovado para a vaga!',
                 html: `
